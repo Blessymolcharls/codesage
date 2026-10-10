@@ -1,0 +1,487 @@
+import json
+from pathlib import Path
+
+QUERIES = [
+    {
+        "query_id": "q01",
+        "query": "merge multiple PDF files",
+        "relevant_unit_ids": [
+            "backend/controllers/pdfController.js:function:mergePdfs:9_36",
+            "frontend/lib/screens/feature_screens/tools.dart:class:MergeScreen:4_17",
+            "frontend/lib/screens/feature_screens/tools.dart:method:build:7_16",
+        ],
+        "task_category": "backend_pdf_processing",
+        "split": "dev",
+        "annotation_notes": "Merges multiple uploaded PDF files into a single document via pdf-lib in backend controller, configured in MergeScreen.",
+    },
+    {
+        "query_id": "q02",
+        "query": "split PDF into specific page ranges",
+        "relevant_unit_ids": [
+            "backend/controllers/pdfController.js:function:splitPdf:39_91",
+            "frontend/lib/screens/feature_screens/tools.dart:class:SplitScreen:19_23",
+            "frontend/lib/screens/feature_screens/tools.dart:class:_SplitScreenState:25_94",
+        ],
+        "task_category": "backend_pdf_processing",
+        "split": "test",
+        "annotation_notes": "Extracts page ranges from a PDF using startPage and endPage parameters.",
+    },
+    {
+        "query_id": "q03",
+        "query": "convert images into a single PDF document",
+        "relevant_unit_ids": [
+            "backend/controllers/pdfController.js:function:imageToPdf:94_135",
+            "frontend/lib/screens/feature_screens/tools.dart:class:ImagesToPdfScreen:96_109",
+            "frontend/lib/screens/feature_screens/tools.dart:method:build:99_108",
+        ],
+        "task_category": "backend_pdf_processing",
+        "split": "dev",
+        "annotation_notes": "Embeds JPG/PNG image files into a new sequential PDF document.",
+    },
+    {
+        "query_id": "q04",
+        "query": "extract PDF pages as image files",
+        "relevant_unit_ids": [
+            "backend/controllers/pdfController.js:function:pdfToImage:138_192",
+            "frontend/lib/screens/feature_screens/tools.dart:class:PdfToImagesScreen:111_124",
+            "frontend/lib/screens/feature_screens/tools.dart:method:build:114_123",
+        ],
+        "task_category": "backend_pdf_processing",
+        "split": "test",
+        "annotation_notes": "Converts PDF pages to images using pdf-poppler and bundles them in a zip archive.",
+    },
+    {
+        "query_id": "q05",
+        "query": "rotate PDF pages by degree angle",
+        "relevant_unit_ids": [
+            "backend/controllers/pdfController.js:function:rotatePdf:195_226",
+            "frontend/lib/screens/feature_screens/tools.dart:class:RotateScreen:126_130",
+            "frontend/lib/screens/feature_screens/tools.dart:class:_RotateScreenState:132_177",
+        ],
+        "task_category": "backend_pdf_processing",
+        "split": "test",
+        "annotation_notes": "Applies 90/180/270 degree rotation angle to all pages in a PDF document.",
+    },
+    {
+        "query_id": "q06",
+        "query": "clean up temporary uploaded files from disk",
+        "relevant_unit_ids": [
+            "backend/utils/fileHelper.js:function:cleanupFiles:7_17",
+            "backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48",
+        ],
+        "task_category": "backend_utilities",
+        "split": "dev",
+        "annotation_notes": "Unlinks and deletes temporary uploaded or generated PDF/image files from local storage.",
+    },
+    {
+        "query_id": "q07",
+        "query": "middleware to automatically delete files after response",
+        "relevant_unit_ids": [
+            "backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48",
+        ],
+        "task_category": "backend_utilities",
+        "split": "test",
+        "annotation_notes": "Express middleware hook that cleans up uploaded files when response stream finishes.",
+    },
+    {
+        "query_id": "q08",
+        "query": "express router defining pdf manipulation endpoints",
+        "relevant_unit_ids": [
+            "backend/routes/pdfRoutes.js:line_chunk:anon:1_46",
+        ],
+        "task_category": "backend_routing",
+        "split": "test",
+        "annotation_notes": "Router registering POST routes for /merge, /split, /image-to-pdf, /pdf-to-image, and /rotate.",
+    },
+    {
+        "query_id": "q09",
+        "query": "start express server and listen on port",
+        "relevant_unit_ids": [
+            "backend/server.js:line_chunk:anon:1_36",
+        ],
+        "task_category": "backend_server",
+        "split": "dev",
+        "annotation_notes": "Main server script configuring middleware, routes, and listening on port 3000.",
+    },
+    {
+        "query_id": "q10",
+        "query": "generic multipart upload function with progress tracking",
+        "relevant_unit_ids": [
+            "frontend/lib/services/network_service.dart:method:uploadFiles:22_101",
+            "frontend/lib/services/network_service.dart:class:NetworkService:6_102",
+        ],
+        "task_category": "frontend_networking",
+        "split": "test",
+        "annotation_notes": "Uploads files via FormData with Dio and callbacks for onSendProgress.",
+    },
+    {
+        "query_id": "q11",
+        "query": "dio client configuration with base URL and timeout",
+        "relevant_unit_ids": [
+            "frontend/lib/services/network_service.dart:method:NetworkService:13_19",
+            "frontend/lib/services/network_service.dart:class:NetworkService:6_102",
+        ],
+        "task_category": "frontend_networking",
+        "split": "dev",
+        "annotation_notes": "Initializes Dio instance with baseUrl, connectTimeout, and receiveTimeout options.",
+    },
+    {
+        "query_id": "q12",
+        "query": "state management for PDF processing status and progress",
+        "relevant_unit_ids": [
+            "frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76",
+            "frontend/lib/providers/pdf_provider.dart:class:PdfState:5_5",
+            "frontend/lib/providers/pdf_provider.dart:method:processFiles:41_75",
+        ],
+        "task_category": "frontend_state",
+        "split": "dev",
+        "annotation_notes": "ChangeNotifier provider tracking idle, picking, processing, and success/error states.",
+    },
+    {
+        "query_id": "q13",
+        "query": "reset PDF provider state to idle",
+        "relevant_unit_ids": [
+            "frontend/lib/providers/pdf_provider.dart:method:reset:22_28",
+        ],
+        "task_category": "frontend_state",
+        "split": "test",
+        "annotation_notes": "Resets PdfProvider state, clears error message and progress, and notifies listeners.",
+    },
+    {
+        "query_id": "q14",
+        "query": "toggle between dark mode and light theme",
+        "relevant_unit_ids": [
+            "frontend/lib/main.dart:class:ThemeProvider:20_29",
+            "frontend/lib/main.dart:method:toggleTheme:25_28",
+            "frontend/lib/main.dart:method:themeMode:23_23",
+        ],
+        "task_category": "frontend_state",
+        "split": "dev",
+        "annotation_notes": "ThemeProvider toggling between light and dark ThemeMode.",
+    },
+    {
+        "query_id": "q15",
+        "query": "configure material app theme with google fonts",
+        "relevant_unit_ids": [
+            "frontend/lib/main.dart:method:_buildTheme:48_84",
+            "frontend/lib/main.dart:class:DocuCharmApp:31_85",
+            "frontend/lib/main.dart:method:build:35_46",
+        ],
+        "task_category": "frontend_ui",
+        "split": "dev",
+        "annotation_notes": "Creates modern Material 3 ThemeData with GoogleFonts Inter and Outfit typography.",
+    },
+    {
+        "query_id": "q16",
+        "query": "view and read PDF document in viewer screen",
+        "relevant_unit_ids": [
+            "frontend/lib/screens/viewer_screen.dart:class:ViewerScreen:6_13",
+            "frontend/lib/screens/viewer_screen.dart:class:_ViewerScreenState:15_235",
+            "frontend/lib/screens/viewer_screen.dart:method:build:31_164",
+        ],
+        "task_category": "frontend_viewer",
+        "split": "test",
+        "annotation_notes": "Renders PDF documents using SfPdfViewer with zoom, search, and page navigation.",
+    },
+    {
+        "query_id": "q17",
+        "query": "search text within PDF document toolbar",
+        "relevant_unit_ids": [
+            "frontend/lib/screens/viewer_screen.dart:class:SearchToolbar:237_251",
+            "frontend/lib/screens/viewer_screen.dart:class:SearchToolbarState:253_294",
+            "frontend/lib/screens/viewer_screen.dart:method:build:257_293",
+        ],
+        "task_category": "frontend_viewer",
+        "split": "dev",
+        "annotation_notes": "Toolbar widget for searching text instances and cycling matches in the PDF viewer.",
+    },
+    {
+        "query_id": "q18",
+        "query": "modal grid sheet to jump to specific page",
+        "relevant_unit_ids": [
+            "frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234",
+        ],
+        "task_category": "frontend_viewer",
+        "split": "test",
+        "annotation_notes": "Bottom sheet showing a grid of pages allowing quick jumping in ViewerScreen.",
+    },
+    {
+        "query_id": "q19",
+        "query": "share or save processed PDF locally to device storage",
+        "relevant_unit_ids": [
+            "frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47",
+            "frontend/lib/utils/export_helper.dart:method:shareFile:8_10",
+            "frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46",
+        ],
+        "task_category": "frontend_utilities",
+        "split": "dev",
+        "annotation_notes": "ExportHelper allowing users to share or save output files to filesystem storage.",
+    },
+    {
+        "query_id": "q20",
+        "query": "drag and drop zone for picking files",
+        "relevant_unit_ids": [
+            "frontend/lib/widgets/file_drop_zone.dart:class:FileDropZone:7_27",
+            "frontend/lib/widgets/file_drop_zone.dart:class:_FileDropZoneState:29_126",
+            "frontend/lib/widgets/file_drop_zone.dart:method:_pickFiles:32_46",
+            "frontend/lib/widgets/file_drop_zone.dart:method:build:49_125",
+        ],
+        "task_category": "frontend_widgets",
+        "split": "dev",
+        "annotation_notes": "DesktopDrop and FilePicker drop zone for dragging and clicking to pick documents.",
+    },
+    {
+        "query_id": "q21",
+        "query": "loading overlay with progress indicator and percentage",
+        "relevant_unit_ids": [
+            "frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85",
+            "frontend/lib/widgets/loading_overlay.dart:method:build:18_84",
+        ],
+        "task_category": "frontend_widgets",
+        "split": "test",
+        "annotation_notes": "Modal overlay showing circular progress indicator and formatted percentage text.",
+    },
+    {
+        "query_id": "q22",
+        "query": "display custom error or success snackbar message",
+        "relevant_unit_ids": [
+            "frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75",
+            "frontend/lib/widgets/custom_snackbar.dart:method:show:5_66",
+            "frontend/lib/widgets/custom_snackbar.dart:method:showError:68_70",
+            "frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74",
+        ],
+        "task_category": "frontend_widgets",
+        "split": "dev",
+        "annotation_notes": "Floating animated snackbar widget showing custom icon, styling, and message.",
+    },
+    {
+        "query_id": "q23",
+        "query": "base feature screen layout for uploading and processing",
+        "relevant_unit_ids": [
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:BaseFeatureScreen:14_42",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_processFiles:72_95",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_onFilesDropped:56_70",
+        ],
+        "task_category": "frontend_ui",
+        "split": "dev",
+        "annotation_notes": "Reusable scaffold wrapping drop zones, action buttons, and processFiles calls.",
+    },
+    {
+        "query_id": "q24",
+        "query": "dashboard screen displaying grid of PDF feature cards",
+        "relevant_unit_ids": [
+            "frontend/lib/screens/dashboard_screen.dart:class:DashboardScreen:12_158",
+            "frontend/lib/screens/dashboard_screen.dart:method:build:16_157",
+            "frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178",
+        ],
+        "task_category": "frontend_ui",
+        "split": "test",
+        "annotation_notes": "Main screen displaying animated cards for all available PDF toolkit features.",
+    },
+    {
+        "query_id": "q25",
+        "query": "interactive animated card with hover scale effect",
+        "relevant_unit_ids": [
+            "frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178",
+            "frontend/lib/screens/dashboard_screen.dart:class:_FeatureCardState:180_306",
+            "frontend/lib/screens/dashboard_screen.dart:method:build:217_305",
+        ],
+        "task_category": "frontend_widgets",
+        "split": "dev",
+        "annotation_notes": "Stateful card with AnimationController scaling on hover and tap gestures.",
+    },
+    {
+        "query_id": "q26",
+        "query": "connect to the database",
+        "relevant_unit_ids": [],
+        "task_category": "unsupported_negative_control",
+        "split": "negative_control",
+        "annotation_notes": "Negative control: DocuCharm is a stateless file processing tool and has no database.",
+    },
+    {
+        "query_id": "q27",
+        "query": "user authentication and login session",
+        "relevant_unit_ids": [],
+        "task_category": "unsupported_negative_control",
+        "split": "negative_control",
+        "annotation_notes": "Negative control: DocuCharm does not implement user accounts, logins, or sessions.",
+    },
+    {
+        "query_id": "q28",
+        "query": "health check endpoint returning backend status",
+        "relevant_unit_ids": [
+            "backend/server.js:line_chunk:anon:1_36",
+        ],
+        "task_category": "backend_server",
+        "split": "test",
+        "annotation_notes": "Express GET /health endpoint verifying backend service availability.",
+    },
+    {
+        "query_id": "q29",
+        "query": "configure multer disk storage destination and filename",
+        "relevant_unit_ids": [
+            "backend/routes/pdfRoutes.js:line_chunk:anon:1_46",
+        ],
+        "task_category": "backend_routing",
+        "split": "dev",
+        "annotation_notes": "Multer diskStorage configuring uploads directory and unique timestamp suffix filename.",
+    },
+    {
+        "query_id": "q30",
+        "query": "set upload file size limit of 50 megabytes",
+        "relevant_unit_ids": [
+            "backend/routes/pdfRoutes.js:line_chunk:anon:1_46",
+        ],
+        "task_category": "backend_routing",
+        "split": "test",
+        "annotation_notes": "Multer configuration options enforcing 50MB file size limit for uploads.",
+    },
+    {
+        "query_id": "q31",
+        "query": "show error snackbar alert notification",
+        "relevant_unit_ids": [
+            "frontend/lib/widgets/custom_snackbar.dart:method:showError:68_70",
+            "frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75",
+        ],
+        "task_category": "frontend_widgets",
+        "split": "dev",
+        "annotation_notes": "Static helper method displaying red error themed snackbar banner.",
+    },
+    {
+        "query_id": "q32",
+        "query": "show success snackbar alert notification",
+        "relevant_unit_ids": [
+            "frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74",
+            "frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75",
+        ],
+        "task_category": "frontend_widgets",
+        "split": "test",
+        "annotation_notes": "Static helper method displaying green success themed snackbar banner.",
+    },
+    {
+        "query_id": "q33",
+        "query": "set error state with message in provider",
+        "relevant_unit_ids": [
+            "frontend/lib/providers/pdf_provider.dart:method:setError:35_39",
+            "frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76",
+        ],
+        "task_category": "frontend_state",
+        "split": "test",
+        "annotation_notes": "PdfProvider method mutating state to error and setting errorMessage string.",
+    },
+    {
+        "query_id": "q34",
+        "query": "save output file to application documents directory",
+        "relevant_unit_ids": [
+            "frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46",
+            "frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47",
+        ],
+        "task_category": "frontend_utilities",
+        "split": "test",
+        "annotation_notes": "Method using getApplicationDocumentsDirectory and copying file with timestamped name.",
+    },
+    {
+        "query_id": "q35",
+        "query": "validate minimum two files selected before merging",
+        "relevant_unit_ids": [
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_processFiles:72_95",
+        ],
+        "task_category": "frontend_ui",
+        "split": "test",
+        "annotation_notes": "Validation check in _processFiles ensuring at least 2 files selected for /merge endpoint.",
+    },
+    {
+        "query_id": "q36",
+        "query": "reorderable list view of selected files",
+        "relevant_unit_ids": [
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:98_347:part1",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:44_293:part1",
+        ],
+        "task_category": "frontend_ui",
+        "split": "dev",
+        "annotation_notes": "ReorderableListView widget allowing drag to reorder and remove selected files.",
+    },
+    {
+        "query_id": "q37",
+        "query": "open and view generated pdf in viewer after completion",
+        "relevant_unit_ids": [
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:98_347:part1",
+            "frontend/lib/screens/viewer_screen.dart:class:ViewerScreen:6_13",
+        ],
+        "task_category": "frontend_ui",
+        "split": "test",
+        "annotation_notes": "Navigation push to ViewerScreen with provider.resultFilePath upon successful completion.",
+    },
+    {
+        "query_id": "q38",
+        "query": "flutter smoke test verifying docucharm app startup",
+        "relevant_unit_ids": [
+            "frontend/test/widget_test.dart:function:main:13_30",
+        ],
+        "task_category": "frontend_test",
+        "split": "dev",
+        "annotation_notes": "Widget test pumping DocuCharmApp widget tree and verifying title presence.",
+    },
+    {
+        "query_id": "q39",
+        "query": "stripe payment gateway checkout for subscription",
+        "relevant_unit_ids": [],
+        "task_category": "unsupported_negative_control",
+        "split": "negative_control",
+        "annotation_notes": "Negative control: DocuCharm has no billing, stripe or payment integration.",
+    },
+    {
+        "query_id": "q40",
+        "query": "docker container kubernetes cluster orchestration",
+        "relevant_unit_ids": [],
+        "task_category": "unsupported_negative_control",
+        "split": "negative_control",
+        "annotation_notes": "Negative control: DocuCharm repository has no k8s manifests or container clustering.",
+    },
+]
+
+
+def main():
+    root = Path(__file__).resolve().parent.parent
+    units_path = root / "data" / "code_units.jsonl"
+    with open(units_path, "r", encoding="utf-8") as f:
+        indexed_ids = {json.loads(line)["unit_id"] for line in f if line.strip()}
+
+    print(f"Total indexed units loaded: {len(indexed_ids)}")
+
+    missing = {}
+    for q in QUERIES:
+        for rid in q["relevant_unit_ids"]:
+            if rid not in indexed_ids:
+                missing.setdefault(q["query_id"], []).append(rid)
+
+    if missing:
+        print("ERROR: Missing relevant unit IDs found:")
+        for qid, ids in missing.items():
+            print(f"  {qid}: {ids}")
+        return
+
+    dev_count = sum(1 for q in QUERIES if q["split"] == "dev")
+    test_count = sum(1 for q in QUERIES if q["split"] == "test")
+    neg_count = sum(1 for q in QUERIES if q["split"] == "negative_control")
+
+    print(f"Total Queries: {len(QUERIES)}")
+    print(f"  Dev Split  : {dev_count}")
+    print(f"  Test Split : {test_count}")
+    print(f"  Neg Control: {neg_count}")
+
+    # Check query uniqueness
+    query_texts = [q["query"].lower().strip() for q in QUERIES]
+    assert len(query_texts) == len(set(query_texts)), "Duplicate query detected!"
+
+    # Save to data/evaluation_queries.jsonl
+    out_path = root / "data" / "evaluation_queries.jsonl"
+    with open(out_path, "w", encoding="utf-8") as f:
+        for q in QUERIES:
+            f.write(json.dumps(q) + "\n")
+
+    print(f"Successfully saved {len(QUERIES)} validated queries to {out_path}")
+
+
+if __name__ == "__main__":
+    main()

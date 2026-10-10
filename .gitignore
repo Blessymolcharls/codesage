@@ -14,9 +14,32 @@ __pycache__/
 .coverage
 htmlcov/
 
-# CodeSage generated data artifacts (preserve directory marker)
-data/*
-!data/.gitkeep
+# Node.js & Next.js web application
+web/node_modules/
+web/.next/
+web/out/
+web/.vercel/
+web/*.tsbuildinfo
+
+# CodeSage generated model caches & local embedding binaries
+data/cache/
+.cache/
+models/
+*.npy
+*.npz
+*.pt
+*.bin
+*.onnx
+
+# Allow tracking evaluation queries, code unit dataset, and experimental reports
+!data/
+!data/evaluation_queries.jsonl
+!data/code_units.jsonl
+!data/relationship_graph.json
+!data/manifest.json
+!data/experiments/
+!data/benchmark_comparison.json
+!data/benchmark_comparison.csv
 
 # Secrets, keys, and credentials
 .env

@@ -1,0 +1,1087 @@
+{
+  "evaluation_split": "all",
+  "top_k": 10,
+  "reranker_weights": {
+    "alpha": 0.75,
+    "beta": 0.25
+  },
+  "comparisons": [
+    {
+      "model_family": "TF-IDF",
+      "base_metrics": {
+        "total_queries": 40,
+        "evaluated_queries": 36,
+        "unannotated_queries": 4,
+        "mean_recall_at_1": 0.41435185185185186,
+        "mean_recall_at_5": 0.8333333333333334,
+        "mean_recall_at_10": 0.9675925925925927,
+        "mrr": 0.7743055555555556,
+        "mean_ndcg_at_5": 0.7542851006921208,
+        "mean_ndcg_at_10": 0.81396304891489,
+        "category_metrics": {
+          "backend_pdf_processing": {
+            "count": 5.0,
+            "recall_at_1": 0.2,
+            "recall_at_5": 0.7333333333333333,
+            "recall_at_10": 0.8666666666666666,
+            "mrr": 0.7166666666666667,
+            "ndcg_at_5": 0.6637170212032477,
+            "ndcg_at_10": 0.7242795068829777
+          },
+          "backend_utilities": {
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 0.5,
+            "recall_at_10": 0.75,
+            "mrr": 0.5833333333333334,
+            "ndcg_at_5": 0.5,
+            "ndcg_at_10": 0.609203718409082
+          },
+          "backend_routing": {
+            "count": 3.0,
+            "recall_at_1": 1.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "backend_server": {
+            "count": 2.0,
+            "recall_at_1": 1.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "frontend_networking": {
+            "count": 2.0,
+            "recall_at_1": 0.25,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 0.75,
+            "ndcg_at_5": 0.8254604649035663,
+            "ndcg_at_10": 0.8254604649035663
+          },
+          "frontend_state": {
+            "count": 4.0,
+            "recall_at_1": 0.4583333333333333,
+            "recall_at_5": 0.9166666666666666,
+            "recall_at_10": 1.0,
+            "mrr": 0.8333333333333334,
+            "ndcg_at_5": 0.8391168746650284,
+            "ndcg_at_10": 0.8809069884065789
+          },
+          "frontend_ui": {
+            "count": 6.0,
+            "recall_at_1": 0.05555555555555555,
+            "recall_at_5": 0.6944444444444445,
+            "recall_at_10": 1.0,
+            "mrr": 0.40972222222222227,
+            "ndcg_at_5": 0.46739203996866424,
+            "ndcg_at_10": 0.5951299167812331
+          },
+          "frontend_viewer": {
+            "count": 3.0,
+            "recall_at_1": 0.4444444444444444,
+            "recall_at_5": 0.6666666666666666,
+            "recall_at_10": 1.0,
+            "mrr": 0.8333333333333334,
+            "ndcg_at_5": 0.6666666666666666,
+            "ndcg_at_10": 0.8111150627666207
+          },
+          "frontend_utilities": {
+            "count": 2.0,
+            "recall_at_1": 0.41666666666666663,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "frontend_widgets": {
+            "count": 6.0,
+            "recall_at_1": 0.34722222222222227,
+            "recall_at_5": 0.9166666666666666,
+            "recall_at_10": 1.0,
+            "mrr": 0.8888888888888888,
+            "ndcg_at_5": 0.8373229751034797,
+            "ndcg_at_10": 0.8806985362137133
+          },
+          "frontend_test": {
+            "count": 1.0,
+            "recall_at_1": 1.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          }
+        },
+        "missing_relevant_ids": [],
+        "confidence_intervals_95": {
+          "recall_at_1": [
+            0.2939,
+            0.5509
+          ],
+          "recall_at_5": [
+            0.7315,
+            0.9167
+          ],
+          "recall_at_10": [
+            0.9306,
+            1.0
+          ],
+          "mrr": [
+            0.6655,
+            0.8808
+          ],
+          "ndcg_at_5": [
+            0.6502,
+            0.8517
+          ],
+          "ndcg_at_10": [
+            0.7367,
+            0.888
+          ]
+        }
+      },
+      "reranked_metrics": {
+        "total_queries": 40,
+        "evaluated_queries": 36,
+        "unannotated_queries": 4,
+        "mean_recall_at_1": 0.4282407407407407,
+        "mean_recall_at_5": 0.8518518518518519,
+        "mean_recall_at_10": 0.9722222222222222,
+        "mrr": 0.803505291005291,
+        "mean_ndcg_at_5": 0.7856619108113206,
+        "mean_ndcg_at_10": 0.8405840248592894,
+        "category_metrics": {
+          "backend_pdf_processing": {
+            "count": 5.0,
+            "recall_at_1": 0.2,
+            "recall_at_5": 0.7333333333333333,
+            "recall_at_10": 0.8666666666666666,
+            "mrr": 0.74,
+            "ndcg_at_5": 0.6596039104106087,
+            "ndcg_at_10": 0.7212893959758151
+          },
+          "backend_utilities": {
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 0.5,
+            "recall_at_10": 1.0,
+            "mrr": 0.5714285714285714,
+            "ndcg_at_5": 0.5,
+            "ndcg_at_10": 0.6989044006028785
+          },
+          "backend_routing": {
+            "count": 3.0,
+            "recall_at_1": 1.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "backend_server": {
+            "count": 2.0,
+            "recall_at_1": 1.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "frontend_networking": {
+            "count": 2.0,
+            "recall_at_1": 0.25,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 0.75,
+            "ndcg_at_5": 0.8254604649035663,
+            "ndcg_at_10": 0.8254604649035663
+          },
+          "frontend_state": {
+            "count": 4.0,
+            "recall_at_1": 0.4583333333333333,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 0.8333333333333334,
+            "ndcg_at_5": 0.9045721255123196,
+            "ndcg_at_10": 0.9045721255123196
+          },
+          "frontend_ui": {
+            "count": 6.0,
+            "recall_at_1": 0.13888888888888887,
+            "recall_at_5": 0.6944444444444445,
+            "recall_at_10": 1.0,
+            "mrr": 0.5694444444444444,
+            "ndcg_at_5": 0.5334691386807527,
+            "ndcg_at_10": 0.6710836491319748
+          },
+          "frontend_viewer": {
+            "count": 3.0,
+            "recall_at_1": 0.4444444444444444,
+            "recall_at_5": 0.7777777777777777,
+            "recall_at_10": 0.8888888888888888,
+            "mrr": 0.8333333333333334,
+            "ndcg_at_5": 0.7340357821668492,
+            "ndcg_at_10": 0.7897559338222498
+          },
+          "frontend_utilities": {
+            "count": 2.0,
+            "recall_at_1": 0.41666666666666663,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "frontend_widgets": {
+            "count": 6.0,
+            "recall_at_1": 0.34722222222222227,
+            "recall_at_5": 0.9166666666666666,
+            "recall_at_10": 1.0,
+            "mrr": 0.8888888888888888,
+            "ndcg_at_5": 0.8856129377855043,
+            "ndcg_at_10": 0.9319649976224295
+          },
+          "frontend_test": {
+            "count": 1.0,
+            "recall_at_1": 1.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          }
+        },
+        "missing_relevant_ids": [
+          "backend/controllers/pdfController.js:function:imageToPdf:94_135",
+          "backend/controllers/pdfController.js:function:mergePdfs:9_36",
+          "backend/controllers/pdfController.js:function:pdfToImage:138_192",
+          "backend/controllers/pdfController.js:function:rotatePdf:195_226",
+          "backend/controllers/pdfController.js:function:splitPdf:39_91",
+          "backend/routes/pdfRoutes.js:line_chunk:anon:1_46",
+          "backend/server.js:line_chunk:anon:1_36",
+          "backend/utils/fileHelper.js:function:cleanupFiles:7_17",
+          "backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48",
+          "frontend/lib/main.dart:class:DocuCharmApp:31_85",
+          "frontend/lib/main.dart:class:ThemeProvider:20_29",
+          "frontend/lib/main.dart:method:_buildTheme:48_84",
+          "frontend/lib/main.dart:method:build:35_46",
+          "frontend/lib/main.dart:method:themeMode:23_23",
+          "frontend/lib/main.dart:method:toggleTheme:25_28",
+          "frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76",
+          "frontend/lib/providers/pdf_provider.dart:class:PdfState:5_5",
+          "frontend/lib/providers/pdf_provider.dart:method:processFiles:41_75",
+          "frontend/lib/providers/pdf_provider.dart:method:reset:22_28",
+          "frontend/lib/providers/pdf_provider.dart:method:setError:35_39",
+          "frontend/lib/screens/dashboard_screen.dart:class:DashboardScreen:12_158",
+          "frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178",
+          "frontend/lib/screens/dashboard_screen.dart:class:_FeatureCardState:180_306",
+          "frontend/lib/screens/dashboard_screen.dart:method:build:16_157",
+          "frontend/lib/screens/dashboard_screen.dart:method:build:217_305",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:BaseFeatureScreen:14_42",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:44_293:part1",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_onFilesDropped:56_70",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_processFiles:72_95",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:98_347:part1",
+          "frontend/lib/screens/feature_screens/tools.dart:class:ImagesToPdfScreen:96_109",
+          "frontend/lib/screens/feature_screens/tools.dart:class:MergeScreen:4_17",
+          "frontend/lib/screens/feature_screens/tools.dart:class:PdfToImagesScreen:111_124",
+          "frontend/lib/screens/feature_screens/tools.dart:class:RotateScreen:126_130",
+          "frontend/lib/screens/feature_screens/tools.dart:class:SplitScreen:19_23",
+          "frontend/lib/screens/feature_screens/tools.dart:class:_RotateScreenState:132_177",
+          "frontend/lib/screens/feature_screens/tools.dart:class:_SplitScreenState:25_94",
+          "frontend/lib/screens/feature_screens/tools.dart:method:build:114_123",
+          "frontend/lib/screens/feature_screens/tools.dart:method:build:7_16",
+          "frontend/lib/screens/feature_screens/tools.dart:method:build:99_108",
+          "frontend/lib/screens/viewer_screen.dart:class:SearchToolbar:237_251",
+          "frontend/lib/screens/viewer_screen.dart:class:SearchToolbarState:253_294",
+          "frontend/lib/screens/viewer_screen.dart:class:ViewerScreen:6_13",
+          "frontend/lib/screens/viewer_screen.dart:class:_ViewerScreenState:15_235",
+          "frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234",
+          "frontend/lib/screens/viewer_screen.dart:method:build:257_293",
+          "frontend/lib/screens/viewer_screen.dart:method:build:31_164",
+          "frontend/lib/services/network_service.dart:class:NetworkService:6_102",
+          "frontend/lib/services/network_service.dart:method:NetworkService:13_19",
+          "frontend/lib/services/network_service.dart:method:uploadFiles:22_101",
+          "frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47",
+          "frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46",
+          "frontend/lib/utils/export_helper.dart:method:shareFile:8_10",
+          "frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75",
+          "frontend/lib/widgets/custom_snackbar.dart:method:show:5_66",
+          "frontend/lib/widgets/custom_snackbar.dart:method:showError:68_70",
+          "frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74",
+          "frontend/lib/widgets/file_drop_zone.dart:class:FileDropZone:7_27",
+          "frontend/lib/widgets/file_drop_zone.dart:class:_FileDropZoneState:29_126",
+          "frontend/lib/widgets/file_drop_zone.dart:method:_pickFiles:32_46",
+          "frontend/lib/widgets/file_drop_zone.dart:method:build:49_125",
+          "frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85",
+          "frontend/lib/widgets/loading_overlay.dart:method:build:18_84",
+          "frontend/test/widget_test.dart:function:main:13_30"
+        ],
+        "confidence_intervals_95": {
+          "recall_at_1": [
+            0.3078,
+            0.5602
+          ],
+          "recall_at_5": [
+            0.7593,
+            0.9259
+          ],
+          "recall_at_10": [
+            0.9444,
+            1.0
+          ],
+          "mrr": [
+            0.7016,
+            0.8968
+          ],
+          "ndcg_at_5": [
+            0.69,
+            0.8735
+          ],
+          "ndcg_at_10": [
+            0.7695,
+            0.9075
+          ]
+        }
+      },
+      "deltas": {
+        "delta_mrr": 0.0292,
+        "delta_recall_1": 0.0139,
+        "delta_recall_5": 0.0185,
+        "delta_recall_10": 0.0046,
+        "delta_ndcg_5": 0.0314
+      },
+      "latency": {
+        "base_mean_ms": 0.517,
+        "reranked_mean_ms": 0.944,
+        "overhead_ms": 0.427,
+        "overhead_pct": 82.6
+      }
+    },
+    {
+      "model_family": "Semantic (all-MiniLM)",
+      "base_metrics": {
+        "total_queries": 40,
+        "evaluated_queries": 36,
+        "unannotated_queries": 4,
+        "mean_recall_at_1": 0.3703703703703704,
+        "mean_recall_at_5": 0.8171296296296297,
+        "mean_recall_at_10": 0.8842592592592592,
+        "mrr": 0.7959104938271605,
+        "mean_ndcg_at_5": 0.731761640793394,
+        "mean_ndcg_at_10": 0.7618294437413908,
+        "category_metrics": {
+          "backend_pdf_processing": {
+            "count": 5.0,
+            "recall_at_1": 0.26666666666666666,
+            "recall_at_5": 0.8666666666666666,
+            "recall_at_10": 0.9333333333333333,
+            "mrr": 0.9,
+            "ndcg_at_5": 0.7987185327213434,
+            "ndcg_at_10": 0.8321506237145838
+          },
+          "backend_utilities": {
+            "count": 2.0,
+            "recall_at_1": 0.75,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "backend_routing": {
+            "count": 3.0,
+            "recall_at_1": 0.6666666666666666,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 0.7777777777777778,
+            "ndcg_at_5": 0.8333333333333334,
+            "ndcg_at_10": 0.8333333333333334
+          },
+          "backend_server": {
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 0.6666666666666666,
+            "ndcg_at_5": 0.75,
+            "ndcg_at_10": 0.75
+          },
+          "frontend_networking": {
+            "count": 2.0,
+            "recall_at_1": 0.25,
+            "recall_at_5": 0.75,
+            "recall_at_10": 1.0,
+            "mrr": 0.75,
+            "ndcg_at_5": 0.6934264036172708,
+            "ndcg_at_10": 0.7956176024115138
+          },
+          "frontend_state": {
+            "count": 4.0,
+            "recall_at_1": 0.4583333333333333,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 0.875,
+            "ndcg_at_5": 0.8773776003938313,
+            "ndcg_at_10": 0.8773776003938313
+          },
+          "frontend_ui": {
+            "count": 6.0,
+            "recall_at_1": 0.1111111111111111,
+            "recall_at_5": 0.5277777777777778,
+            "recall_at_10": 0.5833333333333334,
+            "mrr": 0.5185185185185185,
+            "ndcg_at_5": 0.4427727694697454,
+            "ndcg_at_10": 0.4663172649463836
+          },
+          "frontend_viewer": {
+            "count": 3.0,
+            "recall_at_1": 0.5555555555555555,
+            "recall_at_5": 0.6666666666666666,
+            "recall_at_10": 0.7777777777777777,
+            "mrr": 1.0,
+            "ndcg_at_5": 0.7066997481942886,
+            "ndcg_at_10": 0.753788739147565
+          },
+          "frontend_utilities": {
+            "count": 2.0,
+            "recall_at_1": 0.25,
+            "recall_at_5": 0.5,
+            "recall_at_10": 0.8333333333333333,
+            "mrr": 0.5625,
+            "ndcg_at_5": 0.5,
+            "ndcg_at_10": 0.6446539641713808
+          },
+          "frontend_widgets": {
+            "count": 6.0,
+            "recall_at_1": 0.3888888888888889,
+            "recall_at_5": 0.9027777777777778,
+            "recall_at_10": 0.9444444444444445,
+            "mrr": 1.0,
+            "ndcg_at_5": 0.8743417961118117,
+            "ndcg_at_10": 0.8975178260302744
+          },
+          "frontend_test": {
+            "count": 1.0,
+            "recall_at_1": 0.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 0.25,
+            "ndcg_at_5": 0.43067655807339306,
+            "ndcg_at_10": 0.43067655807339306
+          }
+        },
+        "missing_relevant_ids": [],
+        "confidence_intervals_95": {
+          "recall_at_1": [
+            0.2661,
+            0.4838
+          ],
+          "recall_at_5": [
+            0.7106,
+            0.9167
+          ],
+          "recall_at_10": [
+            0.8056,
+            0.9537
+          ],
+          "mrr": [
+            0.6905,
+            0.8981
+          ],
+          "ndcg_at_5": [
+            0.6292,
+            0.8283
+          ],
+          "ndcg_at_10": [
+            0.6702,
+            0.8477
+          ]
+        }
+      },
+      "reranked_metrics": {
+        "total_queries": 40,
+        "evaluated_queries": 36,
+        "unannotated_queries": 4,
+        "mean_recall_at_1": 0.375,
+        "mean_recall_at_5": 0.8518518518518519,
+        "mean_recall_at_10": 0.8935185185185185,
+        "mrr": 0.7882275132275133,
+        "mean_ndcg_at_5": 0.7571705740685455,
+        "mean_ndcg_at_10": 0.7756189520454486,
+        "category_metrics": {
+          "backend_pdf_processing": {
+            "count": 5.0,
+            "recall_at_1": 0.26666666666666666,
+            "recall_at_5": 0.9333333333333333,
+            "recall_at_10": 0.9333333333333333,
+            "mrr": 0.9,
+            "ndcg_at_5": 0.8456464053236191,
+            "ndcg_at_10": 0.8456464053236191
+          },
+          "backend_utilities": {
+            "count": 2.0,
+            "recall_at_1": 0.75,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "backend_routing": {
+            "count": 3.0,
+            "recall_at_1": 0.6666666666666666,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 0.7777777777777778,
+            "ndcg_at_5": 0.8333333333333334,
+            "ndcg_at_10": 0.8333333333333334
+          },
+          "backend_server": {
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 0.625,
+            "ndcg_at_5": 0.7153382790366966,
+            "ndcg_at_10": 0.7153382790366966
+          },
+          "frontend_networking": {
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 0.75,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 0.8065735963827292,
+            "ndcg_at_10": 0.9157773147918112
+          },
+          "frontend_state": {
+            "count": 4.0,
+            "recall_at_1": 0.4583333333333333,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 0.875,
+            "ndcg_at_5": 0.8998629597879882,
+            "ndcg_at_10": 0.8998629597879882
+          },
+          "frontend_ui": {
+            "count": 6.0,
+            "recall_at_1": 0.05555555555555555,
+            "recall_at_5": 0.5833333333333334,
+            "recall_at_10": 0.5833333333333334,
+            "mrr": 0.39999999999999997,
+            "ndcg_at_5": 0.4089061107454748,
+            "ndcg_at_10": 0.4089061107454748
+          },
+          "frontend_viewer": {
+            "count": 3.0,
+            "recall_at_1": 0.5555555555555555,
+            "recall_at_5": 0.7777777777777777,
+            "recall_at_10": 0.8888888888888888,
+            "mrr": 1.0,
+            "ndcg_at_5": 0.7809240483488694,
+            "ndcg_at_10": 0.8302710335098468
+          },
+          "frontend_utilities": {
+            "count": 2.0,
+            "recall_at_1": 0.25,
+            "recall_at_5": 0.5,
+            "recall_at_10": 0.8333333333333333,
+            "mrr": 0.5714285714285714,
+            "ndcg_at_5": 0.5,
+            "ndcg_at_10": 0.6488466074337073
+          },
+          "frontend_widgets": {
+            "count": 6.0,
+            "recall_at_1": 0.3888888888888889,
+            "recall_at_5": 0.9444444444444445,
+            "recall_at_10": 0.9444444444444445,
+            "mrr": 1.0,
+            "ndcg_at_5": 0.9432912803776482,
+            "ndcg_at_10": 0.9432912803776482
+          },
+          "frontend_test": {
+            "count": 1.0,
+            "recall_at_1": 0.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 0.25,
+            "ndcg_at_5": 0.43067655807339306,
+            "ndcg_at_10": 0.43067655807339306
+          }
+        },
+        "missing_relevant_ids": [
+          "backend/controllers/pdfController.js:function:imageToPdf:94_135",
+          "backend/controllers/pdfController.js:function:mergePdfs:9_36",
+          "backend/controllers/pdfController.js:function:pdfToImage:138_192",
+          "backend/controllers/pdfController.js:function:rotatePdf:195_226",
+          "backend/controllers/pdfController.js:function:splitPdf:39_91",
+          "backend/routes/pdfRoutes.js:line_chunk:anon:1_46",
+          "backend/server.js:line_chunk:anon:1_36",
+          "backend/utils/fileHelper.js:function:cleanupFiles:7_17",
+          "backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48",
+          "frontend/lib/main.dart:class:DocuCharmApp:31_85",
+          "frontend/lib/main.dart:class:ThemeProvider:20_29",
+          "frontend/lib/main.dart:method:_buildTheme:48_84",
+          "frontend/lib/main.dart:method:build:35_46",
+          "frontend/lib/main.dart:method:themeMode:23_23",
+          "frontend/lib/main.dart:method:toggleTheme:25_28",
+          "frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76",
+          "frontend/lib/providers/pdf_provider.dart:class:PdfState:5_5",
+          "frontend/lib/providers/pdf_provider.dart:method:processFiles:41_75",
+          "frontend/lib/providers/pdf_provider.dart:method:reset:22_28",
+          "frontend/lib/providers/pdf_provider.dart:method:setError:35_39",
+          "frontend/lib/screens/dashboard_screen.dart:class:DashboardScreen:12_158",
+          "frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178",
+          "frontend/lib/screens/dashboard_screen.dart:class:_FeatureCardState:180_306",
+          "frontend/lib/screens/dashboard_screen.dart:method:build:16_157",
+          "frontend/lib/screens/dashboard_screen.dart:method:build:217_305",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:BaseFeatureScreen:14_42",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:44_293:part1",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_onFilesDropped:56_70",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_processFiles:72_95",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:98_347:part1",
+          "frontend/lib/screens/feature_screens/tools.dart:class:ImagesToPdfScreen:96_109",
+          "frontend/lib/screens/feature_screens/tools.dart:class:MergeScreen:4_17",
+          "frontend/lib/screens/feature_screens/tools.dart:class:PdfToImagesScreen:111_124",
+          "frontend/lib/screens/feature_screens/tools.dart:class:RotateScreen:126_130",
+          "frontend/lib/screens/feature_screens/tools.dart:class:SplitScreen:19_23",
+          "frontend/lib/screens/feature_screens/tools.dart:class:_RotateScreenState:132_177",
+          "frontend/lib/screens/feature_screens/tools.dart:class:_SplitScreenState:25_94",
+          "frontend/lib/screens/feature_screens/tools.dart:method:build:114_123",
+          "frontend/lib/screens/feature_screens/tools.dart:method:build:7_16",
+          "frontend/lib/screens/feature_screens/tools.dart:method:build:99_108",
+          "frontend/lib/screens/viewer_screen.dart:class:SearchToolbar:237_251",
+          "frontend/lib/screens/viewer_screen.dart:class:SearchToolbarState:253_294",
+          "frontend/lib/screens/viewer_screen.dart:class:ViewerScreen:6_13",
+          "frontend/lib/screens/viewer_screen.dart:class:_ViewerScreenState:15_235",
+          "frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234",
+          "frontend/lib/screens/viewer_screen.dart:method:build:257_293",
+          "frontend/lib/screens/viewer_screen.dart:method:build:31_164",
+          "frontend/lib/services/network_service.dart:class:NetworkService:6_102",
+          "frontend/lib/services/network_service.dart:method:NetworkService:13_19",
+          "frontend/lib/services/network_service.dart:method:uploadFiles:22_101",
+          "frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47",
+          "frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46",
+          "frontend/lib/utils/export_helper.dart:method:shareFile:8_10",
+          "frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75",
+          "frontend/lib/widgets/custom_snackbar.dart:method:show:5_66",
+          "frontend/lib/widgets/custom_snackbar.dart:method:showError:68_70",
+          "frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74",
+          "frontend/lib/widgets/file_drop_zone.dart:class:FileDropZone:7_27",
+          "frontend/lib/widgets/file_drop_zone.dart:class:_FileDropZoneState:29_126",
+          "frontend/lib/widgets/file_drop_zone.dart:method:_pickFiles:32_46",
+          "frontend/lib/widgets/file_drop_zone.dart:method:build:49_125",
+          "frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85",
+          "frontend/lib/widgets/loading_overlay.dart:method:build:18_84",
+          "frontend/test/widget_test.dart:function:main:13_30"
+        ],
+        "confidence_intervals_95": {
+          "recall_at_1": [
+            0.2662,
+            0.4907
+          ],
+          "recall_at_5": [
+            0.7546,
+            0.9398
+          ],
+          "recall_at_10": [
+            0.8193,
+            0.963
+          ],
+          "mrr": [
+            0.6773,
+            0.8945
+          ],
+          "ndcg_at_5": [
+            0.6588,
+            0.8517
+          ],
+          "ndcg_at_10": [
+            0.6836,
+            0.8656
+          ]
+        }
+      },
+      "deltas": {
+        "delta_mrr": -0.0077,
+        "delta_recall_1": 0.0046,
+        "delta_recall_5": 0.0347,
+        "delta_recall_10": 0.0093,
+        "delta_ndcg_5": 0.0254
+      },
+      "latency": {
+        "base_mean_ms": 529.685,
+        "reranked_mean_ms": 16.218,
+        "overhead_ms": -513.467,
+        "overhead_pct": -96.9
+      }
+    },
+    {
+      "model_family": "Code Transformer (st-codesearch)",
+      "base_metrics": {
+        "total_queries": 40,
+        "evaluated_queries": 36,
+        "unannotated_queries": 4,
+        "mean_recall_at_1": 0.4074074074074074,
+        "mean_recall_at_5": 0.7615740740740741,
+        "mean_recall_at_10": 0.8657407407407408,
+        "mrr": 0.845679012345679,
+        "mean_ndcg_at_5": 0.7305606939767889,
+        "mean_ndcg_at_10": 0.7733526916806708,
+        "category_metrics": {
+          "backend_pdf_processing": {
+            "count": 5.0,
+            "recall_at_1": 0.3333333333333333,
+            "recall_at_5": 0.6666666666666666,
+            "recall_at_10": 0.8666666666666666,
+            "mrr": 1.0,
+            "ndcg_at_5": 0.7178755941211243,
+            "ndcg_at_10": 0.8028675744761662
+          },
+          "backend_utilities": {
+            "count": 2.0,
+            "recall_at_1": 0.75,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "backend_routing": {
+            "count": 3.0,
+            "recall_at_1": 0.3333333333333333,
+            "recall_at_5": 0.6666666666666666,
+            "recall_at_10": 1.0,
+            "mrr": 0.4537037037037037,
+            "ndcg_at_5": 0.47689218602446437,
+            "ndcg_at_10": 0.5772355179124581
+          },
+          "backend_server": {
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 0.75,
+            "ndcg_at_5": 0.8154648767857288,
+            "ndcg_at_10": 0.8154648767857288
+          },
+          "frontend_networking": {
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "frontend_state": {
+            "count": 4.0,
+            "recall_at_1": 0.4583333333333333,
+            "recall_at_5": 0.9166666666666666,
+            "recall_at_10": 0.9166666666666666,
+            "mrr": 0.875,
+            "ndcg_at_5": 0.8377792806317674,
+            "ndcg_at_10": 0.8377792806317674
+          },
+          "frontend_ui": {
+            "count": 6.0,
+            "recall_at_1": 0.25,
+            "recall_at_5": 0.5277777777777778,
+            "recall_at_10": 0.5833333333333334,
+            "mrr": 0.75,
+            "ndcg_at_5": 0.5406794910561527,
+            "ndcg_at_10": 0.5667505313907503
+          },
+          "frontend_viewer": {
+            "count": 3.0,
+            "recall_at_1": 0.4444444444444444,
+            "recall_at_5": 0.6666666666666666,
+            "recall_at_10": 0.7777777777777778,
+            "mrr": 0.7777777777777778,
+            "ndcg_at_5": 0.6461858173485043,
+            "ndcg_at_10": 0.701905969003905
+          },
+          "frontend_utilities": {
+            "count": 2.0,
+            "recall_at_1": 0.25,
+            "recall_at_5": 0.6666666666666666,
+            "recall_at_10": 0.8333333333333333,
+            "mrr": 0.625,
+            "ndcg_at_5": 0.6010536732502738,
+            "ndcg_at_10": 0.6792667942540666
+          },
+          "frontend_widgets": {
+            "count": 6.0,
+            "recall_at_1": 0.3888888888888889,
+            "recall_at_5": 0.8194444444444445,
+            "recall_at_10": 0.9444444444444445,
+            "mrr": 1.0,
+            "ndcg_at_5": 0.8188903055839803,
+            "ndcg_at_10": 0.8746418190705114
+          },
+          "frontend_test": {
+            "count": 1.0,
+            "recall_at_1": 1.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          }
+        },
+        "missing_relevant_ids": [],
+        "confidence_intervals_95": {
+          "recall_at_1": [
+            0.3148,
+            0.5139
+          ],
+          "recall_at_5": [
+            0.6644,
+            0.8519
+          ],
+          "recall_at_10": [
+            0.7869,
+            0.9444
+          ],
+          "mrr": [
+            0.7399,
+            0.9329
+          ],
+          "ndcg_at_5": [
+            0.6393,
+            0.81
+          ],
+          "ndcg_at_10": [
+            0.6893,
+            0.8494
+          ]
+        }
+      },
+      "reranked_metrics": {
+        "total_queries": 40,
+        "evaluated_queries": 36,
+        "unannotated_queries": 4,
+        "mean_recall_at_1": 0.3796296296296296,
+        "mean_recall_at_5": 0.7824074074074074,
+        "mean_recall_at_10": 0.8657407407407408,
+        "mrr": 0.8125,
+        "mean_ndcg_at_5": 0.7271236490946942,
+        "mean_ndcg_at_10": 0.7613924058129354,
+        "category_metrics": {
+          "backend_pdf_processing": {
+            "count": 5.0,
+            "recall_at_1": 0.3333333333333333,
+            "recall_at_5": 0.6666666666666666,
+            "recall_at_10": 0.8666666666666666,
+            "mrr": 1.0,
+            "ndcg_at_5": 0.6655531434475532,
+            "ndcg_at_10": 0.7560547740422433
+          },
+          "backend_utilities": {
+            "count": 2.0,
+            "recall_at_1": 0.75,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "backend_routing": {
+            "count": 3.0,
+            "recall_at_1": 0.0,
+            "recall_at_5": 0.3333333333333333,
+            "recall_at_10": 0.6666666666666666,
+            "mrr": 0.16666666666666666,
+            "ndcg_at_5": 0.16666666666666666,
+            "ndcg_at_10": 0.28540239570267406
+          },
+          "backend_server": {
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 0.6666666666666666,
+            "ndcg_at_5": 0.75,
+            "ndcg_at_10": 0.75
+          },
+          "frontend_networking": {
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "frontend_state": {
+            "count": 4.0,
+            "recall_at_1": 0.4583333333333333,
+            "recall_at_5": 0.9166666666666666,
+            "recall_at_10": 1.0,
+            "mrr": 0.875,
+            "ndcg_at_5": 0.8745473143666032,
+            "ndcg_at_10": 0.9098640575815604
+          },
+          "frontend_ui": {
+            "count": 6.0,
+            "recall_at_1": 0.25,
+            "recall_at_5": 0.5833333333333334,
+            "recall_at_10": 0.5833333333333334,
+            "mrr": 0.7222222222222222,
+            "ndcg_at_5": 0.5491148308838018,
+            "ndcg_at_10": 0.5491148308838018
+          },
+          "frontend_viewer": {
+            "count": 3.0,
+            "recall_at_1": 0.4444444444444444,
+            "recall_at_5": 0.7777777777777778,
+            "recall_at_10": 0.7777777777777778,
+            "mrr": 0.75,
+            "ndcg_at_5": 0.6958557426906783,
+            "ndcg_at_10": 0.6958557426906783
+          },
+          "frontend_utilities": {
+            "count": 2.0,
+            "recall_at_1": 0.25,
+            "recall_at_5": 0.8333333333333333,
+            "recall_at_10": 1.0,
+            "mrr": 0.6666666666666666,
+            "ndcg_at_5": 0.7183733547559629,
+            "ndcg_at_10": 0.7861993414721868
+          },
+          "frontend_widgets": {
+            "count": 6.0,
+            "recall_at_1": 0.3888888888888889,
+            "recall_at_5": 0.9444444444444445,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 0.921915578303007,
+            "ndcg_at_10": 0.9465890708834955
+          },
+          "frontend_test": {
+            "count": 1.0,
+            "recall_at_1": 1.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          }
+        },
+        "missing_relevant_ids": [
+          "backend/controllers/pdfController.js:function:imageToPdf:94_135",
+          "backend/controllers/pdfController.js:function:mergePdfs:9_36",
+          "backend/controllers/pdfController.js:function:pdfToImage:138_192",
+          "backend/controllers/pdfController.js:function:rotatePdf:195_226",
+          "backend/controllers/pdfController.js:function:splitPdf:39_91",
+          "backend/routes/pdfRoutes.js:line_chunk:anon:1_46",
+          "backend/server.js:line_chunk:anon:1_36",
+          "backend/utils/fileHelper.js:function:cleanupFiles:7_17",
+          "backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48",
+          "frontend/lib/main.dart:class:DocuCharmApp:31_85",
+          "frontend/lib/main.dart:class:ThemeProvider:20_29",
+          "frontend/lib/main.dart:method:_buildTheme:48_84",
+          "frontend/lib/main.dart:method:build:35_46",
+          "frontend/lib/main.dart:method:themeMode:23_23",
+          "frontend/lib/main.dart:method:toggleTheme:25_28",
+          "frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76",
+          "frontend/lib/providers/pdf_provider.dart:class:PdfState:5_5",
+          "frontend/lib/providers/pdf_provider.dart:method:processFiles:41_75",
+          "frontend/lib/providers/pdf_provider.dart:method:reset:22_28",
+          "frontend/lib/providers/pdf_provider.dart:method:setError:35_39",
+          "frontend/lib/screens/dashboard_screen.dart:class:DashboardScreen:12_158",
+          "frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178",
+          "frontend/lib/screens/dashboard_screen.dart:class:_FeatureCardState:180_306",
+          "frontend/lib/screens/dashboard_screen.dart:method:build:16_157",
+          "frontend/lib/screens/dashboard_screen.dart:method:build:217_305",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:BaseFeatureScreen:14_42",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:44_293:part1",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_onFilesDropped:56_70",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_processFiles:72_95",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:98_347:part1",
+          "frontend/lib/screens/feature_screens/tools.dart:class:ImagesToPdfScreen:96_109",
+          "frontend/lib/screens/feature_screens/tools.dart:class:MergeScreen:4_17",
+          "frontend/lib/screens/feature_screens/tools.dart:class:PdfToImagesScreen:111_124",
+          "frontend/lib/screens/feature_screens/tools.dart:class:RotateScreen:126_130",
+          "frontend/lib/screens/feature_screens/tools.dart:class:SplitScreen:19_23",
+          "frontend/lib/screens/feature_screens/tools.dart:class:_RotateScreenState:132_177",
+          "frontend/lib/screens/feature_screens/tools.dart:class:_SplitScreenState:25_94",
+          "frontend/lib/screens/feature_screens/tools.dart:method:build:114_123",
+          "frontend/lib/screens/feature_screens/tools.dart:method:build:7_16",
+          "frontend/lib/screens/feature_screens/tools.dart:method:build:99_108",
+          "frontend/lib/screens/viewer_screen.dart:class:SearchToolbar:237_251",
+          "frontend/lib/screens/viewer_screen.dart:class:SearchToolbarState:253_294",
+          "frontend/lib/screens/viewer_screen.dart:class:ViewerScreen:6_13",
+          "frontend/lib/screens/viewer_screen.dart:class:_ViewerScreenState:15_235",
+          "frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234",
+          "frontend/lib/screens/viewer_screen.dart:method:build:257_293",
+          "frontend/lib/screens/viewer_screen.dart:method:build:31_164",
+          "frontend/lib/services/network_service.dart:class:NetworkService:6_102",
+          "frontend/lib/services/network_service.dart:method:NetworkService:13_19",
+          "frontend/lib/services/network_service.dart:method:uploadFiles:22_101",
+          "frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47",
+          "frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46",
+          "frontend/lib/utils/export_helper.dart:method:shareFile:8_10",
+          "frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75",
+          "frontend/lib/widgets/custom_snackbar.dart:method:show:5_66",
+          "frontend/lib/widgets/custom_snackbar.dart:method:showError:68_70",
+          "frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74",
+          "frontend/lib/widgets/file_drop_zone.dart:class:FileDropZone:7_27",
+          "frontend/lib/widgets/file_drop_zone.dart:class:_FileDropZoneState:29_126",
+          "frontend/lib/widgets/file_drop_zone.dart:method:_pickFiles:32_46",
+          "frontend/lib/widgets/file_drop_zone.dart:method:build:49_125",
+          "frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85",
+          "frontend/lib/widgets/loading_overlay.dart:method:build:18_84",
+          "frontend/test/widget_test.dart:function:main:13_30"
+        ],
+        "confidence_intervals_95": {
+          "recall_at_1": [
+            0.287,
+            0.4838
+          ],
+          "recall_at_5": [
+            0.6759,
+            0.8704
+          ],
+          "recall_at_10": [
+            0.7685,
+            0.9444
+          ],
+          "mrr": [
+            0.7083,
+            0.912
+          ],
+          "ndcg_at_5": [
+            0.6319,
+            0.8198
+          ],
+          "ndcg_at_10": [
+            0.6761,
+            0.8469
+          ]
+        }
+      },
+      "deltas": {
+        "delta_mrr": -0.0332,
+        "delta_recall_1": -0.0278,
+        "delta_recall_5": 0.0208,
+        "delta_recall_10": 0.0,
+        "delta_ndcg_5": -0.0034
+      },
+      "latency": {
+        "base_mean_ms": 206.482,
+        "reranked_mean_ms": 32.932,
+        "overhead_ms": -173.55,
+        "overhead_pct": -84.1
+      }
+    }
+  ]
+}

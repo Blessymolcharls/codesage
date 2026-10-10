@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-10-10T17:20:38.291560+00:00",
+  "repository_label": "DocuCharm",
+  "counts": {
+    "total_files_discovered": 187,
+    "total_files_indexed": 16,
+    "total_files_skipped": 171,
+    "total_units_extracted": 89,
+    "by_language": {
+      "dart": 80,
+      "javascript": 9
+    },
+    "by_unit_type": {
+      "class": 27,
+      "function": 9,
+      "line_chunk": 2,
+      "method": 51
+    },
+    "by_extraction_method": {
+      "line_chunk": 2,
+      "tree_sitter": 87
+    },
+    "by_parser_status": {
+      "fallback": 2,
+      "success": 87
+    }
+  },
+  "skipped_files_by_reason": {
+    "binary_or_document": 43,
+    "extension_not_supported": 114,
+    "ignored_directory": 11,
+    "lockfile_or_generated": 3
+  },
+  "parser_failures": [],
+  "configuration": {
+    "supported_extensions": [
+      ".dart",
+      ".js",
+      ".jsx",
+      ".py",
+      ".ts",
+      ".tsx"
+    ],
+    "max_files": null,
+    "max_file_size_bytes": 524288,
+    "max_unit_lines": 250,
+    "dry_run": false
+  }
+}

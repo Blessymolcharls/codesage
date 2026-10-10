@@ -1,0 +1,104 @@
+{
+  "total_queries": 27,
+  "evaluated_queries": 25,
+  "unannotated_queries": 2,
+  "mean_recall_at_1": 0.35666666666666663,
+  "mean_recall_at_5": 0.78,
+  "mean_recall_at_10": 0.9533333333333333,
+  "mrr": 0.755,
+  "mean_ndcg_at_5": 0.7236776448331522,
+  "mean_ndcg_at_10": 0.8018768341292491,
+  "category_metrics": {
+    "backend_pdf_processing": {
+      "count": 5.0,
+      "recall_at_1": 0.2,
+      "recall_at_5": 0.7333333333333333,
+      "recall_at_10": 0.8666666666666666,
+      "mrr": 0.7166666666666667,
+      "ndcg_at_5": 0.6637170212032477,
+      "ndcg_at_10": 0.7242795068829777
+    },
+    "backend_utilities": {
+      "count": 2.0,
+      "recall_at_1": 0.5,
+      "recall_at_5": 0.5,
+      "recall_at_10": 0.75,
+      "mrr": 0.5833333333333334,
+      "ndcg_at_5": 0.5,
+      "ndcg_at_10": 0.609203718409082
+    },
+    "backend_routing": {
+      "count": 1.0,
+      "recall_at_1": 1.0,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_5": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    "backend_server": {
+      "count": 1.0,
+      "recall_at_1": 1.0,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_5": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    "frontend_networking": {
+      "count": 2.0,
+      "recall_at_1": 0.25,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.75,
+      "ndcg_at_5": 0.8254604649035663,
+      "ndcg_at_10": 0.8254604649035663
+    },
+    "frontend_state": {
+      "count": 3.0,
+      "recall_at_1": 0.4444444444444444,
+      "recall_at_5": 0.8888888888888888,
+      "recall_at_10": 1.0,
+      "mrr": 0.7777777777777778,
+      "ndcg_at_5": 0.812248903170642,
+      "ndcg_at_10": 0.8679690548260427
+    },
+    "frontend_ui": {
+      "count": 3.0,
+      "recall_at_1": 0.1111111111111111,
+      "recall_at_5": 0.5555555555555555,
+      "recall_at_10": 1.0,
+      "mrr": 0.4861111111111111,
+      "ndcg_at_5": 0.4720603851829103,
+      "ndcg_at_10": 0.6630606709356243
+    },
+    "frontend_viewer": {
+      "count": 3.0,
+      "recall_at_1": 0.4444444444444444,
+      "recall_at_5": 0.6666666666666666,
+      "recall_at_10": 1.0,
+      "mrr": 0.8333333333333334,
+      "ndcg_at_5": 0.6666666666666666,
+      "ndcg_at_10": 0.8111150627666207
+    },
+    "frontend_utilities": {
+      "count": 1.0,
+      "recall_at_1": 0.3333333333333333,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_5": 1.0,
+      "ndcg_at_10": 1.0
+    },
+    "frontend_widgets": {
+      "count": 4.0,
+      "recall_at_1": 0.2708333333333333,
+      "recall_at_5": 0.875,
+      "recall_at_10": 1.0,
+      "mrr": 0.8333333333333334,
+      "ndcg_at_5": 0.8173768049861949,
+      "ndcg_at_10": 0.8824401466515452
+    }
+  },
+  "missing_relevant_ids": []
+}

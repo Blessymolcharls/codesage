@@ -1,0 +1,3444 @@
+{
+  "study_metadata": {
+    "dataset_version": "1.2.0-milestone5",
+    "evaluated_repo": "DocuCharm",
+    "indexed_units_count": 89,
+    "queries_count": 40,
+    "dev_queries_count": 18,
+    "test_queries_count": 18,
+    "negative_control_count": 4,
+    "top_k": 10,
+    "timestamp": "2026-10-10T18:35:50Z"
+  },
+  "experiments": {
+    "tfidf_standard": {
+      "experiment_name": "tfidf_standard",
+      "indexing_time_seconds": 0.281,
+      "latency_ms": {
+        "mean": 3.0,
+        "p50": 2.42,
+        "p95": 6.0,
+        "p99": 7.06
+      },
+      "splits": {
+        "dev": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.3657407407407407,
+          "mean_recall_at_5": 0.8425925925925926,
+          "mean_recall_at_10": 0.9537037037037037,
+          "mrr": 0.8148148148148148,
+          "mean_ndcg_at_5": 0.7849901951929268,
+          "mean_ndcg_at_10": 0.8377839983004982,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 2.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 0.8333333333333333,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8664143102388955,
+              "ndcg_at_10": 0.8664143102388955
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.0,
+              "recall_at_10": 0.5,
+              "mrr": 0.16666666666666666,
+              "ndcg_at_5": 0.0,
+              "ndcg_at_10": 0.21840743681816419
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.16666666666666666,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 1.0,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.7183733547559629,
+              "ndcg_at_10": 0.801953582239064
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.8888888888888888,
+              "recall_at_10": 1.0,
+              "mrr": 0.611111111111111,
+              "ndcg_at_5": 0.7032025197220005,
+              "ndcg_at_10": 0.7525495048829781
+            },
+            "frontend_viewer": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7039180890341347,
+              "ndcg_at_10": 0.86034433104172
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_widgets": {
+              "count": 4.0,
+              "recall_at_1": 0.2708333333333333,
+              "recall_at_5": 0.875,
+              "recall_at_10": 1.0,
+              "mrr": 0.8333333333333334,
+              "ndcg_at_5": 0.7866806338207073,
+              "ndcg_at_10": 0.8517439754860576
+            },
+            "backend_routing": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2176,
+              0.5278
+            ],
+            "recall_at_5": [
+              0.7083,
+              0.9446
+            ],
+            "recall_at_10": [
+              0.8889,
+              1.0
+            ],
+            "mrr": [
+              0.6574,
+              0.9537
+            ],
+            "ndcg_at_5": [
+              0.6446,
+              0.9055
+            ],
+            "ndcg_at_10": [
+              0.7304,
+              0.9293
+            ]
+          }
+        },
+        "test": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.462962962962963,
+          "mean_recall_at_5": 0.8240740740740741,
+          "mean_recall_at_10": 0.9814814814814815,
+          "mrr": 0.7337962962962963,
+          "mean_ndcg_at_5": 0.7235800061913148,
+          "mean_ndcg_at_10": 0.7901420995292818,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.8888888888888888,
+              "mrr": 0.5277777777777778,
+              "ndcg_at_5": 0.5285854951794825,
+              "ndcg_at_10": 0.6295229713123659
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 2.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.6509209298071326,
+              "ndcg_at_10": 0.6509209298071326
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.75,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9598603945740938,
+              "ndcg_at_10": 0.9598603945740938
+            },
+            "frontend_viewer": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.6480409554829326,
+              "ndcg_at_10": 0.7865004286290711
+            },
+            "frontend_widgets": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9386076576690247,
+              "ndcg_at_10": 0.9386076576690247
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.5,
+              "recall_at_10": 1.0,
+              "mrr": 0.20833333333333334,
+              "ndcg_at_5": 0.23158156021532797,
+              "ndcg_at_10": 0.43771032867948806
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2778,
+              0.6667
+            ],
+            "recall_at_5": [
+              0.6852,
+              0.9537
+            ],
+            "recall_at_10": [
+              0.9444,
+              1.0
+            ],
+            "mrr": [
+              0.567,
+              0.8889
+            ],
+            "ndcg_at_5": [
+              0.5636,
+              0.8763
+            ],
+            "ndcg_at_10": [
+              0.6699,
+              0.9018
+            ]
+          }
+        },
+        "all": {
+          "total_queries": 40,
+          "evaluated_queries": 36,
+          "unannotated_queries": 4,
+          "mean_recall_at_1": 0.41435185185185186,
+          "mean_recall_at_5": 0.8333333333333334,
+          "mean_recall_at_10": 0.9675925925925927,
+          "mrr": 0.7743055555555556,
+          "mean_ndcg_at_5": 0.7542851006921208,
+          "mean_ndcg_at_10": 0.81396304891489,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 5.0,
+              "recall_at_1": 0.2,
+              "recall_at_5": 0.7333333333333333,
+              "recall_at_10": 0.8666666666666666,
+              "mrr": 0.7166666666666667,
+              "ndcg_at_5": 0.6637170212032477,
+              "ndcg_at_10": 0.7242795068829777
+            },
+            "backend_utilities": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.5,
+              "recall_at_10": 0.75,
+              "mrr": 0.5833333333333334,
+              "ndcg_at_5": 0.5,
+              "ndcg_at_10": 0.609203718409082
+            },
+            "backend_routing": {
+              "count": 3.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_server": {
+              "count": 2.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 2.0,
+              "recall_at_1": 0.25,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.8254604649035663,
+              "ndcg_at_10": 0.8254604649035663
+            },
+            "frontend_state": {
+              "count": 4.0,
+              "recall_at_1": 0.4583333333333333,
+              "recall_at_5": 0.9166666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 0.8333333333333334,
+              "ndcg_at_5": 0.8391168746650284,
+              "ndcg_at_10": 0.8809069884065789
+            },
+            "frontend_ui": {
+              "count": 6.0,
+              "recall_at_1": 0.05555555555555555,
+              "recall_at_5": 0.6944444444444445,
+              "recall_at_10": 1.0,
+              "mrr": 0.40972222222222227,
+              "ndcg_at_5": 0.46739203996866424,
+              "ndcg_at_10": 0.5951299167812331
+            },
+            "frontend_viewer": {
+              "count": 3.0,
+              "recall_at_1": 0.4444444444444444,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 0.8333333333333334,
+              "ndcg_at_5": 0.6666666666666666,
+              "ndcg_at_10": 0.8111150627666207
+            },
+            "frontend_utilities": {
+              "count": 2.0,
+              "recall_at_1": 0.41666666666666663,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_widgets": {
+              "count": 6.0,
+              "recall_at_1": 0.34722222222222227,
+              "recall_at_5": 0.9166666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 0.8888888888888888,
+              "ndcg_at_5": 0.8373229751034797,
+              "ndcg_at_10": 0.8806985362137133
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2939,
+              0.5509
+            ],
+            "recall_at_5": [
+              0.7315,
+              0.9167
+            ],
+            "recall_at_10": [
+              0.9306,
+              1.0
+            ],
+            "mrr": [
+              0.6655,
+              0.8808
+            ],
+            "ndcg_at_5": [
+              0.6502,
+              0.8517
+            ],
+            "ndcg_at_10": [
+              0.7367,
+              0.888
+            ]
+          }
+        }
+      }
+    },
+    "semantic_standard": {
+      "experiment_name": "semantic_standard",
+      "indexing_time_seconds": 46.1899,
+      "latency_ms": {
+        "mean": 37.06,
+        "p50": 36.6,
+        "p95": 40.55,
+        "p99": 46.97
+      },
+      "splits": {
+        "dev": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.3148148148148148,
+          "mean_recall_at_5": 0.8101851851851852,
+          "mean_recall_at_10": 0.8796296296296297,
+          "mrr": 0.7770061728395061,
+          "mean_ndcg_at_5": 0.7320045495136223,
+          "mean_ndcg_at_10": 0.7636507206643648,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 2.0,
+              "recall_at_1": 0.16666666666666666,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.8561315332572981,
+              "ndcg_at_10": 0.8561315332572981
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.16666666666666666,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.8295827480202853,
+              "ndcg_at_10": 0.8295827480202853
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.5,
+              "recall_at_10": 0.611111111111111,
+              "mrr": 0.5370370370370371,
+              "ndcg_at_5": 0.4514402635745703,
+              "ndcg_at_10": 0.49852925452784663
+            },
+            "frontend_viewer": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.6666666666666666,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.6508205185601091,
+              "ndcg_at_10": 0.6508205185601091
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.0,
+              "recall_at_10": 0.6666666666666666,
+              "mrr": 0.125,
+              "ndcg_at_5": 0.0,
+              "ndcg_at_10": 0.2893079283427616
+            },
+            "frontend_widgets": {
+              "count": 4.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.8541666666666666,
+              "recall_at_10": 0.9166666666666666,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8422088653332053,
+              "ndcg_at_10": 0.8769729102108992
+            },
+            "backend_routing": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.25,
+              "ndcg_at_5": 0.43067655807339306,
+              "ndcg_at_10": 0.43067655807339306
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.1804,
+              0.4583
+            ],
+            "recall_at_5": [
+              0.6481,
+              0.9398
+            ],
+            "recall_at_10": [
+              0.7685,
+              0.963
+            ],
+            "mrr": [
+              0.6079,
+              0.9167
+            ],
+            "ndcg_at_5": [
+              0.5748,
+              0.8651
+            ],
+            "ndcg_at_10": [
+              0.6237,
+              0.8791
+            ]
+          }
+        },
+        "test": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.42592592592592593,
+          "mean_recall_at_5": 0.8240740740740741,
+          "mean_recall_at_10": 0.8888888888888888,
+          "mrr": 0.8148148148148148,
+          "mean_ndcg_at_5": 0.7315187320731658,
+          "mean_ndcg_at_10": 0.7600081668184168,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 3.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.7777777777777777,
+              "recall_at_10": 0.8888888888888888,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.760443199030707,
+              "ndcg_at_10": 0.8161633506861078
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.75,
+              "ndcg_at_10": 0.75
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.5,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.38685280723454163,
+              "ndcg_at_10": 0.5912352048230277
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.75,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9251724527673773,
+              "ndcg_at_10": 0.9251724527673773
+            },
+            "frontend_viewer": {
+              "count": 2.0,
+              "recall_at_1": 0.6666666666666666,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.8333333333333333,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7346393630113782,
+              "ndcg_at_10": 0.8052728494412927
+            },
+            "frontend_widgets": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9386076576690247,
+              "ndcg_at_10": 0.9386076576690247
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.5555555555555555,
+              "recall_at_10": 0.5555555555555555,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.43410527536492055,
+              "ndcg_at_10": 0.43410527536492055
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.3333333333333333,
+              "ndcg_at_5": 0.5,
+              "ndcg_at_10": 0.5
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2593,
+              0.5926
+            ],
+            "recall_at_5": [
+              0.6944,
+              0.9444
+            ],
+            "recall_at_10": [
+              0.7593,
+              0.9815
+            ],
+            "mrr": [
+              0.6574,
+              0.9444
+            ],
+            "ndcg_at_5": [
+              0.5956,
+              0.8506
+            ],
+            "ndcg_at_10": [
+              0.6355,
+              0.87
+            ]
+          }
+        },
+        "all": {
+          "total_queries": 40,
+          "evaluated_queries": 36,
+          "unannotated_queries": 4,
+          "mean_recall_at_1": 0.3703703703703704,
+          "mean_recall_at_5": 0.8171296296296297,
+          "mean_recall_at_10": 0.8842592592592592,
+          "mrr": 0.7959104938271605,
+          "mean_ndcg_at_5": 0.731761640793394,
+          "mean_ndcg_at_10": 0.7618294437413908,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 5.0,
+              "recall_at_1": 0.26666666666666666,
+              "recall_at_5": 0.8666666666666666,
+              "recall_at_10": 0.9333333333333333,
+              "mrr": 0.9,
+              "ndcg_at_5": 0.7987185327213434,
+              "ndcg_at_10": 0.8321506237145838
+            },
+            "backend_utilities": {
+              "count": 2.0,
+              "recall_at_1": 0.75,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 3.0,
+              "recall_at_1": 0.6666666666666666,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.7777777777777778,
+              "ndcg_at_5": 0.8333333333333334,
+              "ndcg_at_10": 0.8333333333333334
+            },
+            "backend_server": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.75,
+              "ndcg_at_10": 0.75
+            },
+            "frontend_networking": {
+              "count": 2.0,
+              "recall_at_1": 0.25,
+              "recall_at_5": 0.75,
+              "recall_at_10": 1.0,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.6934264036172708,
+              "ndcg_at_10": 0.7956176024115138
+            },
+            "frontend_state": {
+              "count": 4.0,
+              "recall_at_1": 0.4583333333333333,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.875,
+              "ndcg_at_5": 0.8773776003938313,
+              "ndcg_at_10": 0.8773776003938313
+            },
+            "frontend_ui": {
+              "count": 6.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.5277777777777778,
+              "recall_at_10": 0.5833333333333334,
+              "mrr": 0.5185185185185185,
+              "ndcg_at_5": 0.4427727694697454,
+              "ndcg_at_10": 0.4663172649463836
+            },
+            "frontend_viewer": {
+              "count": 3.0,
+              "recall_at_1": 0.5555555555555555,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.7777777777777777,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7066997481942886,
+              "ndcg_at_10": 0.753788739147565
+            },
+            "frontend_utilities": {
+              "count": 2.0,
+              "recall_at_1": 0.25,
+              "recall_at_5": 0.5,
+              "recall_at_10": 0.8333333333333333,
+              "mrr": 0.5625,
+              "ndcg_at_5": 0.5,
+              "ndcg_at_10": 0.6446539641713808
+            },
+            "frontend_widgets": {
+              "count": 6.0,
+              "recall_at_1": 0.3888888888888889,
+              "recall_at_5": 0.9027777777777778,
+              "recall_at_10": 0.9444444444444445,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8743417961118117,
+              "ndcg_at_10": 0.8975178260302744
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.25,
+              "ndcg_at_5": 0.43067655807339306,
+              "ndcg_at_10": 0.43067655807339306
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2661,
+              0.4838
+            ],
+            "recall_at_5": [
+              0.7106,
+              0.9167
+            ],
+            "recall_at_10": [
+              0.8056,
+              0.9537
+            ],
+            "mrr": [
+              0.6905,
+              0.8981
+            ],
+            "ndcg_at_5": [
+              0.6292,
+              0.8283
+            ],
+            "ndcg_at_10": [
+              0.6702,
+              0.8477
+            ]
+          }
+        }
+      }
+    },
+    "code_transformer_standard": {
+      "experiment_name": "code_transformer_standard",
+      "indexing_time_seconds": 47.0577,
+      "latency_ms": {
+        "mean": 65.99,
+        "p50": 65.34,
+        "p95": 77.12,
+        "p99": 77.65
+      },
+      "splits": {
+        "dev": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.3796296296296296,
+          "mean_recall_at_5": 0.7731481481481481,
+          "mean_recall_at_10": 0.8796296296296297,
+          "mrr": 0.9027777777777778,
+          "mean_ndcg_at_5": 0.7513427165038083,
+          "mean_ndcg_at_10": 0.8013120248735215,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 2.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7039180890341347,
+              "ndcg_at_10": 0.8485720532055154
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.6309297535714575,
+              "ndcg_at_10": 0.6309297535714575
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.16666666666666666,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 0.8333333333333333,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.6755585612635349,
+              "ndcg_at_10": 0.6755585612635349
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.38888888888888884,
+              "recall_at_5": 0.5,
+              "recall_at_10": 0.611111111111111,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.6159288519256122,
+              "ndcg_at_10": 0.6680709325948073
+            },
+            "frontend_viewer": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7039180890341347,
+              "ndcg_at_10": 0.8710785440003369
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.3333333333333333,
+              "recall_at_10": 0.6666666666666666,
+              "mrr": 0.25,
+              "ndcg_at_5": 0.20210734650054757,
+              "ndcg_at_10": 0.35853358850813305
+            },
+            "frontend_widgets": {
+              "count": 4.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.8541666666666666,
+              "recall_at_10": 0.9166666666666666,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.845118462897559,
+              "ndcg_at_10": 0.8776501337302341
+            },
+            "backend_routing": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2639,
+              0.5139
+            ],
+            "recall_at_5": [
+              0.662,
+              0.8704
+            ],
+            "recall_at_10": [
+              0.7685,
+              0.963
+            ],
+            "mrr": [
+              0.7913,
+              1.0
+            ],
+            "ndcg_at_5": [
+              0.6505,
+              0.8422
+            ],
+            "ndcg_at_10": [
+              0.7016,
+              0.882
+            ]
+          }
+        },
+        "test": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.4351851851851852,
+          "mean_recall_at_5": 0.75,
+          "mean_recall_at_10": 0.8518518518518519,
+          "mrr": 0.7885802469135803,
+          "mean_ndcg_at_5": 0.7097786714497694,
+          "mean_ndcg_at_10": 0.7453933584878203,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 3.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.7777777777777777,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7271805975124508,
+              "ndcg_at_10": 0.7723979219899334
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 2.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.5,
+              "recall_at_10": 1.0,
+              "mrr": 0.18055555555555555,
+              "ndcg_at_5": 0.21533827903669653,
+              "ndcg_at_10": 0.3658532768686871
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.75,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_viewer": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.6666666666666666,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.6173196815056892,
+              "ndcg_at_10": 0.6173196815056892
+            },
+            "frontend_widgets": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.75,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.766433990956823,
+              "ndcg_at_10": 0.868625189751066
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.5555555555555555,
+              "recall_at_10": 0.5555555555555555,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.46543013018669305,
+              "ndcg_at_10": 0.46543013018669305
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2683,
+              0.5926
+            ],
+            "recall_at_5": [
+              0.5833,
+              0.8796
+            ],
+            "recall_at_10": [
+              0.7222,
+              0.963
+            ],
+            "mrr": [
+              0.6049,
+              0.9307
+            ],
+            "ndcg_at_5": [
+              0.5374,
+              0.8467
+            ],
+            "ndcg_at_10": [
+              0.5945,
+              0.8658
+            ]
+          }
+        },
+        "all": {
+          "total_queries": 40,
+          "evaluated_queries": 36,
+          "unannotated_queries": 4,
+          "mean_recall_at_1": 0.4074074074074074,
+          "mean_recall_at_5": 0.7615740740740741,
+          "mean_recall_at_10": 0.8657407407407408,
+          "mrr": 0.845679012345679,
+          "mean_ndcg_at_5": 0.7305606939767889,
+          "mean_ndcg_at_10": 0.7733526916806708,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 5.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.8666666666666666,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7178755941211243,
+              "ndcg_at_10": 0.8028675744761662
+            },
+            "backend_utilities": {
+              "count": 2.0,
+              "recall_at_1": 0.75,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 3.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 0.4537037037037037,
+              "ndcg_at_5": 0.47689218602446437,
+              "ndcg_at_10": 0.5772355179124581
+            },
+            "backend_server": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.8154648767857288,
+              "ndcg_at_10": 0.8154648767857288
+            },
+            "frontend_networking": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_state": {
+              "count": 4.0,
+              "recall_at_1": 0.4583333333333333,
+              "recall_at_5": 0.9166666666666666,
+              "recall_at_10": 0.9166666666666666,
+              "mrr": 0.875,
+              "ndcg_at_5": 0.8377792806317674,
+              "ndcg_at_10": 0.8377792806317674
+            },
+            "frontend_ui": {
+              "count": 6.0,
+              "recall_at_1": 0.25,
+              "recall_at_5": 0.5277777777777778,
+              "recall_at_10": 0.5833333333333334,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.5406794910561527,
+              "ndcg_at_10": 0.5667505313907503
+            },
+            "frontend_viewer": {
+              "count": 3.0,
+              "recall_at_1": 0.4444444444444444,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.7777777777777778,
+              "mrr": 0.7777777777777778,
+              "ndcg_at_5": 0.6461858173485043,
+              "ndcg_at_10": 0.701905969003905
+            },
+            "frontend_utilities": {
+              "count": 2.0,
+              "recall_at_1": 0.25,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.8333333333333333,
+              "mrr": 0.625,
+              "ndcg_at_5": 0.6010536732502738,
+              "ndcg_at_10": 0.6792667942540666
+            },
+            "frontend_widgets": {
+              "count": 6.0,
+              "recall_at_1": 0.3888888888888889,
+              "recall_at_5": 0.8194444444444445,
+              "recall_at_10": 0.9444444444444445,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8188903055839803,
+              "ndcg_at_10": 0.8746418190705114
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.3148,
+              0.5139
+            ],
+            "recall_at_5": [
+              0.6644,
+              0.8519
+            ],
+            "recall_at_10": [
+              0.7869,
+              0.9444
+            ],
+            "mrr": [
+              0.7399,
+              0.9329
+            ],
+            "ndcg_at_5": [
+              0.6393,
+              0.81
+            ],
+            "ndcg_at_10": [
+              0.6893,
+              0.8494
+            ]
+          }
+        }
+      }
+    },
+    "tfidf_char_ngrams": {
+      "experiment_name": "tfidf_char_ngrams",
+      "indexing_time_seconds": 0.5593,
+      "latency_ms": {
+        "mean": 6.69,
+        "p50": 7.85,
+        "p95": 8.37,
+        "p99": 8.65
+      },
+      "splits": {
+        "dev": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.3657407407407407,
+          "mean_recall_at_5": 0.8564814814814814,
+          "mean_recall_at_10": 1.0,
+          "mrr": 0.8092592592592592,
+          "mean_ndcg_at_5": 0.7925002231436694,
+          "mean_ndcg_at_10": 0.8607383538300338,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 2.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8826803184943108,
+              "ndcg_at_10": 0.9505063052105347
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.5,
+              "recall_at_10": 1.0,
+              "mrr": 0.2,
+              "ndcg_at_5": 0.23719771276929622,
+              "ndcg_at_10": 0.4415801103577823
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.16666666666666666,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.8091442510246392,
+              "ndcg_at_10": 0.8091442510246392
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.7777777777777778,
+              "recall_at_10": 1.0,
+              "mrr": 0.5666666666666667,
+              "ndcg_at_5": 0.6249893987182078,
+              "ndcg_at_10": 0.7328516310428036
+            },
+            "frontend_viewer": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7039180890341347,
+              "ndcg_at_10": 0.86034433104172
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_widgets": {
+              "count": 4.0,
+              "recall_at_1": 0.2708333333333333,
+              "recall_at_5": 0.8125,
+              "recall_at_10": 1.0,
+              "mrr": 0.8333333333333334,
+              "ndcg_at_5": 0.7663177198975238,
+              "ndcg_at_10": 0.8683774804855868
+            },
+            "backend_routing": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2176,
+              0.5278
+            ],
+            "recall_at_5": [
+              0.75,
+              0.9537
+            ],
+            "recall_at_10": [
+              1.0,
+              1.0
+            ],
+            "mrr": [
+              0.6463,
+              0.9556
+            ],
+            "ndcg_at_5": [
+              0.6557,
+              0.9143
+            ],
+            "ndcg_at_10": [
+              0.7596,
+              0.9442
+            ]
+          }
+        },
+        "test": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.5092592592592592,
+          "mean_recall_at_5": 0.8333333333333334,
+          "mean_recall_at_10": 0.9166666666666666,
+          "mrr": 0.8518518518518519,
+          "mean_ndcg_at_5": 0.780455248985963,
+          "mean_ndcg_at_10": 0.8187905317234566,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 3.0,
+              "recall_at_1": 0.2222222222222222,
+              "recall_at_5": 0.7777777777777778,
+              "recall_at_10": 1.0,
+              "mrr": 0.8333333333333334,
+              "ndcg_at_5": 0.7054925865052305,
+              "ndcg_at_10": 0.8133548188298264
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 2.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.6240505200038379,
+              "ndcg_at_10": 0.6240505200038379
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.75,
+              "recall_at_5": 0.75,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8065735963827292,
+              "ndcg_at_10": 0.9157773147918112
+            },
+            "frontend_viewer": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.6666666666666666,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.6480409554829326,
+              "ndcg_at_10": 0.6480409554829326
+            },
+            "frontend_widgets": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9598603945740938,
+              "ndcg_at_10": 0.9598603945740938
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.16666666666666666,
+              "recall_at_5": 0.611111111111111,
+              "recall_at_10": 0.7222222222222222,
+              "mrr": 0.611111111111111,
+              "ndcg_at_5": 0.49290543644943136,
+              "ndcg_at_10": 0.5422524216104089
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.3333,
+              0.6944
+            ],
+            "recall_at_5": [
+              0.6944,
+              0.963
+            ],
+            "recall_at_10": [
+              0.8238,
+              1.0
+            ],
+            "mrr": [
+              0.7407,
+              0.963
+            ],
+            "ndcg_at_5": [
+              0.6589,
+              0.8954
+            ],
+            "ndcg_at_10": [
+              0.7156,
+              0.9186
+            ]
+          }
+        },
+        "all": {
+          "total_queries": 40,
+          "evaluated_queries": 36,
+          "unannotated_queries": 4,
+          "mean_recall_at_1": 0.4375,
+          "mean_recall_at_5": 0.8449074074074074,
+          "mean_recall_at_10": 0.9583333333333334,
+          "mrr": 0.8305555555555555,
+          "mean_ndcg_at_5": 0.7864777360648163,
+          "mean_ndcg_at_10": 0.8397644427767452,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 5.0,
+              "recall_at_1": 0.26666666666666666,
+              "recall_at_5": 0.8,
+              "recall_at_10": 1.0,
+              "mrr": 0.9,
+              "ndcg_at_5": 0.7763676793008626,
+              "ndcg_at_10": 0.8682154133821097
+            },
+            "backend_utilities": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.75,
+              "recall_at_10": 1.0,
+              "mrr": 0.6,
+              "ndcg_at_5": 0.6185988563846481,
+              "ndcg_at_10": 0.7207900551788912
+            },
+            "backend_routing": {
+              "count": 3.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_server": {
+              "count": 2.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 2.0,
+              "recall_at_1": 0.25,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.8120252600019189,
+              "ndcg_at_10": 0.8120252600019189
+            },
+            "frontend_state": {
+              "count": 4.0,
+              "recall_at_1": 0.4583333333333333,
+              "recall_at_5": 0.875,
+              "recall_at_10": 1.0,
+              "mrr": 0.8333333333333334,
+              "ndcg_at_5": 0.8078589237036842,
+              "ndcg_at_10": 0.8624607829082253
+            },
+            "frontend_ui": {
+              "count": 6.0,
+              "recall_at_1": 0.13888888888888887,
+              "recall_at_5": 0.6944444444444445,
+              "recall_at_10": 0.8611111111111112,
+              "mrr": 0.5888888888888889,
+              "ndcg_at_5": 0.5589474175838196,
+              "ndcg_at_10": 0.6375520263266062
+            },
+            "frontend_viewer": {
+              "count": 3.0,
+              "recall_at_1": 0.4444444444444444,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.7777777777777778,
+              "mrr": 0.8333333333333334,
+              "ndcg_at_5": 0.6666666666666666,
+              "ndcg_at_10": 0.7188087473358618
+            },
+            "frontend_utilities": {
+              "count": 2.0,
+              "recall_at_1": 0.41666666666666663,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_widgets": {
+              "count": 6.0,
+              "recall_at_1": 0.34722222222222227,
+              "recall_at_5": 0.875,
+              "recall_at_10": 1.0,
+              "mrr": 0.8888888888888888,
+              "ndcg_at_5": 0.8308319447897139,
+              "ndcg_at_10": 0.8988717851817558
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.3194,
+              0.5648
+            ],
+            "recall_at_5": [
+              0.7593,
+              0.9213
+            ],
+            "recall_at_10": [
+              0.9074,
+              1.0
+            ],
+            "mrr": [
+              0.7361,
+              0.9176
+            ],
+            "ndcg_at_5": [
+              0.7008,
+              0.8721
+            ],
+            "ndcg_at_10": [
+              0.7711,
+              0.9063
+            ]
+          }
+        }
+      }
+    },
+    "tfidf_no_metadata": {
+      "experiment_name": "tfidf_no_metadata",
+      "indexing_time_seconds": 0.128,
+      "latency_ms": {
+        "mean": 3.04,
+        "p50": 3.01,
+        "p95": 3.53,
+        "p99": 3.61
+      },
+      "splits": {
+        "dev": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.3333333333333333,
+          "mean_recall_at_5": 0.7592592592592592,
+          "mean_recall_at_10": 0.9027777777777778,
+          "mrr": 0.7638888888888888,
+          "mean_ndcg_at_5": 0.7160693422029898,
+          "mean_ndcg_at_10": 0.7856404421120811,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 2.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 0.8333333333333333,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8664143102388955,
+              "ndcg_at_10": 0.8664143102388955
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.0,
+              "recall_at_10": 0.5,
+              "mrr": 0.16666666666666666,
+              "ndcg_at_5": 0.0,
+              "ndcg_at_10": 0.21840743681816419
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.16666666666666666,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.6173196815056892,
+              "ndcg_at_10": 0.779113029992583
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.7777777777777778,
+              "recall_at_10": 0.7777777777777778,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.6631694381943787,
+              "ndcg_at_10": 0.6631694381943787
+            },
+            "frontend_viewer": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.5307212739772434,
+              "ndcg_at_10": 0.6871475159848289
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_widgets": {
+              "count": 4.0,
+              "recall_at_1": 0.20833333333333331,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.9375,
+              "mrr": 0.6875,
+              "ndcg_at_5": 0.6003876469010668,
+              "ndcg_at_10": 0.7388525025420931
+            },
+            "backend_routing": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.1759,
+              0.5093
+            ],
+            "recall_at_5": [
+              0.6019,
+              0.9074
+            ],
+            "recall_at_10": [
+              0.8054,
+              0.9815
+            ],
+            "mrr": [
+              0.6249,
+              0.9075
+            ],
+            "ndcg_at_5": [
+              0.5624,
+              0.8776
+            ],
+            "ndcg_at_10": [
+              0.6619,
+              0.9053
+            ]
+          }
+        },
+        "test": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.4074074074074074,
+          "mean_recall_at_5": 0.8240740740740741,
+          "mean_recall_at_10": 0.9629629629629629,
+          "mrr": 0.7023809523809523,
+          "mean_ndcg_at_5": 0.6896988493387107,
+          "mean_ndcg_at_10": 0.7509668660366547,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.5555555555555555,
+              "recall_at_10": 0.8888888888888888,
+              "mrr": 0.46428571428571425,
+              "ndcg_at_5": 0.4230363402031292,
+              "ndcg_at_10": 0.576667486702497
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 2.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.6240505200038379,
+              "ndcg_at_10": 0.6240505200038379
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.25,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.6886076576690247,
+              "ndcg_at_10": 0.6886076576690247
+            },
+            "frontend_viewer": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.6480409554829326,
+              "ndcg_at_10": 0.7940800632029492
+            },
+            "frontend_widgets": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9197207891481876,
+              "ndcg_at_10": 0.9197207891481876
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.611111111111111,
+              "recall_at_10": 0.8888888888888888,
+              "mrr": 0.3055555555555555,
+              "ndcg_at_5": 0.33622698096109227,
+              "ndcg_at_10": 0.45284452950271104
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2222,
+              0.6021
+            ],
+            "recall_at_5": [
+              0.6667,
+              0.9447
+            ],
+            "recall_at_10": [
+              0.9074,
+              1.0
+            ],
+            "mrr": [
+              0.5437,
+              0.8565
+            ],
+            "ndcg_at_5": [
+              0.5391,
+              0.8315
+            ],
+            "ndcg_at_10": [
+              0.6391,
+              0.8622
+            ]
+          }
+        },
+        "all": {
+          "total_queries": 40,
+          "evaluated_queries": 36,
+          "unannotated_queries": 4,
+          "mean_recall_at_1": 0.3703703703703704,
+          "mean_recall_at_5": 0.7916666666666666,
+          "mean_recall_at_10": 0.9328703703703705,
+          "mrr": 0.7331349206349206,
+          "mean_ndcg_at_5": 0.7028840957708502,
+          "mean_ndcg_at_10": 0.768303654074368,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 5.0,
+              "recall_at_1": 0.2,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.8666666666666666,
+              "mrr": 0.6785714285714286,
+              "ndcg_at_5": 0.6003875282174358,
+              "ndcg_at_10": 0.6925662161170564
+            },
+            "backend_utilities": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.5,
+              "recall_at_10": 0.75,
+              "mrr": 0.5833333333333334,
+              "ndcg_at_5": 0.5,
+              "ndcg_at_10": 0.609203718409082
+            },
+            "backend_routing": {
+              "count": 3.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_server": {
+              "count": 2.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 2.0,
+              "recall_at_1": 0.25,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.8120252600019189,
+              "ndcg_at_10": 0.8120252600019189
+            },
+            "frontend_state": {
+              "count": 4.0,
+              "recall_at_1": 0.20833333333333331,
+              "recall_at_5": 0.8333333333333334,
+              "recall_at_10": 1.0,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.6529636695873569,
+              "ndcg_at_10": 0.7338603438308038
+            },
+            "frontend_ui": {
+              "count": 6.0,
+              "recall_at_1": 0.05555555555555555,
+              "recall_at_5": 0.6944444444444445,
+              "recall_at_10": 0.8333333333333334,
+              "mrr": 0.4861111111111111,
+              "ndcg_at_5": 0.4996982095777354,
+              "ndcg_at_10": 0.5580069838485449
+            },
+            "frontend_viewer": {
+              "count": 3.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.6089343949810363,
+              "ndcg_at_10": 0.7584358807969092
+            },
+            "frontend_utilities": {
+              "count": 2.0,
+              "recall_at_1": 0.41666666666666663,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_widgets": {
+              "count": 6.0,
+              "recall_at_1": 0.3055555555555555,
+              "recall_at_5": 0.7777777777777778,
+              "recall_at_10": 0.9583333333333334,
+              "mrr": 0.7916666666666666,
+              "ndcg_at_5": 0.706832027650107,
+              "ndcg_at_10": 0.7991419314107913
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.25,
+              0.5046
+            ],
+            "recall_at_5": [
+              0.6897,
+              0.8889
+            ],
+            "recall_at_10": [
+              0.8749,
+              0.9745
+            ],
+            "mrr": [
+              0.6253,
+              0.8443
+            ],
+            "ndcg_at_5": [
+              0.5943,
+              0.8101
+            ],
+            "ndcg_at_10": [
+              0.6851,
+              0.8483
+            ]
+          }
+        }
+      }
+    },
+    "semantic_no_metadata": {
+      "experiment_name": "semantic_no_metadata",
+      "indexing_time_seconds": 12.1829,
+      "latency_ms": {
+        "mean": 37.08,
+        "p50": 36.48,
+        "p95": 42.51,
+        "p99": 45.81
+      },
+      "splits": {
+        "dev": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.2361111111111111,
+          "mean_recall_at_5": 0.7824074074074074,
+          "mean_recall_at_10": 0.8796296296296297,
+          "mrr": 0.6712962962962963,
+          "mean_ndcg_at_5": 0.6750788352391737,
+          "mean_ndcg_at_10": 0.7216619678780279,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 2.0,
+              "recall_at_1": 0.16666666666666666,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.8664143102388955,
+              "ndcg_at_10": 0.8664143102388955
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.16666666666666666,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 1.0,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.6918245695189501,
+              "ndcg_at_10": 0.7658450472604164
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.5,
+              "recall_at_10": 0.611111111111111,
+              "mrr": 0.5555555555555556,
+              "ndcg_at_5": 0.4514402635745703,
+              "ndcg_at_10": 0.507160415229971
+            },
+            "frontend_viewer": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.6666666666666666,
+              "mrr": 0.3333333333333333,
+              "ndcg_at_5": 0.4367467095119258,
+              "ndcg_at_10": 0.4367467095119258
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.3333333333333333,
+              "recall_at_10": 0.6666666666666666,
+              "mrr": 0.25,
+              "ndcg_at_5": 0.20210734650054757,
+              "ndcg_at_10": 0.34337431936037655
+            },
+            "frontend_widgets": {
+              "count": 4.0,
+              "recall_at_1": 0.0625,
+              "recall_at_5": 0.7291666666666666,
+              "recall_at_10": 0.9166666666666666,
+              "mrr": 0.625,
+              "ndcg_at_5": 0.6027091686204484,
+              "ndcg_at_10": 0.6982161696680512
+            },
+            "backend_routing": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.6309297535714575,
+              "ndcg_at_10": 0.6309297535714575
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.0972,
+              0.3889
+            ],
+            "recall_at_5": [
+              0.6435,
+              0.9074
+            ],
+            "recall_at_10": [
+              0.7685,
+              0.963
+            ],
+            "mrr": [
+              0.5278,
+              0.8148
+            ],
+            "ndcg_at_5": [
+              0.5362,
+              0.808
+            ],
+            "ndcg_at_10": [
+              0.5926,
+              0.8375
+            ]
+          }
+        },
+        "test": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.39814814814814814,
+          "mean_recall_at_5": 0.7685185185185186,
+          "mean_recall_at_10": 0.8240740740740741,
+          "mrr": 0.7611111111111111,
+          "mean_ndcg_at_5": 0.6762229751854577,
+          "mean_ndcg_at_10": 0.6960122633581256,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 3.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.8888888888888888,
+              "recall_at_10": 0.8888888888888888,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8345827945402552,
+              "ndcg_at_10": 0.8345827945402552
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.6,
+              "ndcg_at_5": 0.6934264036172708,
+              "ndcg_at_10": 0.6934264036172708
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.3333333333333333,
+              "ndcg_at_5": 0.5706417189553201,
+              "ndcg_at_10": 0.5706417189553201
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.75,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9386076576690247,
+              "ndcg_at_10": 0.9386076576690247
+            },
+            "frontend_viewer": {
+              "count": 2.0,
+              "recall_at_1": 0.6666666666666666,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.6666666666666666,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7346393630113782,
+              "ndcg_at_10": 0.7346393630113782
+            },
+            "frontend_widgets": {
+              "count": 2.0,
+              "recall_at_1": 0.25,
+              "recall_at_5": 0.75,
+              "recall_at_10": 0.75,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.6320340612862955,
+              "ndcg_at_10": 0.6320340612862955
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.4444444444444444,
+              "recall_at_10": 0.4444444444444444,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.366736159864738,
+              "ndcg_at_10": 0.366736159864738
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.16666666666666666,
+              "ndcg_at_5": 0.0,
+              "ndcg_at_10": 0.3562071871080222
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2222,
+              0.5833
+            ],
+            "recall_at_5": [
+              0.6111,
+              0.9444
+            ],
+            "recall_at_10": [
+              0.6759,
+              0.963
+            ],
+            "mrr": [
+              0.587,
+              0.9167
+            ],
+            "ndcg_at_5": [
+              0.5296,
+              0.826
+            ],
+            "ndcg_at_10": [
+              0.565,
+              0.8292
+            ]
+          }
+        },
+        "all": {
+          "total_queries": 40,
+          "evaluated_queries": 36,
+          "unannotated_queries": 4,
+          "mean_recall_at_1": 0.3171296296296296,
+          "mean_recall_at_5": 0.775462962962963,
+          "mean_recall_at_10": 0.8518518518518519,
+          "mrr": 0.7162037037037038,
+          "mean_ndcg_at_5": 0.6756509052123156,
+          "mean_ndcg_at_10": 0.7088371156180767,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 5.0,
+              "recall_at_1": 0.26666666666666666,
+              "recall_at_5": 0.9333333333333333,
+              "recall_at_10": 0.9333333333333333,
+              "mrr": 0.9,
+              "ndcg_at_5": 0.8473154008197114,
+              "ndcg_at_10": 0.8473154008197114
+            },
+            "backend_utilities": {
+              "count": 2.0,
+              "recall_at_1": 0.75,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 3.0,
+              "recall_at_1": 0.6666666666666666,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.7333333333333334,
+              "ndcg_at_5": 0.7956176024115139,
+              "ndcg_at_10": 0.7956176024115139
+            },
+            "backend_server": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.5,
+              "recall_at_10": 1.0,
+              "mrr": 0.5833333333333334,
+              "ndcg_at_5": 0.5,
+              "ndcg_at_10": 0.6781035935540111
+            },
+            "frontend_networking": {
+              "count": 2.0,
+              "recall_at_1": 0.25,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.7853208594776601,
+              "ndcg_at_10": 0.7853208594776601
+            },
+            "frontend_state": {
+              "count": 4.0,
+              "recall_at_1": 0.4583333333333333,
+              "recall_at_5": 0.9166666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 0.8333333333333334,
+              "ndcg_at_5": 0.8152161135939874,
+              "ndcg_at_10": 0.8522263524647206
+            },
+            "frontend_ui": {
+              "count": 6.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.47222222222222227,
+              "recall_at_10": 0.5277777777777778,
+              "mrr": 0.5277777777777778,
+              "ndcg_at_5": 0.40908821171965415,
+              "ndcg_at_10": 0.43694828754735454
+            },
+            "frontend_viewer": {
+              "count": 3.0,
+              "recall_at_1": 0.4444444444444444,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.6666666666666666,
+              "mrr": 0.7777777777777778,
+              "ndcg_at_5": 0.635341811844894,
+              "ndcg_at_10": 0.635341811844894
+            },
+            "frontend_utilities": {
+              "count": 2.0,
+              "recall_at_1": 0.25,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.8333333333333333,
+              "mrr": 0.625,
+              "ndcg_at_5": 0.6010536732502738,
+              "ndcg_at_10": 0.6716871596801883
+            },
+            "frontend_widgets": {
+              "count": 6.0,
+              "recall_at_1": 0.125,
+              "recall_at_5": 0.7361111111111112,
+              "recall_at_10": 0.8611111111111112,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.6124841328423974,
+              "ndcg_at_10": 0.6761554668741326
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.6309297535714575,
+              "ndcg_at_10": 0.6309297535714575
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.206,
+              0.4352
+            ],
+            "recall_at_5": [
+              0.6666,
+              0.8796
+            ],
+            "recall_at_10": [
+              0.7639,
+              0.9352
+            ],
+            "mrr": [
+              0.6009,
+              0.8172
+            ],
+            "ndcg_at_5": [
+              0.566,
+              0.7751
+            ],
+            "ndcg_at_10": [
+              0.615,
+              0.7966
+            ]
+          }
+        }
+      }
+    },
+    "code_transformer_no_metadata": {
+      "experiment_name": "code_transformer_no_metadata",
+      "indexing_time_seconds": 38.4195,
+      "latency_ms": {
+        "mean": 68.62,
+        "p50": 62.09,
+        "p95": 90.33,
+        "p99": 164.94
+      },
+      "splits": {
+        "dev": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.4074074074074074,
+          "mean_recall_at_5": 0.7916666666666666,
+          "mean_recall_at_10": 0.8842592592592592,
+          "mrr": 0.8981481481481483,
+          "mean_ndcg_at_5": 0.7851223859367366,
+          "mean_ndcg_at_10": 0.8286126841245156,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 2.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8561315332572981,
+              "ndcg_at_10": 0.9343446542610908
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7346393630113782,
+              "ndcg_at_10": 0.8860455772107032
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.5,
+              "recall_at_10": 0.611111111111111,
+              "mrr": 0.5555555555555555,
+              "ndcg_at_5": 0.4041996773058038,
+              "ndcg_at_10": 0.4599198289612046
+            },
+            "frontend_viewer": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.6666666666666666,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7653606369886217,
+              "ndcg_at_10": 0.7653606369886217
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.7328286204777911,
+              "ndcg_at_10": 0.7328286204777911
+            },
+            "frontend_widgets": {
+              "count": 4.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.7708333333333334,
+              "recall_at_10": 0.8541666666666666,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8099682162350204,
+              "ndcg_at_10": 0.8490747767369167
+            },
+            "backend_routing": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.273,
+              0.5556
+            ],
+            "recall_at_5": [
+              0.6619,
+              0.9075
+            ],
+            "recall_at_10": [
+              0.7778,
+              0.9676
+            ],
+            "mrr": [
+              0.7778,
+              1.0
+            ],
+            "ndcg_at_5": [
+              0.6632,
+              0.8884
+            ],
+            "ndcg_at_10": [
+              0.7154,
+              0.911
+            ]
+          }
+        },
+        "test": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.5185185185185186,
+          "mean_recall_at_5": 0.75,
+          "mean_recall_at_10": 0.8240740740740741,
+          "mrr": 0.8236111111111111,
+          "mean_ndcg_at_5": 0.7354902290712213,
+          "mean_ndcg_at_10": 0.7617064023375165,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 3.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.7777777777777777,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7340357821668491,
+              "ndcg_at_10": 0.7861778628360443
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.5,
+              "recall_at_10": 1.0,
+              "mrr": 0.5625,
+              "ndcg_at_5": 0.5,
+              "ndcg_at_10": 0.6577324383928644
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.6934264036172708,
+              "ndcg_at_10": 0.6934264036172708
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.75,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9386076576690247,
+              "ndcg_at_10": 0.9386076576690247
+            },
+            "frontend_viewer": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.6666666666666666,
+              "mrr": 0.6,
+              "ndcg_at_5": 0.5907708962686763,
+              "ndcg_at_10": 0.5907708962686763
+            },
+            "frontend_widgets": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.75,
+              "recall_at_10": 0.75,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8065735963827292,
+              "ndcg_at_10": 0.8065735963827292
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.4444444444444444,
+              "recall_at_5": 0.5555555555555555,
+              "recall_at_10": 0.5555555555555555,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.5571286908411014,
+              "ndcg_at_10": 0.5571286908411014
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.3333,
+              0.6944
+            ],
+            "recall_at_5": [
+              0.5833,
+              0.8796
+            ],
+            "recall_at_10": [
+              0.6852,
+              0.9444
+            ],
+            "mrr": [
+              0.6361,
+              0.9556
+            ],
+            "ndcg_at_5": [
+              0.5619,
+              0.8671
+            ],
+            "ndcg_at_10": [
+              0.6076,
+              0.884
+            ]
+          }
+        },
+        "all": {
+          "total_queries": 40,
+          "evaluated_queries": 36,
+          "unannotated_queries": 4,
+          "mean_recall_at_1": 0.462962962962963,
+          "mean_recall_at_5": 0.7708333333333334,
+          "mean_recall_at_10": 0.8541666666666666,
+          "mrr": 0.8608796296296296,
+          "mean_ndcg_at_5": 0.760306307503979,
+          "mean_ndcg_at_10": 0.7951595432310161,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 5.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.7333333333333333,
+              "recall_at_10": 0.8666666666666666,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7828740826030287,
+              "ndcg_at_10": 0.8454445794060629
+            },
+            "backend_utilities": {
+              "count": 2.0,
+              "recall_at_1": 0.75,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 3.0,
+              "recall_at_1": 0.6666666666666666,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 0.7083333333333334,
+              "ndcg_at_5": 0.6666666666666666,
+              "ndcg_at_10": 0.7718216255952429
+            },
+            "backend_server": {
+              "count": 2.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 2.0,
+              "recall_at_1": 0.25,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.8467132018086354,
+              "ndcg_at_10": 0.8467132018086354
+            },
+            "frontend_state": {
+              "count": 4.0,
+              "recall_at_1": 0.5416666666666666,
+              "recall_at_5": 0.8333333333333334,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8366235103402014,
+              "ndcg_at_10": 0.9123266174398639
+            },
+            "frontend_ui": {
+              "count": 6.0,
+              "recall_at_1": 0.27777777777777773,
+              "recall_at_5": 0.5277777777777778,
+              "recall_at_10": 0.5833333333333334,
+              "mrr": 0.611111111111111,
+              "ndcg_at_5": 0.4806641840734526,
+              "ndcg_at_10": 0.5085242599011529
+            },
+            "frontend_viewer": {
+              "count": 3.0,
+              "recall_at_1": 0.4444444444444444,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.6666666666666666,
+              "mrr": 0.7333333333333334,
+              "ndcg_at_5": 0.648967476508658,
+              "ndcg_at_10": 0.648967476508658
+            },
+            "frontend_utilities": {
+              "count": 2.0,
+              "recall_at_1": 0.25,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.8664143102388955,
+              "ndcg_at_10": 0.8664143102388955
+            },
+            "frontend_widgets": {
+              "count": 6.0,
+              "recall_at_1": 0.3888888888888889,
+              "recall_at_5": 0.7638888888888888,
+              "recall_at_10": 0.8194444444444445,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8088366762842566,
+              "ndcg_at_10": 0.8349077166188542
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.3494,
+              0.5764
+            ],
+            "recall_at_5": [
+              0.6736,
+              0.8681
+            ],
+            "recall_at_10": [
+              0.7731,
+              0.9375
+            ],
+            "mrr": [
+              0.7634,
+              0.9479
+            ],
+            "ndcg_at_5": [
+              0.6636,
+              0.8513
+            ],
+            "ndcg_at_10": [
+              0.7064,
+              0.876
+            ]
+          }
+        }
+      }
+    }
+  },
+  "paired_significance": {
+    "test": {
+      "code_vs_tfidf": {
+        "Recall@1": {
+          "mean_difference": -0.0278,
+          "p_value": 0.546735,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "Recall@5": {
+          "mean_difference": -0.0741,
+          "p_value": 0.387537,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "Recall@10": {
+          "mean_difference": -0.1296,
+          "p_value": 0.068966,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "MRR": {
+          "mean_difference": 0.0548,
+          "p_value": 0.707856,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@5": {
+          "mean_difference": -0.0138,
+          "p_value": 0.929671,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@10": {
+          "mean_difference": -0.0447,
+          "p_value": 0.894677,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        }
+      },
+      "code_vs_semantic": {
+        "Recall@1": {
+          "mean_difference": 0.0093,
+          "p_value": 0.917258,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "Recall@5": {
+          "mean_difference": -0.0741,
+          "p_value": 0.306784,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "Recall@10": {
+          "mean_difference": -0.037,
+          "p_value": 0.163139,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "MRR": {
+          "mean_difference": -0.0262,
+          "p_value": 0.63592,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@5": {
+          "mean_difference": -0.0217,
+          "p_value": 0.911365,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@10": {
+          "mean_difference": -0.0146,
+          "p_value": 0.858656,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        }
+      },
+      "semantic_vs_tfidf": {
+        "Recall@1": {
+          "mean_difference": -0.037,
+          "p_value": 0.546321,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "Recall@5": {
+          "mean_difference": 0.0,
+          "p_value": 1.0,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "Recall@10": {
+          "mean_difference": -0.0926,
+          "p_value": 0.171649,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "MRR": {
+          "mean_difference": 0.081,
+          "p_value": 0.426408,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@5": {
+          "mean_difference": 0.0079,
+          "p_value": 0.874636,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@10": {
+          "mean_difference": -0.0301,
+          "p_value": 0.769518,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        }
+      },
+      "tfidf_char_vs_word": {
+        "Recall@1": {
+          "mean_difference": 0.0463,
+          "p_value": 0.171972,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "Recall@5": {
+          "mean_difference": 0.0093,
+          "p_value": 0.816185,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "Recall@10": {
+          "mean_difference": -0.0648,
+          "p_value": 0.233156,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "MRR": {
+          "mean_difference": 0.1181,
+          "p_value": 0.025893,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": true
+        },
+        "nDCG@5": {
+          "mean_difference": 0.0569,
+          "p_value": 0.148444,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@10": {
+          "mean_difference": 0.0286,
+          "p_value": 0.574149,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        }
+      },
+      "code_meta_vs_nometa": {
+        "Recall@1": {
+          "mean_difference": -0.0833,
+          "p_value": 0.331333,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "Recall@5": {
+          "mean_difference": 0.0,
+          "p_value": 1.0,
+          "test_type": "none",
+          "statistically_significant": false
+        },
+        "Recall@10": {
+          "mean_difference": 0.0278,
+          "p_value": 0.331333,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "MRR": {
+          "mean_difference": -0.035,
+          "p_value": 0.63592,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@5": {
+          "mean_difference": -0.0257,
+          "p_value": 0.961582,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@10": {
+          "mean_difference": -0.0163,
+          "p_value": 0.910284,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        }
+      },
+      "semantic_meta_vs_nometa": {
+        "Recall@1": {
+          "mean_difference": 0.0278,
+          "p_value": 0.331333,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "Recall@5": {
+          "mean_difference": 0.0556,
+          "p_value": 0.63592,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "Recall@10": {
+          "mean_difference": 0.0648,
+          "p_value": 0.089576,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "MRR": {
+          "mean_difference": 0.0537,
+          "p_value": 0.08911,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "nDCG@5": {
+          "mean_difference": 0.0553,
+          "p_value": 0.54267,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@10": {
+          "mean_difference": 0.064,
+          "p_value": 0.103798,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        }
+      }
+    },
+    "all": {
+      "code_vs_tfidf": {
+        "Recall@1": {
+          "mean_difference": -0.0069,
+          "p_value": 0.346677,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "Recall@5": {
+          "mean_difference": -0.0718,
+          "p_value": 0.120848,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "Recall@10": {
+          "mean_difference": -0.1019,
+          "p_value": 0.033933,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": true
+        },
+        "MRR": {
+          "mean_difference": 0.0714,
+          "p_value": 0.323432,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@5": {
+          "mean_difference": -0.0237,
+          "p_value": 0.627683,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@10": {
+          "mean_difference": -0.0406,
+          "p_value": 0.557553,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        }
+      },
+      "code_vs_semantic": {
+        "Recall@1": {
+          "mean_difference": 0.037,
+          "p_value": 0.339267,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "Recall@5": {
+          "mean_difference": -0.0556,
+          "p_value": 0.173701,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "Recall@10": {
+          "mean_difference": -0.0185,
+          "p_value": 0.324174,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "MRR": {
+          "mean_difference": 0.0498,
+          "p_value": 0.36293,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@5": {
+          "mean_difference": -0.0012,
+          "p_value": 0.923699,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@10": {
+          "mean_difference": 0.0115,
+          "p_value": 0.7556,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        }
+      },
+      "semantic_vs_tfidf": {
+        "Recall@1": {
+          "mean_difference": -0.044,
+          "p_value": 0.899809,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "Recall@5": {
+          "mean_difference": -0.0162,
+          "p_value": 0.895225,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "Recall@10": {
+          "mean_difference": -0.0833,
+          "p_value": 0.081307,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "MRR": {
+          "mean_difference": 0.0216,
+          "p_value": 0.771293,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@5": {
+          "mean_difference": -0.0225,
+          "p_value": 0.424768,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@10": {
+          "mean_difference": -0.0521,
+          "p_value": 0.28846,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        }
+      },
+      "tfidf_char_vs_word": {
+        "Recall@1": {
+          "mean_difference": 0.0231,
+          "p_value": 0.168715,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "Recall@5": {
+          "mean_difference": 0.0116,
+          "p_value": 0.672263,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "Recall@10": {
+          "mean_difference": -0.0093,
+          "p_value": 0.961165,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "MRR": {
+          "mean_difference": 0.0563,
+          "p_value": 0.05334,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@5": {
+          "mean_difference": 0.0322,
+          "p_value": 0.068315,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@10": {
+          "mean_difference": 0.0258,
+          "p_value": 0.177614,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        }
+      },
+      "code_meta_vs_nometa": {
+        "Recall@1": {
+          "mean_difference": -0.0556,
+          "p_value": 0.647391,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "Recall@5": {
+          "mean_difference": -0.0093,
+          "p_value": 0.64551,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "Recall@10": {
+          "mean_difference": 0.0116,
+          "p_value": 0.654944,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "MRR": {
+          "mean_difference": -0.0152,
+          "p_value": 0.561905,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@5": {
+          "mean_difference": -0.0297,
+          "p_value": 0.629584,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@10": {
+          "mean_difference": -0.0218,
+          "p_value": 0.647648,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        }
+      },
+      "semantic_meta_vs_nometa": {
+        "Recall@1": {
+          "mean_difference": 0.0532,
+          "p_value": 0.025461,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": true
+        },
+        "Recall@5": {
+          "mean_difference": 0.0417,
+          "p_value": 0.334186,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "Recall@10": {
+          "mean_difference": 0.0324,
+          "p_value": 0.089702,
+          "test_type": "paired_ttest",
+          "statistically_significant": false
+        },
+        "MRR": {
+          "mean_difference": 0.0797,
+          "p_value": 0.057405,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@5": {
+          "mean_difference": 0.0561,
+          "p_value": 0.191731,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        },
+        "nDCG@10": {
+          "mean_difference": 0.053,
+          "p_value": 0.064763,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false
+        }
+      }
+    }
+  },
+  "storage": {
+    "models": {
+      "tfidf": {
+        "parameters": "0",
+        "embedding_dim": "Sparse vocab",
+        "weight_mb": 0.0
+      },
+      "all-MiniLM-L6-v2": {
+        "parameters": "22.7M",
+        "embedding_dim": 384,
+        "weight_mb": 86.7
+      },
+      "st-codesearch-distilroberta": {
+        "parameters": "82.1M",
+        "embedding_dim": 768,
+        "weight_mb": 313.3
+      }
+    },
+    "embedding_caches_kb": {
+      "embeddings_flax-sentence-embeddings_st-codesearch-distilroberta-base_012804015c4969b1.npz": 251.34,
+      "embeddings_flax-sentence-embeddings_st-codesearch-distilroberta-base_e38fbc87591a7865.npz": 251.39,
+      "embeddings_flax-sentence-embeddings_st-codesearch-distilroberta-base_f38ce1b616a70428.npz": 251.34,
+      "embeddings_sentence-transformers_all-MiniLM-L6-v2_0eb9c08b1f32343f.npz": 126.96,
+      "embeddings_sentence-transformers_all-MiniLM-L6-v2_4d8153e04aef3d0f.npz": 126.97,
+      "embeddings_sentence-transformers_all-MiniLM-L6-v2_f14fcf868d15a93b.npz": 126.88
+    }
+  }
+}
