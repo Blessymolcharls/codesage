@@ -1,0 +1,38 @@
+# Python virtual environment
+.venv/
+venv/
+env/
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Test & coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# CodeSage generated data artifacts (preserve directory marker)
+data/*
+!data/.gitkeep
+
+# Secrets, keys, and credentials
+.env
+.env.*
+*.key
+*.pem
+*.cert
+*.p12
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
