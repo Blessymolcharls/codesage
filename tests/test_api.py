@@ -144,3 +144,64 @@ def test_unit_details_endpoint(client: TestClient):
     # Non-existent unit ID should return 404
     resp = client.get("/api/units/non_existent_unit_id_99999")
     assert resp.status_code == 404
+
+
+def test_search_whitespace_query(client: TestClient):
+    """Test that whitespace-only query gracefully returns empty results without crashing."""
+    resp = client.post("/api/search", json={"query": "   ", "model": "tfidf", "top_k": 5})
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["total_results"] == 0
+    assert data["results"] == []
+
+
+def test_search_all_individual_models_consistency(client: TestClient):
+    """Test TF-IDF, semantic, and code retrieval independently with identical query and top_k."""
+    query = "merge multiple PDF files"
+    top_k = 3
+
+    for model_name in ["tfidf", "semantic", "code"]:
+        resp = client.post("/api/search", json={"query": query, "model": model_name, "top_k": top_k})
+        assert resp.status_code == 200, f"Model {model_name} failed: {resp.text}"
+        data = resp.json()
+        assert data["model"] == model_name
+        assert data["query"] == query
+        assert len(data["results"]) <= top_k
+        assert data["latency_ms"] >= 0.0
+
+        scores = [r["score"] for r in data["results"]]
+        # Scores should be sorted descending
+        assert scores == sorted(scores, reverse=True)
+        for r in data["results"]:
+            assert 0.0 <= r["score"] <= 1.0
+            assert len(r["unit_id"]) > 0
+            assert len(r["preview"]) > 0
+            assert len(r["source_code"]) > 0
+
+
+def test_compare_endpoint_top_k_consistency(client: TestClient):
+    """Test multi-engine compare enforces identical top_k across all retrieval engines."""
+    query = "cleanup temporary files"
+    top_k = 4
+    resp = client.post("/api/compare", json={"query": query, "top_k": top_k, "with_graph": True})
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["top_k"] == top_k
+    assert "systems" in data
+
+    for slug, sys_res in data["systems"].items():
+        assert len(sys_res["results"]) <= top_k
+        assert sys_res["latency_ms"] >= 0.0
+        scores = [item["score"] for item in sys_res["results"]]
+        assert scores == sorted(scores, reverse=True)
+
+
+def test_models_availability_flag(client: TestClient):
+    """Test that /api/models exposes is_available boolean reflecting loaded state."""
+    resp = client.get("/api/models")
+    assert resp.status_code == 200
+    models = resp.json()
+    for m in models:
+        assert "is_available" in m
+        assert isinstance(m["is_available"], bool)
+

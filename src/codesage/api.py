@@ -120,6 +120,7 @@ class ModelInfo(BaseModel):
     parameters: str
     weight_mb: float
     supports_graph_reranking: bool
+    is_available: bool = True
 
 
 # Shared Global State Holder
@@ -172,33 +173,42 @@ async def lifespan(app: FastAPI):
             state.tfidf_reranker = GraphContextReranker(tfidf, state.graph)
             state.models_loaded.append("tfidf_graph")
 
-    # 4. Initialize Semantic Retriever with local cache
+    # 4. Initialize Semantic Retriever with local cache (verify dependencies first)
+    has_neural_deps = False
     try:
-        sem = SemanticRetriever(cache_dir=CACHE_DIR, include_metadata=True)
-        if state.code_units:
-            sem.fit(state.code_units)
-        state.semantic_retriever = sem
-        state.models_loaded.append("semantic")
+        import sentence_transformers  # noqa: F401
+        import torch  # noqa: F401
+        has_neural_deps = True
+    except ImportError:
+        print("[Warning] sentence-transformers or torch is missing in current Python. Neural models disabled.")
 
-        if state.graph:
-            state.semantic_reranker = GraphContextReranker(sem, state.graph)
-            state.models_loaded.append("semantic_graph")
-    except Exception as e:
-        print(f"[Warning] Failed to pre-warm semantic retriever: {e}")
+    if has_neural_deps:
+        try:
+            sem = SemanticRetriever(cache_dir=CACHE_DIR, include_metadata=True)
+            if state.code_units:
+                sem.fit(state.code_units)
+            state.semantic_retriever = sem
+            state.models_loaded.append("semantic")
 
-    # 5. Initialize Code Transformer Retriever with local cache
-    try:
-        code_t = CodeTransformerRetriever(cache_dir=CACHE_DIR, include_metadata=True)
-        if state.code_units:
-            code_t.fit(state.code_units)
-        state.code_retriever = code_t
-        state.models_loaded.append("code")
+            if state.graph:
+                state.semantic_reranker = GraphContextReranker(sem, state.graph)
+                state.models_loaded.append("semantic_graph")
+        except Exception as e:
+            print(f"[Warning] Failed to pre-warm semantic retriever: {e}")
 
-        if state.graph:
-            state.code_reranker = GraphContextReranker(code_t, state.graph)
-            state.models_loaded.append("code_graph")
-    except Exception as e:
-        print(f"[Warning] Failed to pre-warm code transformer retriever: {e}")
+        # 5. Initialize Code Transformer Retriever with local cache
+        try:
+            code_t = CodeTransformerRetriever(cache_dir=CACHE_DIR, include_metadata=True)
+            if state.code_units:
+                code_t.fit(state.code_units)
+            state.code_retriever = code_t
+            state.models_loaded.append("code")
+
+            if state.graph:
+                state.code_reranker = GraphContextReranker(code_t, state.graph)
+                state.models_loaded.append("code_graph")
+        except Exception as e:
+            print(f"[Warning] Failed to pre-warm code transformer retriever: {e}")
 
     yield
 
@@ -244,7 +254,7 @@ def get_health() -> Dict[str, Any]:
 @app.get("/api/models", summary="List Available Retrieval Models")
 def get_models() -> List[ModelInfo]:
     """Return list of supported retrieval engines and specifications."""
-    return [
+    models = [
         ModelInfo(
             id="tfidf",
             name="TF-IDF (Lexical Baseline)",
@@ -254,6 +264,7 @@ def get_models() -> List[ModelInfo]:
             parameters="0",
             weight_mb=0.0,
             supports_graph_reranking=True,
+            is_available="tfidf" in state.models_loaded,
         ),
         ModelInfo(
             id="semantic",
@@ -264,6 +275,7 @@ def get_models() -> List[ModelInfo]:
             parameters="22.7M",
             weight_mb=86.7,
             supports_graph_reranking=True,
+            is_available="semantic" in state.models_loaded,
         ),
         ModelInfo(
             id="code",
@@ -274,6 +286,7 @@ def get_models() -> List[ModelInfo]:
             parameters="82.1M",
             weight_mb=313.3,
             supports_graph_reranking=True,
+            is_available="code" in state.models_loaded,
         ),
         ModelInfo(
             id="tfidf_graph",
@@ -284,6 +297,7 @@ def get_models() -> List[ModelInfo]:
             parameters="0",
             weight_mb=0.0,
             supports_graph_reranking=False,
+            is_available="tfidf_graph" in state.models_loaded,
         ),
         ModelInfo(
             id="semantic_graph",
@@ -294,6 +308,7 @@ def get_models() -> List[ModelInfo]:
             parameters="22.7M",
             weight_mb=86.7,
             supports_graph_reranking=False,
+            is_available="semantic_graph" in state.models_loaded,
         ),
         ModelInfo(
             id="code_graph",
@@ -304,8 +319,10 @@ def get_models() -> List[ModelInfo]:
             parameters="82.1M",
             weight_mb=313.3,
             supports_graph_reranking=False,
+            is_available="code_graph" in state.models_loaded,
         ),
     ]
+    return models
 
 
 def _resolve_retriever(model_id: str, rerank: bool = False):
@@ -342,13 +359,24 @@ def search(request: SearchRequest) -> SearchResponse:
 
     retriever = _resolve_retriever(request.model, request.rerank)
     if retriever is None:
+        if request.model in ["semantic", "semantic_graph", "code", "code_graph"] and request.model not in state.models_loaded:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail=f"Requested neural model '{request.model}' is unavailable because neural dependencies (sentence-transformers / torch) are not loaded.",
+            )
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Requested model '{request.model}' is not available or not loaded.",
         )
 
     t0 = time.perf_counter()
-    raw_results: List[SearchResult] = retriever.search(clean_query, top_k=request.top_k)
+    try:
+        raw_results: List[SearchResult] = retriever.search(clean_query, top_k=request.top_k)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Retriever execution failed for model '{request.model}': {str(e)}",
+        )
     elapsed_ms = round((time.perf_counter() - t0) * 1000.0, 2)
 
     # Convert to bounded response items
@@ -412,31 +440,35 @@ def compare_search(request: CompareRequest) -> CompareResponse:
         if retriever is None:
             continue
         q_start = time.perf_counter()
-        raw_res: List[SearchResult] = retriever.search(clean_query, top_k=request.top_k)
-        q_latency = round((time.perf_counter() - q_start) * 1000.0, 2)
+        try:
+            raw_res: List[SearchResult] = retriever.search(clean_query, top_k=request.top_k)
+            q_latency = round((time.perf_counter() - q_start) * 1000.0, 2)
 
-        items = [
-            SearchResultItem(
-                unit_id=r.unit_id,
-                score=round(float(r.score), 4),
-                rel_path=r.rel_path,
-                language=r.language,
-                symbol_name=r.symbol_name,
-                unit_type=r.unit_type,
-                start_line=r.start_line,
-                end_line=r.end_line,
-                extraction_method=r.extraction_method,
-                preview=r.preview,
-                source_code=r.source_code,
+            items = [
+                SearchResultItem(
+                    unit_id=r.unit_id,
+                    score=round(float(r.score), 4),
+                    rel_path=r.rel_path,
+                    language=r.language,
+                    symbol_name=r.symbol_name,
+                    unit_type=r.unit_type,
+                    start_line=r.start_line,
+                    end_line=r.end_line,
+                    extraction_method=r.extraction_method,
+                    preview=r.preview,
+                    source_code=r.source_code,
+                )
+                for r in raw_res
+            ]
+            systems_out[slug] = CompareSystemResult(
+                name=display_name,
+                model_slug=slug,
+                latency_ms=q_latency,
+                results=items,
             )
-            for r in raw_res
-        ]
-        systems_out[slug] = CompareSystemResult(
-            name=display_name,
-            model_slug=slug,
-            latency_ms=q_latency,
-            results=items,
-        )
+        except Exception as e:
+            # Continue comparing remaining systems if one encounters a model error
+            continue
 
     total_time_ms = round((time.perf_counter() - t_start) * 1000.0, 2)
 

@@ -2,11 +2,23 @@
 """Run the CodeSage FastAPI backend server."""
 
 import argparse
+import subprocess
 import sys
 from pathlib import Path
 
 # Add 'src' to python search path
 project_root = Path(__file__).resolve().parent.parent
+
+# Auto-detect and forward to project virtual environment if current python lacks neural dependencies
+venv_python = project_root / ".venv" / "Scripts" / "python.exe"
+if venv_python.exists() and Path(sys.executable).resolve() != venv_python.resolve():
+    try:
+        import sentence_transformers  # noqa: F401
+    except ImportError:
+        print(f"[CodeSage] Current Python lacks neural dependencies; launching via {venv_python}")
+        ret = subprocess.call([str(venv_python)] + sys.argv)
+        sys.exit(ret)
+
 src_dir = project_root / "src"
 if str(src_dir) not in sys.path:
     sys.path.insert(0, str(src_dir))
