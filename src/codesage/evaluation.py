@@ -116,32 +116,60 @@ class AggregateEvaluationResult:
 
 
 def calculate_recall_at_k(retrieved_ids: List[str], relevant_ids: Set[str], k: int) -> float:
-    """Calculate Recall@K: proportion of relevant units retrieved in top-k."""
-    if not relevant_ids:
+    """Calculate Recall@K: proportion of unique relevant units retrieved in top-k.
+    
+    Safely deduplicates retrieved_ids preserving rank order, and guards against empty relevance sets.
+    """
+    if not relevant_ids or not retrieved_ids or k <= 0:
         return 0.0
-    top_k = retrieved_ids[:k]
+    seen = set()
+    deduped = []
+    for uid in retrieved_ids:
+        if uid not in seen:
+            seen.add(uid)
+            deduped.append(uid)
+    top_k = deduped[:k]
     hits = sum(1 for uid in top_k if uid in relevant_ids)
     return hits / float(len(relevant_ids))
 
 
 def calculate_mrr(retrieved_ids: List[str], relevant_ids: Set[str]) -> float:
-    """Calculate Reciprocal Rank (RR): reciprocal of the 1-based rank of the first relevant unit."""
-    if not relevant_ids:
+    """Calculate Reciprocal Rank (RR): reciprocal of the 1-based rank of the first relevant unit.
+    
+    Safely deduplicates retrieved_ids preserving rank order.
+    """
+    if not relevant_ids or not retrieved_ids:
         return 0.0
-    for rank, uid in enumerate(retrieved_ids, start=1):
+    seen = set()
+    rank = 1
+    for uid in retrieved_ids:
+        if uid in seen:
+            continue
+        seen.add(uid)
         if uid in relevant_ids:
             return 1.0 / rank
+        rank += 1
     return 0.0
 
 
 def calculate_ndcg_at_k(retrieved_ids: List[str], relevant_ids: Set[str], k: int) -> float:
-    """Calculate Normalized Discounted Cumulative Gain at rank K using binary relevance."""
-    if not relevant_ids:
+    """Calculate Normalized Discounted Cumulative Gain at rank K using binary relevance.
+    
+    Safely deduplicates retrieved_ids preserving rank order.
+    """
+    if not relevant_ids or not retrieved_ids or k <= 0:
         return 0.0
+
+    seen = set()
+    deduped = []
+    for uid in retrieved_ids:
+        if uid not in seen:
+            seen.add(uid)
+            deduped.append(uid)
 
     # DCG@K
     dcg = 0.0
-    for rank, uid in enumerate(retrieved_ids[:k], start=1):
+    for rank, uid in enumerate(deduped[:k], start=1):
         if uid in relevant_ids:
             dcg += 1.0 / math.log2(rank + 1)
 
@@ -330,6 +358,121 @@ def evaluate_dataset(
     return query_results, aggregate
 
 
+@dataclass
+class NegativeControlQueryAnalysis:
+    """Per-query analysis of false-positive behavior on irrelevant negative controls."""
+    query_id: str
+    query: str
+    task_category: str
+    top_score: float
+    top_unit_id: str
+    top_rel_path: str
+    top_scores: List[float]
+    top_unit_ids: List[str]
+
+    def to_dict(self) -> Dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class NegativeControlReport:
+    """Aggregate analysis of false alarms on negative control queries."""
+    total_negative_queries: int
+    mean_top1_score: float
+    p50_top1_score: float
+    max_top1_score: float
+    min_top1_score: float
+    threshold_exceedance_rates: Dict[str, float]
+    calibration_warning: str
+    per_query_analyses: List[NegativeControlQueryAnalysis]
+
+    def to_dict(self) -> Dict[str, Any]:
+        d = asdict(self)
+        d["per_query_analyses"] = [q.to_dict() for q in self.per_query_analyses]
+        return d
+
+
+def evaluate_negative_controls(
+    retriever: Any,
+    queries: List[EvaluationQuery],
+    top_k: int = 5,
+    thresholds: Tuple[float, ...] = (0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+) -> NegativeControlReport:
+    """Rigorously evaluate a retriever against negative control queries.
+    
+    Negative control queries represent requests that have no implementation in the target codebase.
+    This analysis measures how often irrelevant queries produce high-confidence-looking similarity scores,
+    and proves that raw vector cosine similarities are uncalibrated measures of relevance.
+    """
+    neg_queries = [q for q in queries if q.split == "negative_control" or len(q.relevant_unit_ids) == 0]
+    if not neg_queries:
+        return NegativeControlReport(
+            total_negative_queries=0,
+            mean_top1_score=0.0,
+            p50_top1_score=0.0,
+            max_top1_score=0.0,
+            min_top1_score=0.0,
+            threshold_exceedance_rates={f">={t:.1f}": 0.0 for t in thresholds},
+            calibration_warning="No negative control queries found in dataset.",
+            per_query_analyses=[],
+        )
+
+    analyses: List[NegativeControlQueryAnalysis] = []
+    top1_scores: List[float] = []
+
+    for eq in neg_queries:
+        search_results = retriever.search(eq.query, top_k=top_k)
+        if search_results:
+            top_res = search_results[0]
+            t_score = round(float(top_res.score), 4)
+            t_uid = top_res.unit_id
+            t_path = getattr(top_res, "rel_path", "")
+            scores = [round(float(r.score), 4) for r in search_results]
+            uids = [r.unit_id for r in search_results]
+        else:
+            t_score = 0.0
+            t_uid = "NONE"
+            t_path = "NONE"
+            scores = []
+            uids = []
+
+        top1_scores.append(t_score)
+        analyses.append(
+            NegativeControlQueryAnalysis(
+                query_id=eq.query_id,
+                query=eq.query,
+                task_category=eq.task_category,
+                top_score=t_score,
+                top_unit_id=t_uid,
+                top_rel_path=t_path,
+                top_scores=scores,
+                top_unit_ids=uids,
+            )
+        )
+
+    n_queries = len(top1_scores)
+    exceedance_rates: Dict[str, float] = {}
+    for t in thresholds:
+        count = sum(1 for s in top1_scores if s >= t)
+        exceedance_rates[f">={t:.1f}"] = round(count / float(n_queries), 4)
+
+    mean_top1 = float(np.mean(top1_scores)) if top1_scores else 0.0
+    p50_top1 = float(np.median(top1_scores)) if top1_scores else 0.0
+    max_top1 = float(np.max(top1_scores)) if top1_scores else 0.0
+    min_top1 = float(np.min(top1_scores)) if top1_scores else 0.0
+
+    return NegativeControlReport(
+        total_negative_queries=n_queries,
+        mean_top1_score=round(mean_top1, 4),
+        p50_top1_score=round(p50_top1, 4),
+        max_top1_score=round(max_top1, 4),
+        min_top1_score=round(min_top1, 4),
+        threshold_exceedance_rates=exceedance_rates,
+        calibration_warning="Raw cosine similarity is an uncalibrated ranking metric, not a posterior probability of relevance.",
+        per_query_analyses=analyses,
+    )
+
+
 def export_aggregate_json(aggregate: AggregateEvaluationResult, output_path: Path | str) -> None:
     """Export aggregate evaluation metrics to a JSON file."""
     path = Path(output_path)
@@ -499,11 +642,14 @@ def run_paired_significance_test(
             paired_data[m][1].append(s_val)
 
     significance: Dict[str, Dict[str, Any]] = {}
+    n_queries = len(paired_data[metrics[0]][0]) if metrics else 0
+
     for m in metrics:
         t_vals = np.array(paired_data[m][0])
         s_vals = np.array(paired_data[m][1])
         diffs = s_vals - t_vals
         mean_diff = float(np.mean(diffs))
+        ci_diff = compute_bootstrap_ci(list(diffs))
 
         non_zero = diffs[diffs != 0]
         p_val = 1.0
@@ -532,10 +678,13 @@ def run_paired_significance_test(
 
         label = metric_names[m]
         significance[label] = {
+            "n_queries": n_queries,
             "mean_difference": round(mean_diff, 4),
+            "ci_95_diff": ci_diff,
             "p_value": round(p_val, 6),
             "test_type": test_type,
             "statistically_significant": bool(p_val < 0.05),
+            "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence." if n_queries < 30 else "",
         }
 
     return significance

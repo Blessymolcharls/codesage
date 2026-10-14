@@ -209,3 +209,127 @@ def test_end_to_end_evaluation_pipeline(tmp_path: Path):
     csv_content = csv_export.read_text(encoding="utf-8").strip().splitlines()
     assert len(csv_content) == 3  # Header + 2 queries
     assert "query_id,split,task_category,query" in csv_content[0]
+
+
+def test_duplicate_results_deduplication():
+    """Verify duplicate IDs in retrieved list do not artificially inflate recall or nDCG."""
+    relevant_ids = {"u1", "u2"}
+
+    # Duplicate u1 in top-3: ["u1", "u1", "u2"]
+    # Without deduplication, recall would be 3/2 = 1.5!
+    # With deduplication, top-2 unique are [u1, u2], recall@2 = 1.0, recall@1 = 0.5
+    retrieved_with_dups = ["u1", "u1", "u2", "u3"]
+    assert calculate_recall_at_k(retrieved_with_dups, relevant_ids, k=1) == 0.5
+    assert calculate_recall_at_k(retrieved_with_dups, relevant_ids, k=2) == 1.0
+    assert calculate_mrr(retrieved_with_dups, relevant_ids) == 1.0
+    # First unique hit is at rank 1, second unique hit is at rank 2
+    assert pytest.approx(calculate_ndcg_at_k(retrieved_with_dups, relevant_ids, k=2), 0.001) == 1.0
+
+
+def test_empty_relevance_sets():
+    """Verify empty relevance sets safely yield 0.0 without divide-by-zero or crashes."""
+    empty_rel: set = set()
+    retrieved = ["u1", "u2", "u3"]
+
+    assert calculate_recall_at_k(retrieved, empty_rel, k=1) == 0.0
+    assert calculate_recall_at_k(retrieved, empty_rel, k=5) == 0.0
+    assert calculate_mrr(retrieved, empty_rel) == 0.0
+    assert calculate_ndcg_at_k(retrieved, empty_rel, k=5) == 0.0
+
+    # Also test empty retrieved list with non-empty relevant
+    assert calculate_recall_at_k([], {"u1"}, k=5) == 0.0
+    assert calculate_mrr([], {"u1"}) == 0.0
+    assert calculate_ndcg_at_k([], {"u1"}, k=5) == 0.0
+
+    # k <= 0
+    assert calculate_recall_at_k(retrieved, {"u1"}, k=0) == 0.0
+    assert calculate_ndcg_at_k(retrieved, {"u1"}, k=0) == 0.0
+
+
+def test_negative_control_evaluation_harness():
+    """Verify negative control evaluation reports false alarms, top scores, and calibration warnings."""
+    from codesage.evaluation import evaluate_negative_controls
+
+    class MockNegativeRetriever:
+        def search(self, query: str, top_k: int = 5):
+            # Returns fixed uncalibrated scores
+            return [
+                SearchResult(
+                    unit_id="doc1",
+                    score=0.45,
+                    rel_path="doc1.js",
+                    language="javascript",
+                    symbol_name="doc1",
+                    unit_type="function",
+                    start_line=1,
+                    end_line=10,
+                    extraction_method="tree_sitter",
+                    preview="code",
+                    source_code="code",
+                ),
+                SearchResult(
+                    unit_id="doc2",
+                    score=0.32,
+                    rel_path="doc2.js",
+                    language="javascript",
+                    symbol_name="doc2",
+                    unit_type="function",
+                    start_line=1,
+                    end_line=10,
+                    extraction_method="tree_sitter",
+                    preview="code",
+                    source_code="code",
+                ),
+            ]
+
+    neg_queries = [
+        EvaluationQuery(
+            query_id="neg1",
+            query="unsupported feature query 1",
+            relevant_unit_ids=[],
+            task_category="unsupported",
+            split="negative_control",
+        ),
+        EvaluationQuery(
+            query_id="neg2",
+            query="unsupported feature query 2",
+            relevant_unit_ids=[],
+            task_category="unsupported",
+            split="negative_control",
+        ),
+    ]
+
+    report = evaluate_negative_controls(MockNegativeRetriever(), neg_queries, top_k=5)
+    assert report.total_negative_queries == 2
+    assert report.mean_top1_score == 0.45
+    assert report.max_top1_score == 0.45
+    assert report.threshold_exceedance_rates[">=0.4"] == 1.0
+    assert report.threshold_exceedance_rates[">=0.5"] == 0.0
+    assert len(report.per_query_analyses) == 2
+    assert "uncalibrated" in report.calibration_warning.lower()
+
+
+def test_evaluation_split_isolation_and_disjointness():
+    """Verify that all evaluation queries in the benchmark have strictly isolated, disjoint splits."""
+    root = Path(__file__).resolve().parent.parent
+    queries_path = root / "data" / "evaluation_queries.jsonl"
+    queries = load_evaluation_queries(queries_path)
+
+    dev_ids = {q.query_id for q in queries if q.split == "dev"}
+    test_ids = {q.query_id for q in queries if q.split == "test"}
+    neg_ids = {q.query_id for q in queries if q.split == "negative_control"}
+
+    # Disjoint ID sets
+    assert len(dev_ids.intersection(test_ids)) == 0, "Dev and Test query IDs overlap!"
+    assert len(dev_ids.intersection(neg_ids)) == 0, "Dev and Negative query IDs overlap!"
+    assert len(test_ids.intersection(neg_ids)) == 0, "Test and Negative query IDs overlap!"
+
+    # Disjoint normalized query text
+    dev_texts = {q.query.lower().strip() for q in queries if q.split == "dev"}
+    test_texts = {q.query.lower().strip() for q in queries if q.split == "test"}
+    neg_texts = {q.query.lower().strip() for q in queries if q.split == "negative_control"}
+
+    assert len(dev_texts.intersection(test_texts)) == 0, "Dev and Test query texts overlap!"
+    assert len(dev_texts.intersection(neg_texts)) == 0, "Dev and Negative query texts overlap!"
+    assert len(test_texts.intersection(neg_texts)) == 0, "Test and Negative query texts overlap!"
+

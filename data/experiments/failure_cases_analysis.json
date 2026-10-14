@@ -1,0 +1,222 @@
+{
+  "summary": {
+    "total_queries_evaluated": 36,
+    "lexical_gap_queries_count": 2,
+    "semantic_gap_queries_count": 3,
+    "hard_queries_count": 0,
+    "graph_improvements_count": 13,
+    "graph_degradations_count": 2
+  },
+  "lexical_gap_queries": [
+    {
+      "query_id": "q06",
+      "split": "dev",
+      "query": "clean up temporary uploaded files from disk",
+      "relevant_units": [
+        "backend/utils/fileHelper.js:function:cleanupFiles:7_17",
+        "backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48"
+      ],
+      "tfidf_r5": 0.0,
+      "semantic_r5": 1.0,
+      "code_r5": 1.0,
+      "diagnosis": "Lexical vocabulary mismatch: query uses intent words absent from symbol names or code body."
+    },
+    {
+      "query_id": "q24",
+      "split": "test",
+      "query": "dashboard screen displaying grid of PDF feature cards",
+      "relevant_units": [
+        "frontend/lib/screens/dashboard_screen.dart:class:DashboardScreen:12_158",
+        "frontend/lib/screens/dashboard_screen.dart:method:build:16_157",
+        "frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178"
+      ],
+      "tfidf_r5": 0.0,
+      "semantic_r5": 0.6666666666666666,
+      "code_r5": 0.6666666666666666,
+      "diagnosis": "Lexical vocabulary mismatch: query uses intent words absent from symbol names or code body."
+    }
+  ],
+  "semantic_gap_queries": [
+    {
+      "query_id": "q19",
+      "split": "dev",
+      "query": "share or save processed PDF locally to device storage",
+      "relevant_units": [
+        "frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47",
+        "frontend/lib/utils/export_helper.dart:method:shareFile:8_10",
+        "frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46"
+      ],
+      "tfidf_r5": 1.0,
+      "semantic_r5": 0.0,
+      "code_r5": 0.3333333333333333,
+      "diagnosis": "General semantic dilution: sentence embedding fails on code-specific identifiers."
+    },
+    {
+      "query_id": "q23",
+      "split": "dev",
+      "query": "base feature screen layout for uploading and processing",
+      "relevant_units": [
+        "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:BaseFeatureScreen:14_42",
+        "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_processFiles:72_95",
+        "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_onFilesDropped:56_70"
+      ],
+      "tfidf_r5": 0.6666666666666666,
+      "semantic_r5": 0.0,
+      "code_r5": 0.3333333333333333,
+      "diagnosis": "General semantic dilution: sentence embedding fails on code-specific identifiers."
+    },
+    {
+      "query_id": "q37",
+      "split": "test",
+      "query": "open and view generated pdf in viewer after completion",
+      "relevant_units": [
+        "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:98_347:part1",
+        "frontend/lib/screens/viewer_screen.dart:class:ViewerScreen:6_13"
+      ],
+      "tfidf_r5": 0.5,
+      "semantic_r5": 0.0,
+      "code_r5": 0.0,
+      "diagnosis": "General semantic dilution: sentence embedding fails on code-specific identifiers."
+    }
+  ],
+  "hard_queries": [],
+  "graph_improvements": [
+    {
+      "query_id": "q02",
+      "model": "TF-IDF + Graph",
+      "query": "split PDF into specific page ranges",
+      "base_ndcg5": 0.41618115554873086,
+      "reranked_ndcg5": 0.4776237035032179,
+      "delta": 0.0614,
+      "diagnosis": "Syntax affinity boosted relevant co-defined or called units into top ranks."
+    },
+    {
+      "query_id": "q04",
+      "model": "Semantic + Graph",
+      "query": "extract PDF pages as image files",
+      "base_ndcg5": 0.6713860725233041,
+      "reranked_ndcg5": 0.9060254355346823,
+      "delta": 0.2346,
+      "diagnosis": "Class-method membership affinity promoted target implementation unit."
+    },
+    {
+      "query_id": "q10",
+      "model": "Semantic + Graph",
+      "query": "generic multipart upload function with progress tracking",
+      "base_ndcg5": 0.38685280723454163,
+      "reranked_ndcg5": 0.6131471927654584,
+      "delta": 0.2263,
+      "diagnosis": "Class-method membership affinity promoted target implementation unit."
+    },
+    {
+      "query_id": "q12",
+      "model": "TF-IDF + Graph",
+      "query": "state management for PDF processing status and progress",
+      "base_ndcg5": 0.4367467095119258,
+      "reranked_ndcg5": 0.6182885020492784,
+      "delta": 0.1815,
+      "diagnosis": "Syntax affinity boosted relevant co-defined or called units into top ranks."
+    },
+    {
+      "query_id": "q16",
+      "model": "TF-IDF + Graph",
+      "query": "view and read PDF document in viewer screen",
+      "base_ndcg5": 0.2960819109658652,
+      "reranked_ndcg5": 0.49818925746641285,
+      "delta": 0.2021,
+      "diagnosis": "Syntax affinity boosted relevant co-defined or called units into top ranks."
+    },
+    {
+      "query_id": "q20",
+      "model": "Semantic + Graph",
+      "query": "drag and drop zone for picking files",
+      "base_ndcg5": 0.787702056960637,
+      "reranked_ndcg5": 0.9558295932317544,
+      "delta": 0.1681,
+      "diagnosis": "Class-method membership affinity promoted target implementation unit."
+    },
+    {
+      "query_id": "q23",
+      "model": "Semantic + Graph",
+      "query": "base feature screen layout for uploading and processing",
+      "base_ndcg5": 0.0,
+      "reranked_ndcg5": 0.18154179253735267,
+      "delta": 0.1815,
+      "diagnosis": "Class-method membership affinity promoted target implementation unit."
+    },
+    {
+      "query_id": "q24",
+      "model": "TF-IDF + Graph",
+      "query": "dashboard screen displaying grid of PDF feature cards",
+      "base_ndcg5": 0.0,
+      "reranked_ndcg5": 0.20210734650054757,
+      "delta": 0.2021,
+      "diagnosis": "Syntax affinity boosted relevant co-defined or called units into top ranks."
+    },
+    {
+      "query_id": "q31",
+      "model": "TF-IDF + Graph",
+      "query": "show error snackbar alert notification",
+      "base_ndcg5": 0.8772153153380493,
+      "reranked_ndcg5": 1.0,
+      "delta": 0.1228,
+      "diagnosis": "Syntax affinity boosted relevant co-defined or called units into top ranks."
+    },
+    {
+      "query_id": "q32",
+      "model": "TF-IDF + Graph",
+      "query": "show success snackbar alert notification",
+      "base_ndcg5": 0.8772153153380493,
+      "reranked_ndcg5": 1.0,
+      "delta": 0.1228,
+      "diagnosis": "Syntax affinity boosted relevant co-defined or called units into top ranks."
+    },
+    {
+      "query_id": "q33",
+      "model": "TF-IDF + Graph",
+      "query": "set error state with message in provider",
+      "base_ndcg5": 0.9197207891481876,
+      "reranked_ndcg5": 1.0,
+      "delta": 0.0803,
+      "diagnosis": "Syntax affinity boosted relevant co-defined or called units into top ranks."
+    },
+    {
+      "query_id": "q35",
+      "model": "TF-IDF + Graph",
+      "query": "validate minimum two files selected before merging",
+      "base_ndcg5": 0.43067655807339306,
+      "reranked_ndcg5": 0.5,
+      "delta": 0.0693,
+      "diagnosis": "Syntax affinity boosted relevant co-defined or called units into top ranks."
+    },
+    {
+      "query_id": "q37",
+      "model": "TF-IDF + Graph",
+      "query": "open and view generated pdf in viewer after completion",
+      "base_ndcg5": 0.2640681225725909,
+      "reranked_ndcg5": 0.6131471927654584,
+      "delta": 0.3491,
+      "diagnosis": "Syntax affinity boosted relevant co-defined or called units into top ranks."
+    }
+  ],
+  "graph_degradations": [
+    {
+      "query_id": "q05",
+      "model": "TF-IDF + Graph",
+      "query": "rotate PDF pages by degree angle",
+      "base_ndcg5": 0.9674679834891693,
+      "reranked_ndcg5": 0.9060254355346823,
+      "delta": -0.0614,
+      "diagnosis": "Dense cluster of connected but non-relevant units crowded out relevant candidate."
+    },
+    {
+      "query_id": "q23",
+      "model": "TF-IDF + Graph",
+      "query": "base feature screen layout for uploading and processing",
+      "base_ndcg5": 0.41618115554873086,
+      "reranked_ndcg5": 0.23463936301137822,
+      "delta": -0.1815,
+      "diagnosis": "Dense cluster of connected but non-relevant units crowded out relevant candidate."
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "evaluation_split": "all",
+  "evaluation_split": "test",
   "top_k": 10,
   "reranker_weights": {
     "alpha": 0.75,
@@ -9,36 +9,27 @@
     {
       "model_family": "TF-IDF",
       "base_metrics": {
-        "total_queries": 40,
-        "evaluated_queries": 36,
-        "unannotated_queries": 4,
-        "mean_recall_at_1": 0.41435185185185186,
-        "mean_recall_at_5": 0.8333333333333334,
-        "mean_recall_at_10": 0.9675925925925927,
-        "mrr": 0.7743055555555556,
-        "mean_ndcg_at_5": 0.7542851006921208,
-        "mean_ndcg_at_10": 0.81396304891489,
+        "total_queries": 18,
+        "evaluated_queries": 18,
+        "unannotated_queries": 0,
+        "mean_recall_at_1": 0.462962962962963,
+        "mean_recall_at_5": 0.8240740740740741,
+        "mean_recall_at_10": 0.9814814814814815,
+        "mrr": 0.7337962962962963,
+        "mean_ndcg_at_5": 0.7235800061913148,
+        "mean_ndcg_at_10": 0.7901420995292818,
         "category_metrics": {
           "backend_pdf_processing": {
-            "count": 5.0,
-            "recall_at_1": 0.2,
-            "recall_at_5": 0.7333333333333333,
-            "recall_at_10": 0.8666666666666666,
-            "mrr": 0.7166666666666667,
-            "ndcg_at_5": 0.6637170212032477,
-            "ndcg_at_10": 0.7242795068829777
+            "count": 3.0,
+            "recall_at_1": 0.1111111111111111,
+            "recall_at_5": 0.6666666666666666,
+            "recall_at_10": 0.8888888888888888,
+            "mrr": 0.5277777777777778,
+            "ndcg_at_5": 0.5285854951794825,
+            "ndcg_at_10": 0.6295229713123659
           },
           "backend_utilities": {
-            "count": 2.0,
-            "recall_at_1": 0.5,
-            "recall_at_5": 0.5,
-            "recall_at_10": 0.75,
-            "mrr": 0.5833333333333334,
-            "ndcg_at_5": 0.5,
-            "ndcg_at_10": 0.609203718409082
-          },
-          "backend_routing": {
-            "count": 3.0,
+            "count": 1.0,
             "recall_at_1": 1.0,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
@@ -46,7 +37,7 @@
             "ndcg_at_5": 1.0,
             "ndcg_at_10": 1.0
           },
-          "backend_server": {
+          "backend_routing": {
             "count": 2.0,
             "recall_at_1": 1.0,
             "recall_at_5": 1.0,
@@ -56,62 +47,62 @@
             "ndcg_at_10": 1.0
           },
           "frontend_networking": {
-            "count": 2.0,
-            "recall_at_1": 0.25,
+            "count": 1.0,
+            "recall_at_1": 0.0,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
-            "mrr": 0.75,
-            "ndcg_at_5": 0.8254604649035663,
-            "ndcg_at_10": 0.8254604649035663
+            "mrr": 0.5,
+            "ndcg_at_5": 0.6509209298071326,
+            "ndcg_at_10": 0.6509209298071326
           },
           "frontend_state": {
-            "count": 4.0,
-            "recall_at_1": 0.4583333333333333,
-            "recall_at_5": 0.9166666666666666,
+            "count": 2.0,
+            "recall_at_1": 0.75,
+            "recall_at_5": 1.0,
             "recall_at_10": 1.0,
-            "mrr": 0.8333333333333334,
-            "ndcg_at_5": 0.8391168746650284,
-            "ndcg_at_10": 0.8809069884065789
-          },
-          "frontend_ui": {
-            "count": 6.0,
-            "recall_at_1": 0.05555555555555555,
-            "recall_at_5": 0.6944444444444445,
-            "recall_at_10": 1.0,
-            "mrr": 0.40972222222222227,
-            "ndcg_at_5": 0.46739203996866424,
-            "ndcg_at_10": 0.5951299167812331
+            "mrr": 1.0,
+            "ndcg_at_5": 0.9598603945740938,
+            "ndcg_at_10": 0.9598603945740938
           },
           "frontend_viewer": {
-            "count": 3.0,
-            "recall_at_1": 0.4444444444444444,
+            "count": 2.0,
+            "recall_at_1": 0.5,
             "recall_at_5": 0.6666666666666666,
             "recall_at_10": 1.0,
-            "mrr": 0.8333333333333334,
-            "ndcg_at_5": 0.6666666666666666,
-            "ndcg_at_10": 0.8111150627666207
+            "mrr": 0.75,
+            "ndcg_at_5": 0.6480409554829326,
+            "ndcg_at_10": 0.7865004286290711
           },
-          "frontend_utilities": {
+          "frontend_widgets": {
             "count": 2.0,
-            "recall_at_1": 0.41666666666666663,
+            "recall_at_1": 0.5,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 0.9386076576690247,
+            "ndcg_at_10": 0.9386076576690247
+          },
+          "frontend_ui": {
+            "count": 3.0,
+            "recall_at_1": 0.0,
+            "recall_at_5": 0.5,
+            "recall_at_10": 1.0,
+            "mrr": 0.20833333333333334,
+            "ndcg_at_5": 0.23158156021532797,
+            "ndcg_at_10": 0.43771032867948806
+          },
+          "backend_server": {
+            "count": 1.0,
+            "recall_at_1": 1.0,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
             "mrr": 1.0,
             "ndcg_at_5": 1.0,
             "ndcg_at_10": 1.0
           },
-          "frontend_widgets": {
-            "count": 6.0,
-            "recall_at_1": 0.34722222222222227,
-            "recall_at_5": 0.9166666666666666,
-            "recall_at_10": 1.0,
-            "mrr": 0.8888888888888888,
-            "ndcg_at_5": 0.8373229751034797,
-            "ndcg_at_10": 0.8806985362137133
-          },
-          "frontend_test": {
+          "frontend_utilities": {
             "count": 1.0,
-            "recall_at_1": 1.0,
+            "recall_at_1": 0.5,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
             "mrr": 1.0,
@@ -122,274 +113,220 @@
         "missing_relevant_ids": [],
         "confidence_intervals_95": {
           "recall_at_1": [
-            0.2939,
-            0.5509
+            0.2778,
+            0.6667
           ],
           "recall_at_5": [
-            0.7315,
-            0.9167
-          ],
-          "recall_at_10": [
-            0.9306,
-            1.0
-          ],
-          "mrr": [
-            0.6655,
-            0.8808
-          ],
-          "ndcg_at_5": [
-            0.6502,
-            0.8517
-          ],
-          "ndcg_at_10": [
-            0.7367,
-            0.888
-          ]
-        }
-      },
-      "reranked_metrics": {
-        "total_queries": 40,
-        "evaluated_queries": 36,
-        "unannotated_queries": 4,
-        "mean_recall_at_1": 0.4282407407407407,
-        "mean_recall_at_5": 0.8518518518518519,
-        "mean_recall_at_10": 0.9722222222222222,
-        "mrr": 0.803505291005291,
-        "mean_ndcg_at_5": 0.7856619108113206,
-        "mean_ndcg_at_10": 0.8405840248592894,
-        "category_metrics": {
-          "backend_pdf_processing": {
-            "count": 5.0,
-            "recall_at_1": 0.2,
-            "recall_at_5": 0.7333333333333333,
-            "recall_at_10": 0.8666666666666666,
-            "mrr": 0.74,
-            "ndcg_at_5": 0.6596039104106087,
-            "ndcg_at_10": 0.7212893959758151
-          },
-          "backend_utilities": {
-            "count": 2.0,
-            "recall_at_1": 0.5,
-            "recall_at_5": 0.5,
-            "recall_at_10": 1.0,
-            "mrr": 0.5714285714285714,
-            "ndcg_at_5": 0.5,
-            "ndcg_at_10": 0.6989044006028785
-          },
-          "backend_routing": {
-            "count": 3.0,
-            "recall_at_1": 1.0,
-            "recall_at_5": 1.0,
-            "recall_at_10": 1.0,
-            "mrr": 1.0,
-            "ndcg_at_5": 1.0,
-            "ndcg_at_10": 1.0
-          },
-          "backend_server": {
-            "count": 2.0,
-            "recall_at_1": 1.0,
-            "recall_at_5": 1.0,
-            "recall_at_10": 1.0,
-            "mrr": 1.0,
-            "ndcg_at_5": 1.0,
-            "ndcg_at_10": 1.0
-          },
-          "frontend_networking": {
-            "count": 2.0,
-            "recall_at_1": 0.25,
-            "recall_at_5": 1.0,
-            "recall_at_10": 1.0,
-            "mrr": 0.75,
-            "ndcg_at_5": 0.8254604649035663,
-            "ndcg_at_10": 0.8254604649035663
-          },
-          "frontend_state": {
-            "count": 4.0,
-            "recall_at_1": 0.4583333333333333,
-            "recall_at_5": 1.0,
-            "recall_at_10": 1.0,
-            "mrr": 0.8333333333333334,
-            "ndcg_at_5": 0.9045721255123196,
-            "ndcg_at_10": 0.9045721255123196
-          },
-          "frontend_ui": {
-            "count": 6.0,
-            "recall_at_1": 0.13888888888888887,
-            "recall_at_5": 0.6944444444444445,
-            "recall_at_10": 1.0,
-            "mrr": 0.5694444444444444,
-            "ndcg_at_5": 0.5334691386807527,
-            "ndcg_at_10": 0.6710836491319748
-          },
-          "frontend_viewer": {
-            "count": 3.0,
-            "recall_at_1": 0.4444444444444444,
-            "recall_at_5": 0.7777777777777777,
-            "recall_at_10": 0.8888888888888888,
-            "mrr": 0.8333333333333334,
-            "ndcg_at_5": 0.7340357821668492,
-            "ndcg_at_10": 0.7897559338222498
-          },
-          "frontend_utilities": {
-            "count": 2.0,
-            "recall_at_1": 0.41666666666666663,
-            "recall_at_5": 1.0,
-            "recall_at_10": 1.0,
-            "mrr": 1.0,
-            "ndcg_at_5": 1.0,
-            "ndcg_at_10": 1.0
-          },
-          "frontend_widgets": {
-            "count": 6.0,
-            "recall_at_1": 0.34722222222222227,
-            "recall_at_5": 0.9166666666666666,
-            "recall_at_10": 1.0,
-            "mrr": 0.8888888888888888,
-            "ndcg_at_5": 0.8856129377855043,
-            "ndcg_at_10": 0.9319649976224295
-          },
-          "frontend_test": {
-            "count": 1.0,
-            "recall_at_1": 1.0,
-            "recall_at_5": 1.0,
-            "recall_at_10": 1.0,
-            "mrr": 1.0,
-            "ndcg_at_5": 1.0,
-            "ndcg_at_10": 1.0
-          }
-        },
-        "missing_relevant_ids": [
-          "backend/controllers/pdfController.js:function:imageToPdf:94_135",
-          "backend/controllers/pdfController.js:function:mergePdfs:9_36",
-          "backend/controllers/pdfController.js:function:pdfToImage:138_192",
-          "backend/controllers/pdfController.js:function:rotatePdf:195_226",
-          "backend/controllers/pdfController.js:function:splitPdf:39_91",
-          "backend/routes/pdfRoutes.js:line_chunk:anon:1_46",
-          "backend/server.js:line_chunk:anon:1_36",
-          "backend/utils/fileHelper.js:function:cleanupFiles:7_17",
-          "backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48",
-          "frontend/lib/main.dart:class:DocuCharmApp:31_85",
-          "frontend/lib/main.dart:class:ThemeProvider:20_29",
-          "frontend/lib/main.dart:method:_buildTheme:48_84",
-          "frontend/lib/main.dart:method:build:35_46",
-          "frontend/lib/main.dart:method:themeMode:23_23",
-          "frontend/lib/main.dart:method:toggleTheme:25_28",
-          "frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76",
-          "frontend/lib/providers/pdf_provider.dart:class:PdfState:5_5",
-          "frontend/lib/providers/pdf_provider.dart:method:processFiles:41_75",
-          "frontend/lib/providers/pdf_provider.dart:method:reset:22_28",
-          "frontend/lib/providers/pdf_provider.dart:method:setError:35_39",
-          "frontend/lib/screens/dashboard_screen.dart:class:DashboardScreen:12_158",
-          "frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178",
-          "frontend/lib/screens/dashboard_screen.dart:class:_FeatureCardState:180_306",
-          "frontend/lib/screens/dashboard_screen.dart:method:build:16_157",
-          "frontend/lib/screens/dashboard_screen.dart:method:build:217_305",
-          "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:BaseFeatureScreen:14_42",
-          "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:44_293:part1",
-          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_onFilesDropped:56_70",
-          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_processFiles:72_95",
-          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:98_347:part1",
-          "frontend/lib/screens/feature_screens/tools.dart:class:ImagesToPdfScreen:96_109",
-          "frontend/lib/screens/feature_screens/tools.dart:class:MergeScreen:4_17",
-          "frontend/lib/screens/feature_screens/tools.dart:class:PdfToImagesScreen:111_124",
-          "frontend/lib/screens/feature_screens/tools.dart:class:RotateScreen:126_130",
-          "frontend/lib/screens/feature_screens/tools.dart:class:SplitScreen:19_23",
-          "frontend/lib/screens/feature_screens/tools.dart:class:_RotateScreenState:132_177",
-          "frontend/lib/screens/feature_screens/tools.dart:class:_SplitScreenState:25_94",
-          "frontend/lib/screens/feature_screens/tools.dart:method:build:114_123",
-          "frontend/lib/screens/feature_screens/tools.dart:method:build:7_16",
-          "frontend/lib/screens/feature_screens/tools.dart:method:build:99_108",
-          "frontend/lib/screens/viewer_screen.dart:class:SearchToolbar:237_251",
-          "frontend/lib/screens/viewer_screen.dart:class:SearchToolbarState:253_294",
-          "frontend/lib/screens/viewer_screen.dart:class:ViewerScreen:6_13",
-          "frontend/lib/screens/viewer_screen.dart:class:_ViewerScreenState:15_235",
-          "frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234",
-          "frontend/lib/screens/viewer_screen.dart:method:build:257_293",
-          "frontend/lib/screens/viewer_screen.dart:method:build:31_164",
-          "frontend/lib/services/network_service.dart:class:NetworkService:6_102",
-          "frontend/lib/services/network_service.dart:method:NetworkService:13_19",
-          "frontend/lib/services/network_service.dart:method:uploadFiles:22_101",
-          "frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47",
-          "frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46",
-          "frontend/lib/utils/export_helper.dart:method:shareFile:8_10",
-          "frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75",
-          "frontend/lib/widgets/custom_snackbar.dart:method:show:5_66",
-          "frontend/lib/widgets/custom_snackbar.dart:method:showError:68_70",
-          "frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74",
-          "frontend/lib/widgets/file_drop_zone.dart:class:FileDropZone:7_27",
-          "frontend/lib/widgets/file_drop_zone.dart:class:_FileDropZoneState:29_126",
-          "frontend/lib/widgets/file_drop_zone.dart:method:_pickFiles:32_46",
-          "frontend/lib/widgets/file_drop_zone.dart:method:build:49_125",
-          "frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85",
-          "frontend/lib/widgets/loading_overlay.dart:method:build:18_84",
-          "frontend/test/widget_test.dart:function:main:13_30"
-        ],
-        "confidence_intervals_95": {
-          "recall_at_1": [
-            0.3078,
-            0.5602
-          ],
-          "recall_at_5": [
-            0.7593,
-            0.9259
+            0.6852,
+            0.9537
           ],
           "recall_at_10": [
             0.9444,
             1.0
           ],
           "mrr": [
-            0.7016,
-            0.8968
+            0.567,
+            0.8889
           ],
           "ndcg_at_5": [
-            0.69,
-            0.8735
+            0.5636,
+            0.8763
           ],
           "ndcg_at_10": [
-            0.7695,
-            0.9075
+            0.6699,
+            0.9018
           ]
         }
       },
-      "deltas": {
-        "delta_mrr": 0.0292,
-        "delta_recall_1": 0.0139,
-        "delta_recall_5": 0.0185,
-        "delta_recall_10": 0.0046,
-        "delta_ndcg_5": 0.0314
-      },
-      "latency": {
-        "base_mean_ms": 0.517,
-        "reranked_mean_ms": 0.944,
-        "overhead_ms": 0.427,
-        "overhead_pct": 82.6
+      "reranked_metrics": {
+        "total_queries": 18,
+        "evaluated_queries": 18,
+        "unannotated_queries": 0,
+        "mean_recall_at_1": 0.49074074074074076,
+        "mean_recall_at_5": 0.8611111111111112,
+        "mean_recall_at_10": 0.9629629629629629,
+        "mrr": 0.7935185185185185,
+        "mean_ndcg_at_5": 0.7794197587841558,
+        "mean_ndcg_at_10": 0.8244490806485767,
+        "category_metrics": {
+          "backend_pdf_processing": {
+            "count": 3.0,
+            "recall_at_1": 0.1111111111111111,
+            "recall_at_5": 0.6666666666666666,
+            "recall_at_10": 0.8888888888888888,
+            "mrr": 0.5666666666666667,
+            "ndcg_at_5": 0.5217303105250842,
+            "ndcg_at_10": 0.6245394531337614
+          },
+          "backend_utilities": {
+            "count": 1.0,
+            "recall_at_1": 1.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "backend_routing": {
+            "count": 2.0,
+            "recall_at_1": 1.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "frontend_networking": {
+            "count": 1.0,
+            "recall_at_1": 0.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 0.5,
+            "ndcg_at_5": 0.6509209298071326,
+            "ndcg_at_10": 0.6509209298071326
+          },
+          "frontend_state": {
+            "count": 2.0,
+            "recall_at_1": 0.75,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "frontend_viewer": {
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 0.8333333333333333,
+            "recall_at_10": 0.8333333333333333,
+            "mrr": 0.75,
+            "ndcg_at_5": 0.7490946287332064,
+            "ndcg_at_10": 0.7490946287332064
+          },
+          "frontend_widgets": {
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "frontend_ui": {
+            "count": 3.0,
+            "recall_at_1": 0.16666666666666666,
+            "recall_at_5": 0.611111111111111,
+            "recall_at_10": 1.0,
+            "mrr": 0.5277777777777778,
+            "ndcg_at_5": 0.4384181797553353,
+            "ndcg_at_10": 0.6057849683331834
+          },
+          "backend_server": {
+            "count": 1.0,
+            "recall_at_1": 1.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "frontend_utilities": {
+            "count": 1.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          }
+        },
+        "missing_relevant_ids": [
+          "backend/controllers/pdfController.js:function:pdfToImage:138_192",
+          "backend/controllers/pdfController.js:function:rotatePdf:195_226",
+          "backend/controllers/pdfController.js:function:splitPdf:39_91",
+          "backend/routes/pdfRoutes.js:line_chunk:anon:1_46",
+          "backend/server.js:line_chunk:anon:1_36",
+          "backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48",
+          "frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76",
+          "frontend/lib/providers/pdf_provider.dart:method:reset:22_28",
+          "frontend/lib/providers/pdf_provider.dart:method:setError:35_39",
+          "frontend/lib/screens/dashboard_screen.dart:class:DashboardScreen:12_158",
+          "frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178",
+          "frontend/lib/screens/dashboard_screen.dart:method:build:16_157",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_processFiles:72_95",
+          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:98_347:part1",
+          "frontend/lib/screens/feature_screens/tools.dart:class:PdfToImagesScreen:111_124",
+          "frontend/lib/screens/feature_screens/tools.dart:class:RotateScreen:126_130",
+          "frontend/lib/screens/feature_screens/tools.dart:class:SplitScreen:19_23",
+          "frontend/lib/screens/feature_screens/tools.dart:class:_RotateScreenState:132_177",
+          "frontend/lib/screens/feature_screens/tools.dart:class:_SplitScreenState:25_94",
+          "frontend/lib/screens/feature_screens/tools.dart:method:build:114_123",
+          "frontend/lib/screens/viewer_screen.dart:class:ViewerScreen:6_13",
+          "frontend/lib/screens/viewer_screen.dart:class:_ViewerScreenState:15_235",
+          "frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234",
+          "frontend/lib/screens/viewer_screen.dart:method:build:31_164",
+          "frontend/lib/services/network_service.dart:class:NetworkService:6_102",
+          "frontend/lib/services/network_service.dart:method:uploadFiles:22_101",
+          "frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47",
+          "frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46",
+          "frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75",
+          "frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74",
+          "frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85",
+          "frontend/lib/widgets/loading_overlay.dart:method:build:18_84"
+        ],
+        "confidence_intervals_95": {
+          "recall_at_1": [
+            0.3056,
+            0.6852
+          ],
+          "recall_at_5": [
+            0.75,
+            0.963
+          ],
+          "recall_at_10": [
+            0.9074,
+            1.0
+          ],
+          "mrr": [
+            0.6472,
+            0.9278
+          ],
+          "ndcg_at_5": [
+            0.6457,
+            0.9073
+          ],
+          "ndcg_at_10": [
+            0.7092,
+            0.9214
+          ]
+        }
       }
     },
     {
       "model_family": "Semantic (all-MiniLM)",
       "base_metrics": {
-        "total_queries": 40,
-        "evaluated_queries": 36,
-        "unannotated_queries": 4,
-        "mean_recall_at_1": 0.3703703703703704,
-        "mean_recall_at_5": 0.8171296296296297,
-        "mean_recall_at_10": 0.8842592592592592,
-        "mrr": 0.7959104938271605,
-        "mean_ndcg_at_5": 0.731761640793394,
-        "mean_ndcg_at_10": 0.7618294437413908,
+        "total_queries": 18,
+        "evaluated_queries": 18,
+        "unannotated_queries": 0,
+        "mean_recall_at_1": 0.42592592592592593,
+        "mean_recall_at_5": 0.8240740740740741,
+        "mean_recall_at_10": 0.8888888888888888,
+        "mrr": 0.8148148148148148,
+        "mean_ndcg_at_5": 0.7315187320731658,
+        "mean_ndcg_at_10": 0.7600081668184168,
         "category_metrics": {
           "backend_pdf_processing": {
-            "count": 5.0,
-            "recall_at_1": 0.26666666666666666,
-            "recall_at_5": 0.8666666666666666,
-            "recall_at_10": 0.9333333333333333,
-            "mrr": 0.9,
-            "ndcg_at_5": 0.7987185327213434,
-            "ndcg_at_10": 0.8321506237145838
+            "count": 3.0,
+            "recall_at_1": 0.3333333333333333,
+            "recall_at_5": 0.7777777777777777,
+            "recall_at_10": 0.8888888888888888,
+            "mrr": 1.0,
+            "ndcg_at_5": 0.760443199030707,
+            "ndcg_at_10": 0.8161633506861078
           },
           "backend_utilities": {
-            "count": 2.0,
-            "recall_at_1": 0.75,
+            "count": 1.0,
+            "recall_at_1": 1.0,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
             "mrr": 1.0,
@@ -397,15 +334,6 @@
             "ndcg_at_10": 1.0
           },
           "backend_routing": {
-            "count": 3.0,
-            "recall_at_1": 0.6666666666666666,
-            "recall_at_5": 1.0,
-            "recall_at_10": 1.0,
-            "mrr": 0.7777777777777778,
-            "ndcg_at_5": 0.8333333333333334,
-            "ndcg_at_10": 0.8333333333333334
-          },
-          "backend_server": {
             "count": 2.0,
             "recall_at_1": 0.5,
             "recall_at_5": 1.0,
@@ -415,120 +343,120 @@
             "ndcg_at_10": 0.75
           },
           "frontend_networking": {
-            "count": 2.0,
-            "recall_at_1": 0.25,
-            "recall_at_5": 0.75,
+            "count": 1.0,
+            "recall_at_1": 0.0,
+            "recall_at_5": 0.5,
             "recall_at_10": 1.0,
-            "mrr": 0.75,
-            "ndcg_at_5": 0.6934264036172708,
-            "ndcg_at_10": 0.7956176024115138
+            "mrr": 0.5,
+            "ndcg_at_5": 0.38685280723454163,
+            "ndcg_at_10": 0.5912352048230277
           },
           "frontend_state": {
-            "count": 4.0,
-            "recall_at_1": 0.4583333333333333,
+            "count": 2.0,
+            "recall_at_1": 0.75,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
-            "mrr": 0.875,
-            "ndcg_at_5": 0.8773776003938313,
-            "ndcg_at_10": 0.8773776003938313
-          },
-          "frontend_ui": {
-            "count": 6.0,
-            "recall_at_1": 0.1111111111111111,
-            "recall_at_5": 0.5277777777777778,
-            "recall_at_10": 0.5833333333333334,
-            "mrr": 0.5185185185185185,
-            "ndcg_at_5": 0.4427727694697454,
-            "ndcg_at_10": 0.4663172649463836
+            "mrr": 1.0,
+            "ndcg_at_5": 0.9251724527673773,
+            "ndcg_at_10": 0.9251724527673773
           },
           "frontend_viewer": {
-            "count": 3.0,
-            "recall_at_1": 0.5555555555555555,
-            "recall_at_5": 0.6666666666666666,
-            "recall_at_10": 0.7777777777777777,
-            "mrr": 1.0,
-            "ndcg_at_5": 0.7066997481942886,
-            "ndcg_at_10": 0.753788739147565
-          },
-          "frontend_utilities": {
             "count": 2.0,
-            "recall_at_1": 0.25,
-            "recall_at_5": 0.5,
+            "recall_at_1": 0.6666666666666666,
+            "recall_at_5": 0.6666666666666666,
             "recall_at_10": 0.8333333333333333,
-            "mrr": 0.5625,
-            "ndcg_at_5": 0.5,
-            "ndcg_at_10": 0.6446539641713808
+            "mrr": 1.0,
+            "ndcg_at_5": 0.7346393630113782,
+            "ndcg_at_10": 0.8052728494412927
           },
           "frontend_widgets": {
-            "count": 6.0,
-            "recall_at_1": 0.3888888888888889,
-            "recall_at_5": 0.9027777777777778,
-            "recall_at_10": 0.9444444444444445,
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
             "mrr": 1.0,
-            "ndcg_at_5": 0.8743417961118117,
-            "ndcg_at_10": 0.8975178260302744
+            "ndcg_at_5": 0.9386076576690247,
+            "ndcg_at_10": 0.9386076576690247
           },
-          "frontend_test": {
+          "frontend_ui": {
+            "count": 3.0,
+            "recall_at_1": 0.1111111111111111,
+            "recall_at_5": 0.5555555555555555,
+            "recall_at_10": 0.5555555555555555,
+            "mrr": 0.5,
+            "ndcg_at_5": 0.43410527536492055,
+            "ndcg_at_10": 0.43410527536492055
+          },
+          "backend_server": {
             "count": 1.0,
             "recall_at_1": 0.0,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
-            "mrr": 0.25,
-            "ndcg_at_5": 0.43067655807339306,
-            "ndcg_at_10": 0.43067655807339306
+            "mrr": 0.3333333333333333,
+            "ndcg_at_5": 0.5,
+            "ndcg_at_10": 0.5
+          },
+          "frontend_utilities": {
+            "count": 1.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
           }
         },
         "missing_relevant_ids": [],
         "confidence_intervals_95": {
           "recall_at_1": [
-            0.2661,
-            0.4838
+            0.2593,
+            0.5926
           ],
           "recall_at_5": [
-            0.7106,
-            0.9167
+            0.6944,
+            0.9444
           ],
           "recall_at_10": [
-            0.8056,
-            0.9537
+            0.7593,
+            0.9815
           ],
           "mrr": [
-            0.6905,
-            0.8981
+            0.6574,
+            0.9444
           ],
           "ndcg_at_5": [
-            0.6292,
-            0.8283
+            0.5956,
+            0.8506
           ],
           "ndcg_at_10": [
-            0.6702,
-            0.8477
+            0.6355,
+            0.87
           ]
         }
       },
       "reranked_metrics": {
-        "total_queries": 40,
-        "evaluated_queries": 36,
-        "unannotated_queries": 4,
-        "mean_recall_at_1": 0.375,
-        "mean_recall_at_5": 0.8518518518518519,
-        "mean_recall_at_10": 0.8935185185185185,
-        "mrr": 0.7882275132275133,
-        "mean_ndcg_at_5": 0.7571705740685455,
-        "mean_ndcg_at_10": 0.7756189520454486,
+        "total_queries": 18,
+        "evaluated_queries": 18,
+        "unannotated_queries": 0,
+        "mean_recall_at_1": 0.4351851851851852,
+        "mean_recall_at_5": 0.8611111111111112,
+        "mean_recall_at_10": 0.8888888888888888,
+        "mrr": 0.7935185185185185,
+        "mean_ndcg_at_5": 0.7519967576285999,
+        "mean_ndcg_at_10": 0.7641305041184978,
         "category_metrics": {
           "backend_pdf_processing": {
-            "count": 5.0,
-            "recall_at_1": 0.26666666666666666,
-            "recall_at_5": 0.9333333333333333,
-            "recall_at_10": 0.9333333333333333,
-            "mrr": 0.9,
-            "ndcg_at_5": 0.8456464053236191,
-            "ndcg_at_10": 0.8456464053236191
+            "count": 3.0,
+            "recall_at_1": 0.3333333333333333,
+            "recall_at_5": 0.8888888888888888,
+            "recall_at_10": 0.8888888888888888,
+            "mrr": 1.0,
+            "ndcg_at_5": 0.8386563200344997,
+            "ndcg_at_10": 0.8386563200344997
           },
           "backend_utilities": {
-            "count": 2.0,
-            "recall_at_1": 0.75,
+            "count": 1.0,
+            "recall_at_1": 1.0,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
             "mrr": 1.0,
@@ -536,78 +464,60 @@
             "ndcg_at_10": 1.0
           },
           "backend_routing": {
-            "count": 3.0,
-            "recall_at_1": 0.6666666666666666,
-            "recall_at_5": 1.0,
-            "recall_at_10": 1.0,
-            "mrr": 0.7777777777777778,
-            "ndcg_at_5": 0.8333333333333334,
-            "ndcg_at_10": 0.8333333333333334
-          },
-          "backend_server": {
             "count": 2.0,
             "recall_at_1": 0.5,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
-            "mrr": 0.625,
-            "ndcg_at_5": 0.7153382790366966,
-            "ndcg_at_10": 0.7153382790366966
+            "mrr": 0.6666666666666666,
+            "ndcg_at_5": 0.75,
+            "ndcg_at_10": 0.75
           },
           "frontend_networking": {
-            "count": 2.0,
+            "count": 1.0,
             "recall_at_1": 0.5,
-            "recall_at_5": 0.75,
+            "recall_at_5": 0.5,
             "recall_at_10": 1.0,
             "mrr": 1.0,
-            "ndcg_at_5": 0.8065735963827292,
-            "ndcg_at_10": 0.9157773147918112
+            "ndcg_at_5": 0.6131471927654584,
+            "ndcg_at_10": 0.8315546295836225
           },
           "frontend_state": {
-            "count": 4.0,
-            "recall_at_1": 0.4583333333333333,
+            "count": 2.0,
+            "recall_at_1": 0.75,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
-            "mrr": 0.875,
-            "ndcg_at_5": 0.8998629597879882,
-            "ndcg_at_10": 0.8998629597879882
-          },
-          "frontend_ui": {
-            "count": 6.0,
-            "recall_at_1": 0.05555555555555555,
-            "recall_at_5": 0.5833333333333334,
-            "recall_at_10": 0.5833333333333334,
-            "mrr": 0.39999999999999997,
-            "ndcg_at_5": 0.4089061107454748,
-            "ndcg_at_10": 0.4089061107454748
+            "mrr": 1.0,
+            "ndcg_at_5": 0.9598603945740938,
+            "ndcg_at_10": 0.9598603945740938
           },
           "frontend_viewer": {
-            "count": 3.0,
-            "recall_at_1": 0.5555555555555555,
-            "recall_at_5": 0.7777777777777777,
-            "recall_at_10": 0.8888888888888888,
-            "mrr": 1.0,
-            "ndcg_at_5": 0.7809240483488694,
-            "ndcg_at_10": 0.8302710335098468
-          },
-          "frontend_utilities": {
             "count": 2.0,
-            "recall_at_1": 0.25,
-            "recall_at_5": 0.5,
+            "recall_at_1": 0.6666666666666666,
+            "recall_at_5": 0.8333333333333333,
             "recall_at_10": 0.8333333333333333,
-            "mrr": 0.5714285714285714,
-            "ndcg_at_5": 0.5,
-            "ndcg_at_10": 0.6488466074337073
+            "mrr": 1.0,
+            "ndcg_at_5": 0.835693036261652,
+            "ndcg_at_10": 0.835693036261652
           },
           "frontend_widgets": {
-            "count": 6.0,
-            "recall_at_1": 0.3888888888888889,
-            "recall_at_5": 0.9444444444444445,
-            "recall_at_10": 0.9444444444444445,
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
             "mrr": 1.0,
-            "ndcg_at_5": 0.9432912803776482,
-            "ndcg_at_10": 0.9432912803776482
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
           },
-          "frontend_test": {
+          "frontend_ui": {
+            "count": 3.0,
+            "recall_at_1": 0.0,
+            "recall_at_5": 0.5555555555555555,
+            "recall_at_10": 0.5555555555555555,
+            "mrr": 0.2333333333333333,
+            "ndcg_at_5": 0.2950140215669848,
+            "ndcg_at_10": 0.2950140215669848
+          },
+          "backend_server": {
             "count": 1.0,
             "recall_at_1": 0.0,
             "recall_at_5": 1.0,
@@ -615,140 +525,104 @@
             "mrr": 0.25,
             "ndcg_at_5": 0.43067655807339306,
             "ndcg_at_10": 0.43067655807339306
+          },
+          "frontend_utilities": {
+            "count": 1.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
           }
         },
         "missing_relevant_ids": [
-          "backend/controllers/pdfController.js:function:imageToPdf:94_135",
-          "backend/controllers/pdfController.js:function:mergePdfs:9_36",
           "backend/controllers/pdfController.js:function:pdfToImage:138_192",
           "backend/controllers/pdfController.js:function:rotatePdf:195_226",
           "backend/controllers/pdfController.js:function:splitPdf:39_91",
           "backend/routes/pdfRoutes.js:line_chunk:anon:1_46",
           "backend/server.js:line_chunk:anon:1_36",
-          "backend/utils/fileHelper.js:function:cleanupFiles:7_17",
           "backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48",
-          "frontend/lib/main.dart:class:DocuCharmApp:31_85",
-          "frontend/lib/main.dart:class:ThemeProvider:20_29",
-          "frontend/lib/main.dart:method:_buildTheme:48_84",
-          "frontend/lib/main.dart:method:build:35_46",
-          "frontend/lib/main.dart:method:themeMode:23_23",
-          "frontend/lib/main.dart:method:toggleTheme:25_28",
           "frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76",
-          "frontend/lib/providers/pdf_provider.dart:class:PdfState:5_5",
-          "frontend/lib/providers/pdf_provider.dart:method:processFiles:41_75",
           "frontend/lib/providers/pdf_provider.dart:method:reset:22_28",
           "frontend/lib/providers/pdf_provider.dart:method:setError:35_39",
           "frontend/lib/screens/dashboard_screen.dart:class:DashboardScreen:12_158",
           "frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178",
-          "frontend/lib/screens/dashboard_screen.dart:class:_FeatureCardState:180_306",
           "frontend/lib/screens/dashboard_screen.dart:method:build:16_157",
-          "frontend/lib/screens/dashboard_screen.dart:method:build:217_305",
-          "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:BaseFeatureScreen:14_42",
-          "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:44_293:part1",
-          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_onFilesDropped:56_70",
           "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_processFiles:72_95",
           "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:98_347:part1",
-          "frontend/lib/screens/feature_screens/tools.dart:class:ImagesToPdfScreen:96_109",
-          "frontend/lib/screens/feature_screens/tools.dart:class:MergeScreen:4_17",
           "frontend/lib/screens/feature_screens/tools.dart:class:PdfToImagesScreen:111_124",
           "frontend/lib/screens/feature_screens/tools.dart:class:RotateScreen:126_130",
           "frontend/lib/screens/feature_screens/tools.dart:class:SplitScreen:19_23",
           "frontend/lib/screens/feature_screens/tools.dart:class:_RotateScreenState:132_177",
           "frontend/lib/screens/feature_screens/tools.dart:class:_SplitScreenState:25_94",
           "frontend/lib/screens/feature_screens/tools.dart:method:build:114_123",
-          "frontend/lib/screens/feature_screens/tools.dart:method:build:7_16",
-          "frontend/lib/screens/feature_screens/tools.dart:method:build:99_108",
-          "frontend/lib/screens/viewer_screen.dart:class:SearchToolbar:237_251",
-          "frontend/lib/screens/viewer_screen.dart:class:SearchToolbarState:253_294",
           "frontend/lib/screens/viewer_screen.dart:class:ViewerScreen:6_13",
           "frontend/lib/screens/viewer_screen.dart:class:_ViewerScreenState:15_235",
           "frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234",
-          "frontend/lib/screens/viewer_screen.dart:method:build:257_293",
           "frontend/lib/screens/viewer_screen.dart:method:build:31_164",
           "frontend/lib/services/network_service.dart:class:NetworkService:6_102",
-          "frontend/lib/services/network_service.dart:method:NetworkService:13_19",
           "frontend/lib/services/network_service.dart:method:uploadFiles:22_101",
           "frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47",
           "frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46",
-          "frontend/lib/utils/export_helper.dart:method:shareFile:8_10",
           "frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75",
-          "frontend/lib/widgets/custom_snackbar.dart:method:show:5_66",
-          "frontend/lib/widgets/custom_snackbar.dart:method:showError:68_70",
           "frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74",
-          "frontend/lib/widgets/file_drop_zone.dart:class:FileDropZone:7_27",
-          "frontend/lib/widgets/file_drop_zone.dart:class:_FileDropZoneState:29_126",
-          "frontend/lib/widgets/file_drop_zone.dart:method:_pickFiles:32_46",
-          "frontend/lib/widgets/file_drop_zone.dart:method:build:49_125",
           "frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85",
-          "frontend/lib/widgets/loading_overlay.dart:method:build:18_84",
-          "frontend/test/widget_test.dart:function:main:13_30"
+          "frontend/lib/widgets/loading_overlay.dart:method:build:18_84"
         ],
         "confidence_intervals_95": {
           "recall_at_1": [
-            0.2662,
-            0.4907
+            0.2778,
+            0.6019
           ],
           "recall_at_5": [
-            0.7546,
-            0.9398
-          ],
-          "recall_at_10": [
-            0.8193,
+            0.7407,
             0.963
           ],
+          "recall_at_10": [
+            0.7593,
+            0.9815
+          ],
           "mrr": [
-            0.6773,
-            0.8945
+            0.6287,
+            0.9444
           ],
           "ndcg_at_5": [
-            0.6588,
-            0.8517
+            0.613,
+            0.8744
           ],
           "ndcg_at_10": [
-            0.6836,
-            0.8656
+            0.6184,
+            0.8883
           ]
         }
-      },
-      "deltas": {
-        "delta_mrr": -0.0077,
-        "delta_recall_1": 0.0046,
-        "delta_recall_5": 0.0347,
-        "delta_recall_10": 0.0093,
-        "delta_ndcg_5": 0.0254
-      },
-      "latency": {
-        "base_mean_ms": 529.685,
-        "reranked_mean_ms": 16.218,
-        "overhead_ms": -513.467,
-        "overhead_pct": -96.9
       }
     },
     {
       "model_family": "Code Transformer (st-codesearch)",
       "base_metrics": {
-        "total_queries": 40,
-        "evaluated_queries": 36,
-        "unannotated_queries": 4,
-        "mean_recall_at_1": 0.4074074074074074,
-        "mean_recall_at_5": 0.7615740740740741,
-        "mean_recall_at_10": 0.8657407407407408,
-        "mrr": 0.845679012345679,
-        "mean_ndcg_at_5": 0.7305606939767889,
-        "mean_ndcg_at_10": 0.7733526916806708,
+        "total_queries": 18,
+        "evaluated_queries": 18,
+        "unannotated_queries": 0,
+        "mean_recall_at_1": 0.4351851851851852,
+        "mean_recall_at_5": 0.75,
+        "mean_recall_at_10": 0.8518518518518519,
+        "mrr": 0.7885802469135803,
+        "mean_ndcg_at_5": 0.7097786714497694,
+        "mean_ndcg_at_10": 0.7453933584878203,
         "category_metrics": {
           "backend_pdf_processing": {
-            "count": 5.0,
+            "count": 3.0,
             "recall_at_1": 0.3333333333333333,
             "recall_at_5": 0.6666666666666666,
-            "recall_at_10": 0.8666666666666666,
+            "recall_at_10": 0.7777777777777777,
             "mrr": 1.0,
-            "ndcg_at_5": 0.7178755941211243,
-            "ndcg_at_10": 0.8028675744761662
+            "ndcg_at_5": 0.7271805975124508,
+            "ndcg_at_10": 0.7723979219899334
           },
           "backend_utilities": {
-            "count": 2.0,
-            "recall_at_1": 0.75,
+            "count": 1.0,
+            "recall_at_1": 1.0,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
             "mrr": 1.0,
@@ -756,25 +630,16 @@
             "ndcg_at_10": 1.0
           },
           "backend_routing": {
-            "count": 3.0,
-            "recall_at_1": 0.3333333333333333,
-            "recall_at_5": 0.6666666666666666,
-            "recall_at_10": 1.0,
-            "mrr": 0.4537037037037037,
-            "ndcg_at_5": 0.47689218602446437,
-            "ndcg_at_10": 0.5772355179124581
-          },
-          "backend_server": {
             "count": 2.0,
-            "recall_at_1": 0.5,
-            "recall_at_5": 1.0,
+            "recall_at_1": 0.0,
+            "recall_at_5": 0.5,
             "recall_at_10": 1.0,
-            "mrr": 0.75,
-            "ndcg_at_5": 0.8154648767857288,
-            "ndcg_at_10": 0.8154648767857288
+            "mrr": 0.18055555555555555,
+            "ndcg_at_5": 0.21533827903669653,
+            "ndcg_at_10": 0.3658532768686871
           },
           "frontend_networking": {
-            "count": 2.0,
+            "count": 1.0,
             "recall_at_1": 0.5,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
@@ -783,53 +648,53 @@
             "ndcg_at_10": 1.0
           },
           "frontend_state": {
-            "count": 4.0,
-            "recall_at_1": 0.4583333333333333,
-            "recall_at_5": 0.9166666666666666,
-            "recall_at_10": 0.9166666666666666,
-            "mrr": 0.875,
-            "ndcg_at_5": 0.8377792806317674,
-            "ndcg_at_10": 0.8377792806317674
-          },
-          "frontend_ui": {
-            "count": 6.0,
-            "recall_at_1": 0.25,
-            "recall_at_5": 0.5277777777777778,
-            "recall_at_10": 0.5833333333333334,
-            "mrr": 0.75,
-            "ndcg_at_5": 0.5406794910561527,
-            "ndcg_at_10": 0.5667505313907503
+            "count": 2.0,
+            "recall_at_1": 0.75,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
           },
           "frontend_viewer": {
-            "count": 3.0,
-            "recall_at_1": 0.4444444444444444,
-            "recall_at_5": 0.6666666666666666,
-            "recall_at_10": 0.7777777777777778,
-            "mrr": 0.7777777777777778,
-            "ndcg_at_5": 0.6461858173485043,
-            "ndcg_at_10": 0.701905969003905
-          },
-          "frontend_utilities": {
             "count": 2.0,
-            "recall_at_1": 0.25,
+            "recall_at_1": 0.5,
             "recall_at_5": 0.6666666666666666,
-            "recall_at_10": 0.8333333333333333,
-            "mrr": 0.625,
-            "ndcg_at_5": 0.6010536732502738,
-            "ndcg_at_10": 0.6792667942540666
+            "recall_at_10": 0.6666666666666666,
+            "mrr": 0.6666666666666666,
+            "ndcg_at_5": 0.6173196815056892,
+            "ndcg_at_10": 0.6173196815056892
           },
           "frontend_widgets": {
-            "count": 6.0,
-            "recall_at_1": 0.3888888888888889,
-            "recall_at_5": 0.8194444444444445,
-            "recall_at_10": 0.9444444444444445,
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 0.75,
+            "recall_at_10": 1.0,
             "mrr": 1.0,
-            "ndcg_at_5": 0.8188903055839803,
-            "ndcg_at_10": 0.8746418190705114
+            "ndcg_at_5": 0.766433990956823,
+            "ndcg_at_10": 0.868625189751066
           },
-          "frontend_test": {
+          "frontend_ui": {
+            "count": 3.0,
+            "recall_at_1": 0.1111111111111111,
+            "recall_at_5": 0.5555555555555555,
+            "recall_at_10": 0.5555555555555555,
+            "mrr": 0.5,
+            "ndcg_at_5": 0.46543013018669305,
+            "ndcg_at_10": 0.46543013018669305
+          },
+          "backend_server": {
             "count": 1.0,
             "recall_at_1": 1.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "frontend_utilities": {
+            "count": 1.0,
+            "recall_at_1": 0.5,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
             "mrr": 1.0,
@@ -840,54 +705,54 @@
         "missing_relevant_ids": [],
         "confidence_intervals_95": {
           "recall_at_1": [
-            0.3148,
-            0.5139
+            0.2683,
+            0.5926
           ],
           "recall_at_5": [
-            0.6644,
-            0.8519
+            0.5833,
+            0.8796
           ],
           "recall_at_10": [
-            0.7869,
-            0.9444
+            0.7222,
+            0.963
           ],
           "mrr": [
-            0.7399,
-            0.9329
+            0.6049,
+            0.9307
           ],
           "ndcg_at_5": [
-            0.6393,
-            0.81
+            0.5374,
+            0.8467
           ],
           "ndcg_at_10": [
-            0.6893,
-            0.8494
+            0.5945,
+            0.8658
           ]
         }
       },
       "reranked_metrics": {
-        "total_queries": 40,
-        "evaluated_queries": 36,
-        "unannotated_queries": 4,
-        "mean_recall_at_1": 0.3796296296296296,
-        "mean_recall_at_5": 0.7824074074074074,
-        "mean_recall_at_10": 0.8657407407407408,
-        "mrr": 0.8125,
-        "mean_ndcg_at_5": 0.7271236490946942,
-        "mean_ndcg_at_10": 0.7613924058129354,
+        "total_queries": 18,
+        "evaluated_queries": 18,
+        "unannotated_queries": 0,
+        "mean_recall_at_1": 0.4351851851851852,
+        "mean_recall_at_5": 0.7222222222222222,
+        "mean_recall_at_10": 0.7962962962962963,
+        "mrr": 0.7638888888888888,
+        "mean_ndcg_at_5": 0.6831747141393082,
+        "mean_ndcg_at_10": 0.7111884998388056,
         "category_metrics": {
           "backend_pdf_processing": {
-            "count": 5.0,
+            "count": 3.0,
             "recall_at_1": 0.3333333333333333,
             "recall_at_5": 0.6666666666666666,
-            "recall_at_10": 0.8666666666666666,
+            "recall_at_10": 0.7777777777777777,
             "mrr": 1.0,
-            "ndcg_at_5": 0.6655531434475532,
-            "ndcg_at_10": 0.7560547740422433
+            "ndcg_at_5": 0.6508205185601091,
+            "ndcg_at_10": 0.7001675037210866
           },
           "backend_utilities": {
-            "count": 2.0,
-            "recall_at_1": 0.75,
+            "count": 1.0,
+            "recall_at_1": 1.0,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
             "mrr": 1.0,
@@ -895,25 +760,16 @@
             "ndcg_at_10": 1.0
           },
           "backend_routing": {
-            "count": 3.0,
-            "recall_at_1": 0.0,
-            "recall_at_5": 0.3333333333333333,
-            "recall_at_10": 0.6666666666666666,
-            "mrr": 0.16666666666666666,
-            "ndcg_at_5": 0.16666666666666666,
-            "ndcg_at_10": 0.28540239570267406
-          },
-          "backend_server": {
             "count": 2.0,
-            "recall_at_1": 0.5,
-            "recall_at_5": 1.0,
-            "recall_at_10": 1.0,
-            "mrr": 0.6666666666666666,
-            "ndcg_at_5": 0.75,
-            "ndcg_at_10": 0.75
+            "recall_at_1": 0.0,
+            "recall_at_5": 0.0,
+            "recall_at_10": 0.5,
+            "mrr": 0.08333333333333333,
+            "ndcg_at_5": 0.0,
+            "ndcg_at_10": 0.1781035935540111
           },
           "frontend_networking": {
-            "count": 2.0,
+            "count": 1.0,
             "recall_at_1": 0.5,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
@@ -922,53 +778,53 @@
             "ndcg_at_10": 1.0
           },
           "frontend_state": {
-            "count": 4.0,
-            "recall_at_1": 0.4583333333333333,
-            "recall_at_5": 0.9166666666666666,
-            "recall_at_10": 1.0,
-            "mrr": 0.875,
-            "ndcg_at_5": 0.8745473143666032,
-            "ndcg_at_10": 0.9098640575815604
-          },
-          "frontend_ui": {
-            "count": 6.0,
-            "recall_at_1": 0.25,
-            "recall_at_5": 0.5833333333333334,
-            "recall_at_10": 0.5833333333333334,
-            "mrr": 0.7222222222222222,
-            "ndcg_at_5": 0.5491148308838018,
-            "ndcg_at_10": 0.5491148308838018
-          },
-          "frontend_viewer": {
-            "count": 3.0,
-            "recall_at_1": 0.4444444444444444,
-            "recall_at_5": 0.7777777777777778,
-            "recall_at_10": 0.7777777777777778,
-            "mrr": 0.75,
-            "ndcg_at_5": 0.6958557426906783,
-            "ndcg_at_10": 0.6958557426906783
-          },
-          "frontend_utilities": {
             "count": 2.0,
-            "recall_at_1": 0.25,
-            "recall_at_5": 0.8333333333333333,
-            "recall_at_10": 1.0,
-            "mrr": 0.6666666666666666,
-            "ndcg_at_5": 0.7183733547559629,
-            "ndcg_at_10": 0.7861993414721868
-          },
-          "frontend_widgets": {
-            "count": 6.0,
-            "recall_at_1": 0.3888888888888889,
-            "recall_at_5": 0.9444444444444445,
+            "recall_at_1": 0.75,
+            "recall_at_5": 1.0,
             "recall_at_10": 1.0,
             "mrr": 1.0,
-            "ndcg_at_5": 0.921915578303007,
-            "ndcg_at_10": 0.9465890708834955
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
           },
-          "frontend_test": {
+          "frontend_viewer": {
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 0.6666666666666666,
+            "recall_at_10": 0.6666666666666666,
+            "mrr": 0.625,
+            "ndcg_at_5": 0.6010536732502738,
+            "ndcg_at_10": 0.6010536732502738
+          },
+          "frontend_widgets": {
+            "count": 2.0,
+            "recall_at_1": 0.5,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 0.9386076576690247,
+            "ndcg_at_10": 0.9386076576690247
+          },
+          "frontend_ui": {
+            "count": 3.0,
+            "recall_at_1": 0.1111111111111111,
+            "recall_at_5": 0.5555555555555555,
+            "recall_at_10": 0.5555555555555555,
+            "mrr": 0.4444444444444444,
+            "ndcg_at_5": 0.4217868789962072,
+            "ndcg_at_10": 0.4217868789962072
+          },
+          "backend_server": {
             "count": 1.0,
             "recall_at_1": 1.0,
+            "recall_at_5": 1.0,
+            "recall_at_10": 1.0,
+            "mrr": 1.0,
+            "ndcg_at_5": 1.0,
+            "ndcg_at_10": 1.0
+          },
+          "frontend_utilities": {
+            "count": 1.0,
+            "recall_at_1": 0.5,
             "recall_at_5": 1.0,
             "recall_at_10": 1.0,
             "mrr": 1.0,
@@ -977,110 +833,65 @@
           }
         },
         "missing_relevant_ids": [
-          "backend/controllers/pdfController.js:function:imageToPdf:94_135",
-          "backend/controllers/pdfController.js:function:mergePdfs:9_36",
           "backend/controllers/pdfController.js:function:pdfToImage:138_192",
           "backend/controllers/pdfController.js:function:rotatePdf:195_226",
           "backend/controllers/pdfController.js:function:splitPdf:39_91",
           "backend/routes/pdfRoutes.js:line_chunk:anon:1_46",
           "backend/server.js:line_chunk:anon:1_36",
-          "backend/utils/fileHelper.js:function:cleanupFiles:7_17",
           "backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48",
-          "frontend/lib/main.dart:class:DocuCharmApp:31_85",
-          "frontend/lib/main.dart:class:ThemeProvider:20_29",
-          "frontend/lib/main.dart:method:_buildTheme:48_84",
-          "frontend/lib/main.dart:method:build:35_46",
-          "frontend/lib/main.dart:method:themeMode:23_23",
-          "frontend/lib/main.dart:method:toggleTheme:25_28",
           "frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76",
-          "frontend/lib/providers/pdf_provider.dart:class:PdfState:5_5",
-          "frontend/lib/providers/pdf_provider.dart:method:processFiles:41_75",
           "frontend/lib/providers/pdf_provider.dart:method:reset:22_28",
           "frontend/lib/providers/pdf_provider.dart:method:setError:35_39",
           "frontend/lib/screens/dashboard_screen.dart:class:DashboardScreen:12_158",
           "frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178",
-          "frontend/lib/screens/dashboard_screen.dart:class:_FeatureCardState:180_306",
           "frontend/lib/screens/dashboard_screen.dart:method:build:16_157",
-          "frontend/lib/screens/dashboard_screen.dart:method:build:217_305",
-          "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:BaseFeatureScreen:14_42",
-          "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:44_293:part1",
-          "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_onFilesDropped:56_70",
           "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_processFiles:72_95",
           "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:98_347:part1",
-          "frontend/lib/screens/feature_screens/tools.dart:class:ImagesToPdfScreen:96_109",
-          "frontend/lib/screens/feature_screens/tools.dart:class:MergeScreen:4_17",
           "frontend/lib/screens/feature_screens/tools.dart:class:PdfToImagesScreen:111_124",
           "frontend/lib/screens/feature_screens/tools.dart:class:RotateScreen:126_130",
           "frontend/lib/screens/feature_screens/tools.dart:class:SplitScreen:19_23",
           "frontend/lib/screens/feature_screens/tools.dart:class:_RotateScreenState:132_177",
           "frontend/lib/screens/feature_screens/tools.dart:class:_SplitScreenState:25_94",
           "frontend/lib/screens/feature_screens/tools.dart:method:build:114_123",
-          "frontend/lib/screens/feature_screens/tools.dart:method:build:7_16",
-          "frontend/lib/screens/feature_screens/tools.dart:method:build:99_108",
-          "frontend/lib/screens/viewer_screen.dart:class:SearchToolbar:237_251",
-          "frontend/lib/screens/viewer_screen.dart:class:SearchToolbarState:253_294",
           "frontend/lib/screens/viewer_screen.dart:class:ViewerScreen:6_13",
           "frontend/lib/screens/viewer_screen.dart:class:_ViewerScreenState:15_235",
           "frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234",
-          "frontend/lib/screens/viewer_screen.dart:method:build:257_293",
           "frontend/lib/screens/viewer_screen.dart:method:build:31_164",
           "frontend/lib/services/network_service.dart:class:NetworkService:6_102",
-          "frontend/lib/services/network_service.dart:method:NetworkService:13_19",
           "frontend/lib/services/network_service.dart:method:uploadFiles:22_101",
           "frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47",
           "frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46",
-          "frontend/lib/utils/export_helper.dart:method:shareFile:8_10",
           "frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75",
-          "frontend/lib/widgets/custom_snackbar.dart:method:show:5_66",
-          "frontend/lib/widgets/custom_snackbar.dart:method:showError:68_70",
           "frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74",
-          "frontend/lib/widgets/file_drop_zone.dart:class:FileDropZone:7_27",
-          "frontend/lib/widgets/file_drop_zone.dart:class:_FileDropZoneState:29_126",
-          "frontend/lib/widgets/file_drop_zone.dart:method:_pickFiles:32_46",
-          "frontend/lib/widgets/file_drop_zone.dart:method:build:49_125",
           "frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85",
-          "frontend/lib/widgets/loading_overlay.dart:method:build:18_84",
-          "frontend/test/widget_test.dart:function:main:13_30"
+          "frontend/lib/widgets/loading_overlay.dart:method:build:18_84"
         ],
         "confidence_intervals_95": {
           "recall_at_1": [
-            0.287,
-            0.4838
+            0.2683,
+            0.5926
           ],
           "recall_at_5": [
-            0.6759,
+            0.537,
             0.8704
           ],
           "recall_at_10": [
-            0.7685,
+            0.6296,
             0.9444
           ],
           "mrr": [
-            0.7083,
-            0.912
+            0.5602,
+            0.9168
           ],
           "ndcg_at_5": [
-            0.6319,
-            0.8198
+            0.4905,
+            0.8437
           ],
           "ndcg_at_10": [
-            0.6761,
-            0.8469
+            0.5247,
+            0.8566
           ]
         }
-      },
-      "deltas": {
-        "delta_mrr": -0.0332,
-        "delta_recall_1": -0.0278,
-        "delta_recall_5": 0.0208,
-        "delta_recall_10": 0.0,
-        "delta_ndcg_5": -0.0034
-      },
-      "latency": {
-        "base_mean_ms": 206.482,
-        "reranked_mean_ms": 32.932,
-        "overhead_ms": -173.55,
-        "overhead_pct": -84.1
       }
     }
   ]
