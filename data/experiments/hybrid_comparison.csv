@@ -1,0 +1,11 @@
+split,system_key,system_name,recall_at_1,recall_at_5,recall_at_10,mrr,ndcg_at_5,ndcg_at_10,latency_p50_ms,latency_mean_ms
+dev,tfidf,TF-IDF (Lexical Baseline),0.3657,0.8426,0.9537,0.8148,0.7850,0.8378,0.48,0.49
+dev,code,Code Transformer (st-codesearch),0.3796,0.7731,0.8796,0.9028,0.7513,0.8013,21.80,22.20
+dev,tfidf_graph,TF-IDF + Graph Reranker,0.3657,0.8426,0.9815,0.8135,0.7919,0.8567,0.81,0.90
+dev,hybrid_rrf_k60,"Hybrid RRF (TF-IDF + Code, k=60)",0.4722,0.8750,0.9352,1.0000,0.8781,0.9068,23.59,23.68
+dev,hybrid_rrf_graph,Hybrid RRF + Graph Reranker (k=60),0.2593,0.8472,0.9537,0.8167,0.7686,0.8114,23.99,23.89
+test,tfidf,TF-IDF (Lexical Baseline),0.4630,0.8241,0.9815,0.7338,0.7236,0.7901,0.46,0.47
+test,code,Code Transformer (st-codesearch),0.4352,0.7500,0.8519,0.7886,0.7098,0.7454,22.50,22.84
+test,tfidf_graph,TF-IDF + Graph Reranker,0.4907,0.8611,0.9630,0.7935,0.7794,0.8244,0.84,0.99
+test,hybrid_rrf_k60,"Hybrid RRF (TF-IDF + Code, k=60)",0.4815,0.8519,0.8889,0.8426,0.7925,0.8079,24.06,25.06
+test,hybrid_rrf_graph,Hybrid RRF + Graph Reranker (k=60),0.3148,0.8519,0.8889,0.7287,0.7107,0.7268,24.41,24.44

@@ -22,6 +22,12 @@ def parse_args() -> argparse.Namespace:
         description="Build deterministic repository relationship graph for CodeSage."
     )
     parser.add_argument(
+        "--workspace",
+        type=str,
+        default=None,
+        help="Target workspace ID (reads units and repo root from workspace, writes graph to workspace directory)",
+    )
+    parser.add_argument(
         "--index",
         type=str,
         default=str(project_root / "data" / "code_units.jsonl"),
@@ -44,9 +50,27 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    index_path = Path(args.index)
-    output_path = Path(args.output)
-    repo_root = Path(args.repo_root) if args.repo_root else None
+
+    if args.workspace:
+        from codesage.workspace import WorkspaceError, WorkspaceManager
+
+        manager = WorkspaceManager(project_root / "data")
+        try:
+            ws = manager.get_workspace(args.workspace.strip())
+            if ws.metadata.is_canonical:
+                print("Error: The canonical research baseline relationship graph is immutable.", file=sys.stderr)
+                sys.exit(1)
+            index_path = ws.units_path
+            output_path = ws.graph_path
+            repo_root = Path(ws.metadata.repo_path)
+            print(f"Building relationship graph for workspace '{ws.id}' ({ws.metadata.name})...")
+        except Exception as e:
+            print(f"Error resolving workspace '{args.workspace}': {e}", file=sys.stderr)
+            sys.exit(1)
+    else:
+        index_path = Path(args.index)
+        output_path = Path(args.output)
+        repo_root = Path(args.repo_root) if args.repo_root else None
 
     if not index_path.exists():
         print(f"Error: Index file not found at '{index_path}'", file=sys.stderr)

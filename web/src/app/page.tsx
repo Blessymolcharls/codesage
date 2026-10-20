@@ -15,6 +15,7 @@ import {
 import { SearchResultCard, SearchResultItem } from "@/components/SearchResultCard";
 import { CompareView } from "@/components/CompareView";
 import { GraphNeighborhoodModal } from "@/components/GraphNeighborhoodModal";
+import { WorkspaceSelector, WorkspaceMetadata } from "@/components/WorkspaceSelector";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
 
@@ -32,6 +33,7 @@ export default function SearchPage() {
   const [topK, setTopK] = useState<number>(10);
   const [rerank, setRerank] = useState<boolean>(false);
   const [compareMode, setCompareMode] = useState<boolean>(false);
+  const [currentWorkspace, setCurrentWorkspace] = useState<WorkspaceMetadata | null>(null);
 
   // Search Results State
   const [loading, setLoading] = useState<boolean>(false);
@@ -64,6 +66,7 @@ export default function SearchPage() {
             query: activeQuery,
             top_k: topK,
             with_graph: rerank,
+            workspace_id: currentWorkspace?.id || "default",
           }),
         });
 
@@ -85,6 +88,7 @@ export default function SearchPage() {
             model,
             top_k: topK,
             rerank,
+            workspace_id: currentWorkspace?.id || "default",
           }),
         });
 
@@ -126,13 +130,35 @@ export default function SearchPage() {
           Repository Code Search
         </h1>
         <p className="text-sm text-slate-400">
-          Query the DocuCharm codebase using lexical TF-IDF, general-purpose sentence
-          embeddings, and code-specific Transformer representations with optional graph reranking.
+          Query indexed codebases using lexical TF-IDF, general-purpose sentence
+          embeddings, code-specific Transformer representations, and Hybrid Reciprocal Rank Fusion.
         </p>
       </div>
 
       {/* Main Search Box Card */}
       <div className="glass-panel rounded-2xl p-4 sm:p-6 shadow-2xl space-y-4">
+        {/* Workspace Context & Switcher Bar */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
+          <WorkspaceSelector
+            apiBase={API_BASE}
+            currentWorkspaceId={currentWorkspace?.id || "default"}
+            onSelectWorkspace={(ws) => {
+              setCurrentWorkspace(ws);
+              setHasSearched(false);
+              setSingleResults([]);
+              setCompareResults({});
+            }}
+          />
+          {currentWorkspace && (
+            <div className="flex items-center gap-2 text-xs text-slate-400 font-mono">
+              <span className="text-slate-500 text-[11px]">Path:</span>
+              <span className="rounded bg-slate-900/80 px-2 py-0.5 text-slate-300 border border-white/5 text-[11px]">
+                {currentWorkspace.display_path}
+              </span>
+            </div>
+          )}
+        </div>
+
         <form onSubmit={handleFormSubmit} className="space-y-4">
           {/* Query Input Bar */}
           <div className="relative flex items-center">
@@ -198,6 +224,7 @@ export default function SearchPage() {
                     <option value="tfidf">TF-IDF (Lexical Baseline)</option>
                     <option value="semantic">General Semantic (all-MiniLM-L6-v2)</option>
                     <option value="code">Code Transformer (st-codesearch)</option>
+                    <option value="hybrid">Hybrid RRF (TF-IDF + Code Transformer)</option>
                   </select>
                 </div>
               )}

@@ -1,0 +1,2319 @@
+{
+  "metadata": {
+    "study_name": "CodeSage Milestone 2: Hybrid Retrieval via Reciprocal Rank Fusion",
+    "timestamp": "2026-10-14 18:08:40",
+    "corpus_units": 89,
+    "fusion_formula": "RRF(d) = sum_{m in M, d in m} (1 / (k + rank_m(d)))",
+    "fusion_constant_k": 60,
+    "rank_indexing": "1-based",
+    "dev_queries_count": 18,
+    "test_queries_count": 18
+  },
+  "dev_split": {
+    "systems": {
+      "tfidf": {
+        "name": "TF-IDF (Lexical Baseline)",
+        "metrics": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.3657407407407407,
+          "mean_recall_at_5": 0.8425925925925926,
+          "mean_recall_at_10": 0.9537037037037037,
+          "mrr": 0.8148148148148148,
+          "mean_ndcg_at_5": 0.7849901951929268,
+          "mean_ndcg_at_10": 0.8377839983004982,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 2.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 0.8333333333333333,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8664143102388955,
+              "ndcg_at_10": 0.8664143102388955
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.0,
+              "recall_at_10": 0.5,
+              "mrr": 0.16666666666666666,
+              "ndcg_at_5": 0.0,
+              "ndcg_at_10": 0.21840743681816419
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.16666666666666666,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 1.0,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.7183733547559629,
+              "ndcg_at_10": 0.801953582239064
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.8888888888888888,
+              "recall_at_10": 1.0,
+              "mrr": 0.611111111111111,
+              "ndcg_at_5": 0.7032025197220005,
+              "ndcg_at_10": 0.7525495048829781
+            },
+            "frontend_viewer": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7039180890341347,
+              "ndcg_at_10": 0.86034433104172
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_widgets": {
+              "count": 4.0,
+              "recall_at_1": 0.2708333333333333,
+              "recall_at_5": 0.875,
+              "recall_at_10": 1.0,
+              "mrr": 0.8333333333333334,
+              "ndcg_at_5": 0.7866806338207073,
+              "ndcg_at_10": 0.8517439754860576
+            },
+            "backend_routing": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2176,
+              0.5278
+            ],
+            "recall_at_5": [
+              0.7083,
+              0.9446
+            ],
+            "recall_at_10": [
+              0.8889,
+              1.0
+            ],
+            "mrr": [
+              0.6574,
+              0.9537
+            ],
+            "ndcg_at_5": [
+              0.6446,
+              0.9055
+            ],
+            "ndcg_at_10": [
+              0.7304,
+              0.9293
+            ]
+          }
+        },
+        "latency": {
+          "mean": 0.49,
+          "p50": 0.48,
+          "p95": 0.54,
+          "p99": 0.57
+        }
+      },
+      "code": {
+        "name": "Code Transformer (st-codesearch)",
+        "metrics": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.3796296296296296,
+          "mean_recall_at_5": 0.7731481481481481,
+          "mean_recall_at_10": 0.8796296296296297,
+          "mrr": 0.9027777777777778,
+          "mean_ndcg_at_5": 0.7513427165038083,
+          "mean_ndcg_at_10": 0.8013120248735215,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 2.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7039180890341347,
+              "ndcg_at_10": 0.8485720532055154
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.6309297535714575,
+              "ndcg_at_10": 0.6309297535714575
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.16666666666666666,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 0.8333333333333333,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.6755585612635349,
+              "ndcg_at_10": 0.6755585612635349
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.38888888888888884,
+              "recall_at_5": 0.5,
+              "recall_at_10": 0.611111111111111,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.6159288519256122,
+              "ndcg_at_10": 0.6680709325948073
+            },
+            "frontend_viewer": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7039180890341347,
+              "ndcg_at_10": 0.8710785440003369
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.3333333333333333,
+              "recall_at_10": 0.6666666666666666,
+              "mrr": 0.25,
+              "ndcg_at_5": 0.20210734650054757,
+              "ndcg_at_10": 0.35853358850813305
+            },
+            "frontend_widgets": {
+              "count": 4.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.8541666666666666,
+              "recall_at_10": 0.9166666666666666,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.845118462897559,
+              "ndcg_at_10": 0.8776501337302341
+            },
+            "backend_routing": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2639,
+              0.5139
+            ],
+            "recall_at_5": [
+              0.662,
+              0.8704
+            ],
+            "recall_at_10": [
+              0.7685,
+              0.963
+            ],
+            "mrr": [
+              0.7913,
+              1.0
+            ],
+            "ndcg_at_5": [
+              0.6505,
+              0.8422
+            ],
+            "ndcg_at_10": [
+              0.7016,
+              0.882
+            ]
+          }
+        },
+        "latency": {
+          "mean": 22.2,
+          "p50": 21.8,
+          "p95": 24.32,
+          "p99": 25.05
+        }
+      },
+      "tfidf_graph": {
+        "name": "TF-IDF + Graph Reranker",
+        "metrics": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.3657407407407407,
+          "mean_recall_at_5": 0.8425925925925926,
+          "mean_recall_at_10": 0.9814814814814815,
+          "mrr": 0.8134920634920635,
+          "mean_ndcg_at_5": 0.7919040628384856,
+          "mean_ndcg_at_10": 0.8567189690700022,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 2.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 0.8333333333333333,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8664143102388955,
+              "ndcg_at_10": 0.8664143102388955
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.14285714285714285,
+              "ndcg_at_5": 0.0,
+              "ndcg_at_10": 0.39780880120575696
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.16666666666666666,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.8091442510246392,
+              "ndcg_at_10": 0.8091442510246392
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.7777777777777778,
+              "recall_at_10": 1.0,
+              "mrr": 0.611111111111111,
+              "ndcg_at_5": 0.6285200976061702,
+              "ndcg_at_10": 0.7363823299307661
+            },
+            "frontend_viewer": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7039180890341347,
+              "ndcg_at_10": 0.8710785440003369
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_widgets": {
+              "count": 4.0,
+              "recall_at_1": 0.2708333333333333,
+              "recall_at_5": 0.875,
+              "recall_at_10": 1.0,
+              "mrr": 0.8333333333333334,
+              "ndcg_at_5": 0.8284194066782564,
+              "ndcg_at_10": 0.8979474964336442
+            },
+            "backend_routing": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [
+            "backend/controllers/pdfController.js:function:imageToPdf:94_135",
+            "backend/controllers/pdfController.js:function:mergePdfs:9_36",
+            "backend/routes/pdfRoutes.js:line_chunk:anon:1_46",
+            "backend/server.js:line_chunk:anon:1_36",
+            "backend/utils/fileHelper.js:function:cleanupFiles:7_17",
+            "backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48",
+            "frontend/lib/main.dart:class:DocuCharmApp:31_85",
+            "frontend/lib/main.dart:class:ThemeProvider:20_29",
+            "frontend/lib/main.dart:method:_buildTheme:48_84",
+            "frontend/lib/main.dart:method:build:35_46",
+            "frontend/lib/main.dart:method:themeMode:23_23",
+            "frontend/lib/main.dart:method:toggleTheme:25_28",
+            "frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76",
+            "frontend/lib/providers/pdf_provider.dart:class:PdfState:5_5",
+            "frontend/lib/providers/pdf_provider.dart:method:processFiles:41_75",
+            "frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178",
+            "frontend/lib/screens/dashboard_screen.dart:class:_FeatureCardState:180_306",
+            "frontend/lib/screens/dashboard_screen.dart:method:build:217_305",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:BaseFeatureScreen:14_42",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:44_293:part1",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_onFilesDropped:56_70",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_processFiles:72_95",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:98_347:part1",
+            "frontend/lib/screens/feature_screens/tools.dart:class:ImagesToPdfScreen:96_109",
+            "frontend/lib/screens/feature_screens/tools.dart:class:MergeScreen:4_17",
+            "frontend/lib/screens/feature_screens/tools.dart:method:build:7_16",
+            "frontend/lib/screens/feature_screens/tools.dart:method:build:99_108",
+            "frontend/lib/screens/viewer_screen.dart:class:SearchToolbar:237_251",
+            "frontend/lib/screens/viewer_screen.dart:class:SearchToolbarState:253_294",
+            "frontend/lib/screens/viewer_screen.dart:method:build:257_293",
+            "frontend/lib/services/network_service.dart:class:NetworkService:6_102",
+            "frontend/lib/services/network_service.dart:method:NetworkService:13_19",
+            "frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47",
+            "frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46",
+            "frontend/lib/utils/export_helper.dart:method:shareFile:8_10",
+            "frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75",
+            "frontend/lib/widgets/custom_snackbar.dart:method:show:5_66",
+            "frontend/lib/widgets/custom_snackbar.dart:method:showError:68_70",
+            "frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74",
+            "frontend/lib/widgets/file_drop_zone.dart:class:FileDropZone:7_27",
+            "frontend/lib/widgets/file_drop_zone.dart:class:_FileDropZoneState:29_126",
+            "frontend/lib/widgets/file_drop_zone.dart:method:_pickFiles:32_46",
+            "frontend/lib/widgets/file_drop_zone.dart:method:build:49_125",
+            "frontend/test/widget_test.dart:function:main:13_30"
+          ],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2176,
+              0.5278
+            ],
+            "recall_at_5": [
+              0.7037,
+              0.9537
+            ],
+            "recall_at_10": [
+              0.9444,
+              1.0
+            ],
+            "mrr": [
+              0.6548,
+              0.9524
+            ],
+            "ndcg_at_5": [
+              0.6418,
+              0.9158
+            ],
+            "ndcg_at_10": [
+              0.7547,
+              0.9439
+            ]
+          }
+        },
+        "latency": {
+          "mean": 0.9,
+          "p50": 0.81,
+          "p95": 1.39,
+          "p99": 1.42
+        }
+      },
+      "hybrid_rrf_k60": {
+        "name": "Hybrid RRF (TF-IDF + Code, k=60)",
+        "metrics": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.4722222222222222,
+          "mean_recall_at_5": 0.875,
+          "mean_recall_at_10": 0.9351851851851851,
+          "mrr": 1.0,
+          "mean_ndcg_at_5": 0.8781137434856326,
+          "mean_ndcg_at_10": 0.9067634421031365,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 2.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9264639325303283,
+              "ndcg_at_10": 0.9264639325303283
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.5,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.6131471927654584,
+              "ndcg_at_10": 0.8315546295836225
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9734512147629872,
+              "ndcg_at_10": 0.9734512147629872
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.38888888888888884,
+              "recall_at_5": 0.611111111111111,
+              "recall_at_10": 0.611111111111111,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.694141972929405,
+              "ndcg_at_10": 0.694141972929405
+            },
+            "frontend_viewer": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9469024295259745,
+              "ndcg_at_10": 0.9469024295259745
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7653606369886217,
+              "ndcg_at_10": 0.9325210919548239
+            },
+            "frontend_widgets": {
+              "count": 4.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.9375,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8995952275216221,
+              "ndcg_at_10": 0.9321268983542973
+            },
+            "backend_routing": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.375,
+              0.602
+            ],
+            "recall_at_5": [
+              0.7593,
+              0.9583
+            ],
+            "recall_at_10": [
+              0.8333,
+              1.0
+            ],
+            "mrr": [
+              1.0,
+              1.0
+            ],
+            "ndcg_at_5": [
+              0.7957,
+              0.9423
+            ],
+            "ndcg_at_10": [
+              0.8314,
+              0.9614
+            ]
+          }
+        },
+        "latency": {
+          "mean": 23.68,
+          "p50": 23.59,
+          "p95": 24.7,
+          "p99": 24.99
+        }
+      },
+      "hybrid_rrf_graph": {
+        "name": "Hybrid RRF + Graph Reranker (k=60)",
+        "metrics": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.25925925925925924,
+          "mean_recall_at_5": 0.8472222222222222,
+          "mean_recall_at_10": 0.9537037037037037,
+          "mrr": 0.8166666666666667,
+          "mean_ndcg_at_5": 0.7686223905821731,
+          "mean_ndcg_at_10": 0.8114016572129565,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 2.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8664143102388955,
+              "ndcg_at_10": 0.9404347879803618
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.6934264036172708,
+              "ndcg_at_10": 0.6934264036172708
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.3333333333333333,
+              "ndcg_at_5": 0.5,
+              "ndcg_at_10": 0.5
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9197207891481876,
+              "ndcg_at_10": 0.9197207891481876
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9734512147629872,
+              "ndcg_at_10": 0.9734512147629872
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.27777777777777773,
+              "recall_at_5": 0.611111111111111,
+              "recall_at_10": 0.7222222222222222,
+              "mrr": 0.8333333333333334,
+              "ndcg_at_5": 0.6364097012437745,
+              "ndcg_at_10": 0.6816270257212572
+            },
+            "frontend_viewer": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9469024295259745,
+              "ndcg_at_10": 0.9469024295259745
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_widgets": {
+              "count": 4.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.9375,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.949835111804513,
+              "ndcg_at_10": 0.9823667826371881
+            },
+            "backend_routing": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.2,
+              "ndcg_at_5": 0.38685280723454163,
+              "ndcg_at_10": 0.38685280723454163
+            },
+            "frontend_test": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.16666666666666666,
+              "ndcg_at_5": 0.0,
+              "ndcg_at_10": 0.3562071871080222
+            }
+          },
+          "missing_relevant_ids": [
+            "backend/controllers/pdfController.js:function:imageToPdf:94_135",
+            "backend/controllers/pdfController.js:function:mergePdfs:9_36",
+            "backend/routes/pdfRoutes.js:line_chunk:anon:1_46",
+            "backend/server.js:line_chunk:anon:1_36",
+            "backend/utils/fileHelper.js:function:cleanupFiles:7_17",
+            "backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48",
+            "frontend/lib/main.dart:class:DocuCharmApp:31_85",
+            "frontend/lib/main.dart:class:ThemeProvider:20_29",
+            "frontend/lib/main.dart:method:_buildTheme:48_84",
+            "frontend/lib/main.dart:method:build:35_46",
+            "frontend/lib/main.dart:method:themeMode:23_23",
+            "frontend/lib/main.dart:method:toggleTheme:25_28",
+            "frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76",
+            "frontend/lib/providers/pdf_provider.dart:class:PdfState:5_5",
+            "frontend/lib/providers/pdf_provider.dart:method:processFiles:41_75",
+            "frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178",
+            "frontend/lib/screens/dashboard_screen.dart:class:_FeatureCardState:180_306",
+            "frontend/lib/screens/dashboard_screen.dart:method:build:217_305",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:BaseFeatureScreen:14_42",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:44_293:part1",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_onFilesDropped:56_70",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_processFiles:72_95",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:98_347:part1",
+            "frontend/lib/screens/feature_screens/tools.dart:class:ImagesToPdfScreen:96_109",
+            "frontend/lib/screens/feature_screens/tools.dart:class:MergeScreen:4_17",
+            "frontend/lib/screens/feature_screens/tools.dart:method:build:7_16",
+            "frontend/lib/screens/feature_screens/tools.dart:method:build:99_108",
+            "frontend/lib/screens/viewer_screen.dart:class:SearchToolbar:237_251",
+            "frontend/lib/screens/viewer_screen.dart:class:SearchToolbarState:253_294",
+            "frontend/lib/screens/viewer_screen.dart:method:build:257_293",
+            "frontend/lib/services/network_service.dart:class:NetworkService:6_102",
+            "frontend/lib/services/network_service.dart:method:NetworkService:13_19",
+            "frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47",
+            "frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46",
+            "frontend/lib/utils/export_helper.dart:method:shareFile:8_10",
+            "frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75",
+            "frontend/lib/widgets/custom_snackbar.dart:method:show:5_66",
+            "frontend/lib/widgets/custom_snackbar.dart:method:showError:68_70",
+            "frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74",
+            "frontend/lib/widgets/file_drop_zone.dart:class:FileDropZone:7_27",
+            "frontend/lib/widgets/file_drop_zone.dart:class:_FileDropZoneState:29_126",
+            "frontend/lib/widgets/file_drop_zone.dart:method:_pickFiles:32_46",
+            "frontend/lib/widgets/file_drop_zone.dart:method:build:49_125",
+            "frontend/test/widget_test.dart:function:main:13_30"
+          ],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.1759,
+              0.3333
+            ],
+            "recall_at_5": [
+              0.6944,
+              0.9537
+            ],
+            "recall_at_10": [
+              0.8796,
+              1.0
+            ],
+            "mrr": [
+              0.6629,
+              0.9444
+            ],
+            "ndcg_at_5": [
+              0.6153,
+              0.8785
+            ],
+            "ndcg_at_10": [
+              0.6906,
+              0.9044
+            ]
+          }
+        },
+        "latency": {
+          "mean": 23.89,
+          "p50": 23.99,
+          "p95": 24.58,
+          "p99": 24.68
+        }
+      }
+    },
+    "sensitivity_analysis": {
+      "k_20": {
+        "k": 20,
+        "recall_at_1": 0.4722,
+        "recall_at_5": 0.875,
+        "recall_at_10": 0.9352,
+        "mrr": 1.0,
+        "ndcg_at_5": 0.8781,
+        "ndcg_at_10": 0.9068
+      },
+      "k_40": {
+        "k": 40,
+        "recall_at_1": 0.4722,
+        "recall_at_5": 0.875,
+        "recall_at_10": 0.9352,
+        "mrr": 1.0,
+        "ndcg_at_5": 0.8781,
+        "ndcg_at_10": 0.9068
+      },
+      "k_60": {
+        "k": 60,
+        "recall_at_1": 0.4722,
+        "recall_at_5": 0.875,
+        "recall_at_10": 0.9352,
+        "mrr": 1.0,
+        "ndcg_at_5": 0.8781,
+        "ndcg_at_10": 0.9068
+      },
+      "k_80": {
+        "k": 80,
+        "recall_at_1": 0.4722,
+        "recall_at_5": 0.875,
+        "recall_at_10": 0.9352,
+        "mrr": 1.0,
+        "ndcg_at_5": 0.8781,
+        "ndcg_at_10": 0.9068
+      },
+      "k_100": {
+        "k": 100,
+        "recall_at_1": 0.4722,
+        "recall_at_5": 0.875,
+        "recall_at_10": 0.9352,
+        "mrr": 1.0,
+        "ndcg_at_5": 0.8781,
+        "ndcg_at_10": 0.9062
+      }
+    },
+    "three_way_rrf": {
+      "total_queries": 18,
+      "evaluated_queries": 18,
+      "unannotated_queries": 0,
+      "mean_recall_at_1": 0.4722222222222222,
+      "mean_recall_at_5": 0.8842592592592592,
+      "mean_recall_at_10": 0.9351851851851851,
+      "mrr": 1.0,
+      "mean_ndcg_at_5": 0.8854354463223657,
+      "mean_ndcg_at_10": 0.9117341735136536,
+      "category_metrics": {
+        "backend_pdf_processing": {
+          "count": 2.0,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 0.9530127177673411,
+          "ndcg_at_10": 0.9530127177673411
+        },
+        "backend_utilities": {
+          "count": 1.0,
+          "recall_at_1": 0.5,
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 0.8772153153380493,
+          "ndcg_at_10": 0.8772153153380493
+        },
+        "backend_server": {
+          "count": 1.0,
+          "recall_at_1": 1.0,
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 1.0,
+          "ndcg_at_10": 1.0
+        },
+        "frontend_networking": {
+          "count": 1.0,
+          "recall_at_1": 0.5,
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 1.0,
+          "ndcg_at_10": 1.0
+        },
+        "frontend_state": {
+          "count": 2.0,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 0.9734512147629872,
+          "ndcg_at_10": 0.9734512147629872
+        },
+        "frontend_ui": {
+          "count": 3.0,
+          "recall_at_1": 0.38888888888888884,
+          "recall_at_5": 0.611111111111111,
+          "recall_at_10": 0.611111111111111,
+          "mrr": 1.0,
+          "ndcg_at_5": 0.694141972929405,
+          "ndcg_at_10": 0.694141972929405
+        },
+        "frontend_viewer": {
+          "count": 1.0,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_5": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 0.7653606369886217,
+          "ndcg_at_10": 0.9325210919548239
+        },
+        "frontend_utilities": {
+          "count": 1.0,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_5": 0.6666666666666666,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 0.7653606369886217,
+          "ndcg_at_10": 0.9325210919548239
+        },
+        "frontend_widgets": {
+          "count": 4.0,
+          "recall_at_1": 0.3333333333333333,
+          "recall_at_5": 0.9375,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 0.8986369151596048,
+          "ndcg_at_10": 0.9334009600372988
+        },
+        "backend_routing": {
+          "count": 1.0,
+          "recall_at_1": 1.0,
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 1.0,
+          "ndcg_at_10": 1.0
+        },
+        "frontend_test": {
+          "count": 1.0,
+          "recall_at_1": 1.0,
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "ndcg_at_5": 1.0,
+          "ndcg_at_10": 1.0
+        }
+      },
+      "missing_relevant_ids": [],
+      "confidence_intervals_95": {
+        "recall_at_1": [
+          0.375,
+          0.602
+        ],
+        "recall_at_5": [
+          0.7778,
+          0.9676
+        ],
+        "recall_at_10": [
+          0.8333,
+          1.0
+        ],
+        "mrr": [
+          1.0,
+          1.0
+        ],
+        "ndcg_at_5": [
+          0.8094,
+          0.9446
+        ],
+        "ndcg_at_10": [
+          0.8345,
+          0.9677
+        ]
+      }
+    },
+    "paired_significance": {
+      "hybrid_vs_tfidf": {
+        "Recall@1": {
+          "n_queries": 18,
+          "mean_difference": 0.1065,
+          "ci_95_diff": [
+            0.0278,
+            0.2037
+          ],
+          "p_value": 0.025864,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": true,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "Recall@5": {
+          "n_queries": 18,
+          "mean_difference": 0.0324,
+          "ci_95_diff": [
+            -0.0926,
+            0.1435
+          ],
+          "p_value": 0.4994,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "Recall@10": {
+          "n_queries": 18,
+          "mean_difference": -0.0185,
+          "ci_95_diff": [
+            -0.1481,
+            0.0833
+          ],
+          "p_value": 0.755679,
+          "test_type": "paired_ttest",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "MRR": {
+          "n_queries": 18,
+          "mean_difference": 0.1852,
+          "ci_95_diff": [
+            0.0463,
+            0.3426
+          ],
+          "p_value": 0.025806,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": true,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "nDCG@5": {
+          "n_queries": 18,
+          "mean_difference": 0.0931,
+          "ci_95_diff": [
+            -0.002,
+            0.1943
+          ],
+          "p_value": 0.124767,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "nDCG@10": {
+          "n_queries": 18,
+          "mean_difference": 0.069,
+          "ci_95_diff": [
+            -0.0085,
+            0.1597
+          ],
+          "p_value": 0.281553,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        }
+      },
+      "hybrid_vs_code": {
+        "Recall@1": {
+          "n_queries": 18,
+          "mean_difference": 0.0926,
+          "ci_95_diff": [
+            0.0,
+            0.2222
+          ],
+          "p_value": 0.135453,
+          "test_type": "paired_ttest",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "Recall@5": {
+          "n_queries": 18,
+          "mean_difference": 0.1019,
+          "ci_95_diff": [
+            -0.0093,
+            0.1947
+          ],
+          "p_value": 0.052796,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "Recall@10": {
+          "n_queries": 18,
+          "mean_difference": 0.0556,
+          "ci_95_diff": [
+            0.0,
+            0.1296
+          ],
+          "p_value": 0.082698,
+          "test_type": "paired_ttest",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "MRR": {
+          "n_queries": 18,
+          "mean_difference": 0.0972,
+          "ci_95_diff": [
+            0.0,
+            0.2087
+          ],
+          "p_value": 0.089576,
+          "test_type": "paired_ttest",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "nDCG@5": {
+          "n_queries": 18,
+          "mean_difference": 0.1268,
+          "ci_95_diff": [
+            0.033,
+            0.223
+          ],
+          "p_value": 0.036096,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": true,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "nDCG@10": {
+          "n_queries": 18,
+          "mean_difference": 0.1055,
+          "ci_95_diff": [
+            0.0297,
+            0.1971
+          ],
+          "p_value": 0.028816,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": true,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        }
+      },
+      "hybrid_graph_vs_hybrid": {
+        "Recall@1": {
+          "n_queries": 18,
+          "mean_difference": -0.213,
+          "ci_95_diff": [
+            -0.4076,
+            -0.0556
+          ],
+          "p_value": 0.025806,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": true,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "Recall@5": {
+          "n_queries": 18,
+          "mean_difference": -0.0278,
+          "ci_95_diff": [
+            -0.1667,
+            0.0926
+          ],
+          "p_value": 0.692423,
+          "test_type": "paired_ttest",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "Recall@10": {
+          "n_queries": 18,
+          "mean_difference": 0.0185,
+          "ci_95_diff": [
+            0.0,
+            0.0556
+          ],
+          "p_value": 0.331333,
+          "test_type": "paired_ttest",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "MRR": {
+          "n_queries": 18,
+          "mean_difference": -0.1833,
+          "ci_95_diff": [
+            -0.3371,
+            -0.0556
+          ],
+          "p_value": 0.025893,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": true,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "nDCG@5": {
+          "n_queries": 18,
+          "mean_difference": -0.1095,
+          "ci_95_diff": [
+            -0.2603,
+            0.0083
+          ],
+          "p_value": 0.359364,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "nDCG@10": {
+          "n_queries": 18,
+          "mean_difference": -0.0954,
+          "ci_95_diff": [
+            -0.2075,
+            -0.0022
+          ],
+          "p_value": 0.32453,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        }
+      }
+    }
+  },
+  "test_split": {
+    "systems": {
+      "tfidf": {
+        "name": "TF-IDF (Lexical Baseline)",
+        "metrics": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.462962962962963,
+          "mean_recall_at_5": 0.8240740740740741,
+          "mean_recall_at_10": 0.9814814814814815,
+          "mrr": 0.7337962962962963,
+          "mean_ndcg_at_5": 0.7235800061913148,
+          "mean_ndcg_at_10": 0.7901420995292818,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.8888888888888888,
+              "mrr": 0.5277777777777778,
+              "ndcg_at_5": 0.5285854951794825,
+              "ndcg_at_10": 0.6295229713123659
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 2.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.6509209298071326,
+              "ndcg_at_10": 0.6509209298071326
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.75,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9598603945740938,
+              "ndcg_at_10": 0.9598603945740938
+            },
+            "frontend_viewer": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 1.0,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.6480409554829326,
+              "ndcg_at_10": 0.7865004286290711
+            },
+            "frontend_widgets": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9386076576690247,
+              "ndcg_at_10": 0.9386076576690247
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.5,
+              "recall_at_10": 1.0,
+              "mrr": 0.20833333333333334,
+              "ndcg_at_5": 0.23158156021532797,
+              "ndcg_at_10": 0.43771032867948806
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2778,
+              0.6667
+            ],
+            "recall_at_5": [
+              0.6852,
+              0.9537
+            ],
+            "recall_at_10": [
+              0.9444,
+              1.0
+            ],
+            "mrr": [
+              0.567,
+              0.8889
+            ],
+            "ndcg_at_5": [
+              0.5636,
+              0.8763
+            ],
+            "ndcg_at_10": [
+              0.6699,
+              0.9018
+            ]
+          }
+        },
+        "latency": {
+          "mean": 0.47,
+          "p50": 0.46,
+          "p95": 0.53,
+          "p99": 0.63
+        }
+      },
+      "code": {
+        "name": "Code Transformer (st-codesearch)",
+        "metrics": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.4351851851851852,
+          "mean_recall_at_5": 0.75,
+          "mean_recall_at_10": 0.8518518518518519,
+          "mrr": 0.7885802469135803,
+          "mean_ndcg_at_5": 0.7097786714497694,
+          "mean_ndcg_at_10": 0.7453933584878203,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 3.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.7777777777777777,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7271805975124508,
+              "ndcg_at_10": 0.7723979219899334
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 2.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 0.5,
+              "recall_at_10": 1.0,
+              "mrr": 0.18055555555555555,
+              "ndcg_at_5": 0.21533827903669653,
+              "ndcg_at_10": 0.3658532768686871
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.75,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_viewer": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.6666666666666666,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.6173196815056892,
+              "ndcg_at_10": 0.6173196815056892
+            },
+            "frontend_widgets": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.75,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.766433990956823,
+              "ndcg_at_10": 0.868625189751066
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.5555555555555555,
+              "recall_at_10": 0.5555555555555555,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.46543013018669305,
+              "ndcg_at_10": 0.46543013018669305
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.2683,
+              0.5926
+            ],
+            "recall_at_5": [
+              0.5833,
+              0.8796
+            ],
+            "recall_at_10": [
+              0.7222,
+              0.963
+            ],
+            "mrr": [
+              0.6049,
+              0.9307
+            ],
+            "ndcg_at_5": [
+              0.5374,
+              0.8467
+            ],
+            "ndcg_at_10": [
+              0.5945,
+              0.8658
+            ]
+          }
+        },
+        "latency": {
+          "mean": 22.84,
+          "p50": 22.5,
+          "p95": 25.02,
+          "p99": 26.3
+        }
+      },
+      "tfidf_graph": {
+        "name": "TF-IDF + Graph Reranker",
+        "metrics": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.49074074074074076,
+          "mean_recall_at_5": 0.8611111111111112,
+          "mean_recall_at_10": 0.9629629629629629,
+          "mrr": 0.7935185185185185,
+          "mean_ndcg_at_5": 0.7794197587841558,
+          "mean_ndcg_at_10": 0.8244490806485767,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.8888888888888888,
+              "mrr": 0.5666666666666667,
+              "ndcg_at_5": 0.5217303105250842,
+              "ndcg_at_10": 0.6245394531337614
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 2.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.6509209298071326,
+              "ndcg_at_10": 0.6509209298071326
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.75,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_viewer": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 0.8333333333333333,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.7490946287332064,
+              "ndcg_at_10": 0.7490946287332064
+            },
+            "frontend_widgets": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.16666666666666666,
+              "recall_at_5": 0.611111111111111,
+              "recall_at_10": 1.0,
+              "mrr": 0.5277777777777778,
+              "ndcg_at_5": 0.4384181797553353,
+              "ndcg_at_10": 0.6057849683331834
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [
+            "backend/controllers/pdfController.js:function:pdfToImage:138_192",
+            "backend/controllers/pdfController.js:function:rotatePdf:195_226",
+            "backend/controllers/pdfController.js:function:splitPdf:39_91",
+            "backend/routes/pdfRoutes.js:line_chunk:anon:1_46",
+            "backend/server.js:line_chunk:anon:1_36",
+            "backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48",
+            "frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76",
+            "frontend/lib/providers/pdf_provider.dart:method:reset:22_28",
+            "frontend/lib/providers/pdf_provider.dart:method:setError:35_39",
+            "frontend/lib/screens/dashboard_screen.dart:class:DashboardScreen:12_158",
+            "frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178",
+            "frontend/lib/screens/dashboard_screen.dart:method:build:16_157",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_processFiles:72_95",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:98_347:part1",
+            "frontend/lib/screens/feature_screens/tools.dart:class:PdfToImagesScreen:111_124",
+            "frontend/lib/screens/feature_screens/tools.dart:class:RotateScreen:126_130",
+            "frontend/lib/screens/feature_screens/tools.dart:class:SplitScreen:19_23",
+            "frontend/lib/screens/feature_screens/tools.dart:class:_RotateScreenState:132_177",
+            "frontend/lib/screens/feature_screens/tools.dart:class:_SplitScreenState:25_94",
+            "frontend/lib/screens/feature_screens/tools.dart:method:build:114_123",
+            "frontend/lib/screens/viewer_screen.dart:class:ViewerScreen:6_13",
+            "frontend/lib/screens/viewer_screen.dart:class:_ViewerScreenState:15_235",
+            "frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234",
+            "frontend/lib/screens/viewer_screen.dart:method:build:31_164",
+            "frontend/lib/services/network_service.dart:class:NetworkService:6_102",
+            "frontend/lib/services/network_service.dart:method:uploadFiles:22_101",
+            "frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47",
+            "frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46",
+            "frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75",
+            "frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74",
+            "frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85",
+            "frontend/lib/widgets/loading_overlay.dart:method:build:18_84"
+          ],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.3056,
+              0.6852
+            ],
+            "recall_at_5": [
+              0.75,
+              0.963
+            ],
+            "recall_at_10": [
+              0.9074,
+              1.0
+            ],
+            "mrr": [
+              0.6472,
+              0.9278
+            ],
+            "ndcg_at_5": [
+              0.6457,
+              0.9073
+            ],
+            "ndcg_at_10": [
+              0.7092,
+              0.9214
+            ]
+          }
+        },
+        "latency": {
+          "mean": 0.99,
+          "p50": 0.84,
+          "p95": 1.48,
+          "p99": 1.56
+        }
+      },
+      "hybrid_rrf_k60": {
+        "name": "Hybrid RRF (TF-IDF + Code, k=60)",
+        "metrics": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.48148148148148145,
+          "mean_recall_at_5": 0.8518518518518519,
+          "mean_recall_at_10": 0.8888888888888888,
+          "mrr": 0.8425925925925926,
+          "mean_ndcg_at_5": 0.7925387001328575,
+          "mean_ndcg_at_10": 0.807923086037984,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 3.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.8888888888888888,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7340357821668491,
+              "ndcg_at_10": 0.8263420975976081
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "backend_routing": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.6666666666666666,
+              "ndcg_at_5": 0.75,
+              "ndcg_at_10": 0.75
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.6934264036172708,
+              "ndcg_at_10": 0.6934264036172708
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.75,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_viewer": {
+              "count": 2.0,
+              "recall_at_1": 0.6666666666666666,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 0.8333333333333333,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8826803184943108,
+              "ndcg_at_10": 0.8826803184943108
+            },
+            "frontend_widgets": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.9197207891481876,
+              "ndcg_at_10": 0.9197207891481876
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.5555555555555555,
+              "recall_at_10": 0.5555555555555555,
+              "mrr": 0.4444444444444444,
+              "ndcg_at_5": 0.4217868789962072,
+              "ndcg_at_10": 0.4217868789962072
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 1.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.3056,
+              0.6389
+            ],
+            "recall_at_5": [
+              0.7222,
+              0.963
+            ],
+            "recall_at_10": [
+              0.7593,
+              0.9815
+            ],
+            "mrr": [
+              0.6759,
+              0.963
+            ],
+            "ndcg_at_5": [
+              0.6577,
+              0.8963
+            ],
+            "ndcg_at_10": [
+              0.668,
+              0.9083
+            ]
+          }
+        },
+        "latency": {
+          "mean": 25.06,
+          "p50": 24.06,
+          "p95": 32.22,
+          "p99": 33.11
+        }
+      },
+      "hybrid_rrf_graph": {
+        "name": "Hybrid RRF + Graph Reranker (k=60)",
+        "metrics": {
+          "total_queries": 18,
+          "evaluated_queries": 18,
+          "unannotated_queries": 0,
+          "mean_recall_at_1": 0.3148148148148148,
+          "mean_recall_at_5": 0.8518518518518519,
+          "mean_recall_at_10": 0.8888888888888888,
+          "mrr": 0.7287037037037037,
+          "mean_ndcg_at_5": 0.7107058911698206,
+          "mean_ndcg_at_10": 0.7267785538555296,
+          "category_metrics": {
+            "backend_pdf_processing": {
+              "count": 3.0,
+              "recall_at_1": 0.3333333333333333,
+              "recall_at_5": 0.6666666666666666,
+              "recall_at_10": 0.8888888888888888,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.7066997481942886,
+              "ndcg_at_10": 0.8031357243085423
+            },
+            "backend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.3333333333333333,
+              "ndcg_at_5": 0.5,
+              "ndcg_at_10": 0.5
+            },
+            "backend_routing": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.6,
+              "ndcg_at_5": 0.6934264036172708,
+              "ndcg_at_10": 0.6934264036172708
+            },
+            "frontend_networking": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.5,
+              "ndcg_at_5": 0.6934264036172708,
+              "ndcg_at_10": 0.6934264036172708
+            },
+            "frontend_state": {
+              "count": 2.0,
+              "recall_at_1": 0.25,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.75,
+              "ndcg_at_5": 0.8154648767857288,
+              "ndcg_at_10": 0.8154648767857288
+            },
+            "frontend_viewer": {
+              "count": 2.0,
+              "recall_at_1": 0.6666666666666666,
+              "recall_at_5": 0.8333333333333333,
+              "recall_at_10": 0.8333333333333333,
+              "mrr": 1.0,
+              "ndcg_at_5": 0.8826803184943108,
+              "ndcg_at_10": 0.8826803184943108
+            },
+            "frontend_widgets": {
+              "count": 2.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            },
+            "frontend_ui": {
+              "count": 3.0,
+              "recall_at_1": 0.1111111111111111,
+              "recall_at_5": 0.5555555555555555,
+              "recall_at_10": 0.5555555555555555,
+              "mrr": 0.4444444444444444,
+              "ndcg_at_5": 0.4217868789962072,
+              "ndcg_at_10": 0.4217868789962072
+            },
+            "backend_server": {
+              "count": 1.0,
+              "recall_at_1": 0.0,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 0.25,
+              "ndcg_at_5": 0.43067655807339306,
+              "ndcg_at_10": 0.43067655807339306
+            },
+            "frontend_utilities": {
+              "count": 1.0,
+              "recall_at_1": 0.5,
+              "recall_at_5": 1.0,
+              "recall_at_10": 1.0,
+              "mrr": 1.0,
+              "ndcg_at_5": 1.0,
+              "ndcg_at_10": 1.0
+            }
+          },
+          "missing_relevant_ids": [
+            "backend/controllers/pdfController.js:function:pdfToImage:138_192",
+            "backend/controllers/pdfController.js:function:rotatePdf:195_226",
+            "backend/controllers/pdfController.js:function:splitPdf:39_91",
+            "backend/routes/pdfRoutes.js:line_chunk:anon:1_46",
+            "backend/server.js:line_chunk:anon:1_36",
+            "backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48",
+            "frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76",
+            "frontend/lib/providers/pdf_provider.dart:method:reset:22_28",
+            "frontend/lib/providers/pdf_provider.dart:method:setError:35_39",
+            "frontend/lib/screens/dashboard_screen.dart:class:DashboardScreen:12_158",
+            "frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178",
+            "frontend/lib/screens/dashboard_screen.dart:method:build:16_157",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_processFiles:72_95",
+            "frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:98_347:part1",
+            "frontend/lib/screens/feature_screens/tools.dart:class:PdfToImagesScreen:111_124",
+            "frontend/lib/screens/feature_screens/tools.dart:class:RotateScreen:126_130",
+            "frontend/lib/screens/feature_screens/tools.dart:class:SplitScreen:19_23",
+            "frontend/lib/screens/feature_screens/tools.dart:class:_RotateScreenState:132_177",
+            "frontend/lib/screens/feature_screens/tools.dart:class:_SplitScreenState:25_94",
+            "frontend/lib/screens/feature_screens/tools.dart:method:build:114_123",
+            "frontend/lib/screens/viewer_screen.dart:class:ViewerScreen:6_13",
+            "frontend/lib/screens/viewer_screen.dart:class:_ViewerScreenState:15_235",
+            "frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234",
+            "frontend/lib/screens/viewer_screen.dart:method:build:31_164",
+            "frontend/lib/services/network_service.dart:class:NetworkService:6_102",
+            "frontend/lib/services/network_service.dart:method:uploadFiles:22_101",
+            "frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47",
+            "frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46",
+            "frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75",
+            "frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74",
+            "frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85",
+            "frontend/lib/widgets/loading_overlay.dart:method:build:18_84"
+          ],
+          "confidence_intervals_95": {
+            "recall_at_1": [
+              0.1759,
+              0.463
+            ],
+            "recall_at_5": [
+              0.7222,
+              0.963
+            ],
+            "recall_at_10": [
+              0.7593,
+              0.9815
+            ],
+            "mrr": [
+              0.5657,
+              0.8796
+            ],
+            "ndcg_at_5": [
+              0.5838,
+              0.8254
+            ],
+            "ndcg_at_10": [
+              0.602,
+              0.841
+            ]
+          }
+        },
+        "latency": {
+          "mean": 24.44,
+          "p50": 24.41,
+          "p95": 25.58,
+          "p99": 26.07
+        }
+      }
+    },
+    "paired_significance": {
+      "hybrid_vs_tfidf": {
+        "Recall@1": {
+          "n_queries": 18,
+          "mean_difference": 0.0185,
+          "ci_95_diff": [
+            -0.1296,
+            0.1296
+          ],
+          "p_value": 0.219656,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "Recall@5": {
+          "n_queries": 18,
+          "mean_difference": 0.0278,
+          "ci_95_diff": [
+            -0.0558,
+            0.1296
+          ],
+          "p_value": 0.59208,
+          "test_type": "paired_ttest",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "Recall@10": {
+          "n_queries": 18,
+          "mean_difference": -0.0926,
+          "ci_95_diff": [
+            -0.2222,
+            0.0
+          ],
+          "p_value": 0.135453,
+          "test_type": "paired_ttest",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "MRR": {
+          "n_queries": 18,
+          "mean_difference": 0.1088,
+          "ci_95_diff": [
+            -0.0649,
+            0.2778
+          ],
+          "p_value": 0.230503,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "nDCG@5": {
+          "n_queries": 18,
+          "mean_difference": 0.069,
+          "ci_95_diff": [
+            -0.0615,
+            0.1944
+          ],
+          "p_value": 0.176214,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "nDCG@10": {
+          "n_queries": 18,
+          "mean_difference": 0.0178,
+          "ci_95_diff": [
+            -0.0938,
+            0.1088
+          ],
+          "p_value": 0.259706,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        }
+      },
+      "hybrid_vs_code": {
+        "Recall@1": {
+          "n_queries": 18,
+          "mean_difference": 0.0463,
+          "ci_95_diff": [
+            -0.0556,
+            0.1852
+          ],
+          "p_value": 0.490835,
+          "test_type": "paired_ttest",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "Recall@5": {
+          "n_queries": 18,
+          "mean_difference": 0.1019,
+          "ci_95_diff": [
+            -0.0095,
+            0.2502
+          ],
+          "p_value": 0.15554,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "Recall@10": {
+          "n_queries": 18,
+          "mean_difference": 0.037,
+          "ci_95_diff": [
+            0.0,
+            0.0926
+          ],
+          "p_value": 0.163139,
+          "test_type": "paired_ttest",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "MRR": {
+          "n_queries": 18,
+          "mean_difference": 0.054,
+          "ci_95_diff": [
+            -0.0602,
+            0.1822
+          ],
+          "p_value": 0.577633,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "nDCG@5": {
+          "n_queries": 18,
+          "mean_difference": 0.0828,
+          "ci_95_diff": [
+            -0.019,
+            0.2004
+          ],
+          "p_value": 0.323352,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "nDCG@10": {
+          "n_queries": 18,
+          "mean_difference": 0.0625,
+          "ci_95_diff": [
+            -0.0242,
+            0.1596
+          ],
+          "p_value": 0.261054,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        }
+      },
+      "hybrid_graph_vs_hybrid": {
+        "Recall@1": {
+          "n_queries": 18,
+          "mean_difference": -0.1667,
+          "ci_95_diff": [
+            -0.3333,
+            0.0
+          ],
+          "p_value": 0.082698,
+          "test_type": "paired_ttest",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "Recall@5": {
+          "n_queries": 18,
+          "mean_difference": 0.0,
+          "ci_95_diff": [
+            0.0,
+            0.0
+          ],
+          "p_value": 1.0,
+          "test_type": "none",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "Recall@10": {
+          "n_queries": 18,
+          "mean_difference": 0.0,
+          "ci_95_diff": [
+            0.0,
+            0.0
+          ],
+          "p_value": 1.0,
+          "test_type": "none",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "MRR": {
+          "n_queries": 18,
+          "mean_difference": -0.1139,
+          "ci_95_diff": [
+            -0.2278,
+            -0.0276
+          ],
+          "p_value": 0.067562,
+          "test_type": "paired_ttest",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "nDCG@5": {
+          "n_queries": 18,
+          "mean_difference": -0.0818,
+          "ci_95_diff": [
+            -0.17,
+            -0.0101
+          ],
+          "p_value": 0.169464,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "nDCG@10": {
+          "n_queries": 18,
+          "mean_difference": -0.0811,
+          "ci_95_diff": [
+            -0.1693,
+            -0.0094
+          ],
+          "p_value": 0.28921,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        }
+      },
+      "hybrid_graph_vs_tfidf_graph": {
+        "Recall@1": {
+          "n_queries": 18,
+          "mean_difference": -0.1759,
+          "ci_95_diff": [
+            -0.4074,
+            0.0185
+          ],
+          "p_value": 0.424703,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "Recall@5": {
+          "n_queries": 18,
+          "mean_difference": -0.0093,
+          "ci_95_diff": [
+            -0.0833,
+            0.0556
+          ],
+          "p_value": 0.790325,
+          "test_type": "paired_ttest",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "Recall@10": {
+          "n_queries": 18,
+          "mean_difference": -0.0741,
+          "ci_95_diff": [
+            -0.2037,
+            0.0
+          ],
+          "p_value": 0.215057,
+          "test_type": "paired_ttest",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "MRR": {
+          "n_queries": 18,
+          "mean_difference": -0.0648,
+          "ci_95_diff": [
+            -0.2908,
+            0.1585
+          ],
+          "p_value": 0.639299,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "nDCG@5": {
+          "n_queries": 18,
+          "mean_difference": -0.0687,
+          "ci_95_diff": [
+            -0.2193,
+            0.0739
+          ],
+          "p_value": 0.513298,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        },
+        "nDCG@10": {
+          "n_queries": 18,
+          "mean_difference": -0.0977,
+          "ci_95_diff": [
+            -0.2499,
+            0.0417
+          ],
+          "p_value": 0.457065,
+          "test_type": "wilcoxon_signed_rank",
+          "statistically_significant": false,
+          "sample_size_limitation": "Sample size N < 30 limits statistical power; non-significance does not establish equivalence."
+        }
+      }
+    }
+  }
+}

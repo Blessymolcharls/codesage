@@ -190,6 +190,15 @@ class RepositoryGraph:
         with open(path, "w", encoding="utf-8") as f:
             json.dump(self.to_dict(), f, indent=2)
 
+    def save(self, output_path: Path | str) -> None:
+        """Alias for save_json."""
+        self.save_json(output_path)
+
+    @classmethod
+    def load(cls, json_path: Path | str) -> "RepositoryGraph":
+        """Alias for load_json."""
+        return cls.load_json(json_path)
+
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "RepositoryGraph":
         """Reconstruct graph from dictionary."""
@@ -259,9 +268,10 @@ class RepositoryGraphBuilder:
     def __init__(self, repo_root: Optional[Path | str] = None) -> None:
         self.repo_root = Path(repo_root) if repo_root else None
 
-    def build(self, units: List[Dict[str, Any]]) -> RepositoryGraph:
+    def build(self, units: List[Any]) -> RepositoryGraph:
         """Build relationship graph from indexed code units and repository files."""
         graph = RepositoryGraph()
+        units = [u.to_dict() if hasattr(u, "to_dict") else u for u in units]
 
         # 1. Index code units and files
         file_paths: Set[str] = set()
@@ -419,13 +429,22 @@ class RepositoryGraphBuilder:
 
         candidates: List[str] = []
 
-        # Handle 'package:docucharm/...' for Dart
-        if import_str.startswith("package:docucharm/"):
-            rest = import_str.replace("package:docucharm/", "")
-            candidates.append(f"frontend/lib/{rest}")
-        elif import_str.startswith("package:"):
-            # External Flutter/Dart package
-            return None
+        # Handle Dart 'package:<pkg>/...' imports
+        if import_str.startswith("package:"):
+            pkg_parts = import_str[len("package:"):].split("/", 1)
+            if len(pkg_parts) == 2:
+                pkg_name, rest = pkg_parts
+                # Standard Dart package structure maps package:<pkg>/<rest> to lib/<rest>
+                candidates.append(f"lib/{rest}")
+                candidates.append(f"frontend/lib/{rest}")
+                # Dynamically locate any indexed file ending with lib/<rest>
+                for fp in file_paths:
+                    norm_fp = fp.replace("\\", "/")
+                    if norm_fp.endswith(f"/lib/{rest}") or norm_fp == f"lib/{rest}":
+                        candidates.append(norm_fp)
+            if not candidates:
+                # External Flutter/Dart package (e.g. package:flutter/...)
+                return None
         elif import_str.startswith("."):
             # Relative imports in JS or Dart
             candidates = [

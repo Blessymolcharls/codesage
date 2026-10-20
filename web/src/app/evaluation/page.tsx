@@ -14,6 +14,7 @@ import {
   Network,
   RotateCcw,
   ShieldCheck,
+  SlidersHorizontal,
   Sparkles,
   Zap,
 } from "lucide-react";
@@ -24,7 +25,7 @@ export default function EvaluationPage() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<"benchmark" | "ablations" | "graph_reranking">("benchmark");
+  const [activeTab, setActiveTab] = useState<"benchmark" | "ablations" | "graph_reranking" | "hybrid">("hybrid");
 
   const fetchEvaluations = async () => {
     setLoading(true);
@@ -64,6 +65,18 @@ export default function EvaluationPage() {
 
       {/* Tabs Row */}
       <div className="flex border-b border-white/10 gap-2 overflow-x-auto text-xs font-medium">
+        <button
+          onClick={() => setActiveTab("hybrid")}
+          className={`flex items-center gap-2 py-3 px-4 border-b-2 transition whitespace-nowrap ${
+            activeTab === "hybrid"
+              ? "border-indigo-500 text-white font-semibold"
+              : "border-transparent text-slate-400 hover:text-slate-200"
+          }`}
+        >
+          <Sparkles className="h-4 w-4 text-emerald-400" />
+          <span>Milestone 2: Hybrid RRF Study</span>
+        </button>
+
         <button
           onClick={() => setActiveTab("benchmark")}
           className={`flex items-center gap-2 py-3 px-4 border-b-2 transition whitespace-nowrap ${
@@ -132,6 +145,283 @@ export default function EvaluationPage() {
       {/* Content Tabs */}
       {!loading && data && (
         <div className="space-y-8">
+          {/* TAB 0: MILESTONE 2 HYBRID RRF STUDY */}
+          {activeTab === "hybrid" && (
+            <div className="space-y-6">
+              {/* Summary Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                <div className="glass-panel rounded-2xl p-5 border-l-4 border-indigo-500">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs uppercase text-slate-400 font-semibold tracking-wider">
+                      Test Split MRR
+                    </span>
+                    <Sparkles className="h-4 w-4 text-indigo-400" />
+                  </div>
+                  <div className="mt-2 flex items-baseline gap-2">
+                    <span className="text-2xl font-extrabold text-white">0.8426</span>
+                    <span className="text-xs text-indigo-400 font-medium">+14.8% vs TF-IDF</span>
+                  </div>
+                  <p className="mt-1 text-xs text-slate-400">
+                    Highest MRR on held-out test split, beating TF-IDF (0.7338) and Code Transformer (0.7886).
+                  </p>
+                </div>
+
+                <div className="glass-panel rounded-2xl p-5 border-l-4 border-emerald-500">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs uppercase text-slate-400 font-semibold tracking-wider">
+                      Test nDCG@5
+                    </span>
+                    <Zap className="h-4 w-4 text-emerald-400" />
+                  </div>
+                  <div className="mt-2 flex items-baseline gap-2">
+                    <span className="text-2xl font-extrabold text-white">0.7925</span>
+                    <span className="text-xs text-emerald-400 font-medium">Top Rank Winner</span>
+                  </div>
+                  <p className="mt-1 text-xs text-slate-400">
+                    Highest ranking quality on held-out test split, outperforming all single-model baselines.
+                  </p>
+                </div>
+
+                <div className="glass-panel rounded-2xl p-5 border-l-4 border-violet-500">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs uppercase text-slate-400 font-semibold tracking-wider">
+                      Dev Split MRR
+                    </span>
+                    <CheckCircle2 className="h-4 w-4 text-violet-400" />
+                  </div>
+                  <div className="mt-2 flex items-baseline gap-2">
+                    <span className="text-2xl font-extrabold text-white">1.0000</span>
+                    <span className="text-xs text-violet-400 font-medium">18/18 Queries</span>
+                  </div>
+                  <p className="mt-1 text-xs text-slate-400">
+                    Every development query retrieved an annotated relevant code unit in the top-1 position.
+                  </p>
+                </div>
+
+                <div className="glass-panel rounded-2xl p-5 border-l-4 border-amber-500">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs uppercase text-slate-400 font-semibold tracking-wider">
+                      Fusion Constant
+                    </span>
+                    <Layers className="h-4 w-4 text-amber-400" />
+                  </div>
+                  <div className="mt-2 flex items-baseline gap-2">
+                    <span className="text-2xl font-extrabold text-white">k = 60</span>
+                    <span className="text-xs text-amber-400 font-medium">1-Based Ranks</span>
+                  </div>
+                  <p className="mt-1 text-xs text-slate-400">
+                    Standard unweighted reciprocal rank summation; robust across k ∈ [20, 100].
+                  </p>
+                </div>
+              </div>
+
+              {/* Empirical Comparison Table: Dev vs Held-Out Test */}
+              <div className="glass-panel rounded-2xl overflow-hidden shadow-xl">
+                <div className="p-5 border-b border-white/5 bg-slate-900/60 flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                      <Sparkles className="h-4 w-4 text-indigo-400" />
+                      <span>Hybrid RRF vs Single-Model Baselines (Dev vs Held-Out Test)</span>
+                    </h3>
+                    <p className="text-xs text-slate-400">
+                      Standardized protocol on identical 89 DocuCharm units with isolated splits (18 Dev / 18 Test).
+                    </p>
+                  </div>
+                </div>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead className="bg-slate-900/90 text-slate-400 font-semibold uppercase tracking-wider text-[11px] border-b border-white/5">
+                      <tr>
+                        <th className="py-3 px-4">Split</th>
+                        <th className="py-3 px-4">Retrieval System</th>
+                        <th className="py-3 px-4">Recall@1</th>
+                        <th className="py-3 px-4">Recall@5</th>
+                        <th className="py-3 px-4">Recall@10</th>
+                        <th className="py-3 px-4">MRR</th>
+                        <th className="py-3 px-4">nDCG@5</th>
+                        <th className="py-3 px-4">nDCG@10</th>
+                        <th className="py-3 px-4">Latency (p50)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-white/5 font-mono text-slate-300">
+                      {/* DEV SPLIT ROWS */}
+                      <tr className="bg-slate-900/30">
+                        <td rowSpan={5} className="py-3 px-4 font-sans font-bold text-indigo-400 border-r border-white/5 align-top">
+                          Dev (N=18)
+                        </td>
+                        <td className="py-2.5 px-4 font-sans text-slate-300">TF-IDF (Lexical Baseline)</td>
+                        <td className="py-2.5 px-4">0.3657</td>
+                        <td className="py-2.5 px-4">0.8426</td>
+                        <td className="py-2.5 px-4">0.9537</td>
+                        <td className="py-2.5 px-4">0.8148</td>
+                        <td className="py-2.5 px-4">0.7850</td>
+                        <td className="py-2.5 px-4">0.8378</td>
+                        <td className="py-2.5 px-4 text-slate-400 font-sans">0.48 ms</td>
+                      </tr>
+                      <tr className="bg-slate-900/30">
+                        <td className="py-2.5 px-4 font-sans text-slate-300">Code Transformer (st-codesearch)</td>
+                        <td className="py-2.5 px-4">0.3796</td>
+                        <td className="py-2.5 px-4">0.7731</td>
+                        <td className="py-2.5 px-4">0.8796</td>
+                        <td className="py-2.5 px-4">0.9028</td>
+                        <td className="py-2.5 px-4">0.7513</td>
+                        <td className="py-2.5 px-4">0.8013</td>
+                        <td className="py-2.5 px-4 text-slate-400 font-sans">21.8 ms</td>
+                      </tr>
+                      <tr className="bg-slate-900/30">
+                        <td className="py-2.5 px-4 font-sans text-slate-300">TF-IDF + Graph Reranker</td>
+                        <td className="py-2.5 px-4">0.3657</td>
+                        <td className="py-2.5 px-4">0.8426</td>
+                        <td className="py-2.5 px-4">0.9815</td>
+                        <td className="py-2.5 px-4">0.8135</td>
+                        <td className="py-2.5 px-4">0.7919</td>
+                        <td className="py-2.5 px-4">0.8567</td>
+                        <td className="py-2.5 px-4 text-slate-400 font-sans">0.81 ms</td>
+                      </tr>
+                      <tr className="bg-indigo-950/20 font-semibold text-white">
+                        <td className="py-2.5 px-4 font-sans text-indigo-300 flex items-center gap-1.5">
+                          <Sparkles className="h-3 w-3 text-emerald-400" />
+                          <span>Hybrid RRF (TF-IDF + Code, k=60)</span>
+                        </td>
+                        <td className="py-2.5 px-4 text-emerald-400 font-bold">0.4722</td>
+                        <td className="py-2.5 px-4 text-emerald-400 font-bold">0.8750</td>
+                        <td className="py-2.5 px-4">0.9352</td>
+                        <td className="py-2.5 px-4 text-emerald-400 font-bold">1.0000</td>
+                        <td className="py-2.5 px-4 text-emerald-400 font-bold">0.8781</td>
+                        <td className="py-2.5 px-4 text-emerald-400 font-bold">0.9068</td>
+                        <td className="py-2.5 px-4 text-slate-400 font-sans">23.59 ms</td>
+                      </tr>
+                      <tr className="bg-slate-900/30 text-slate-400">
+                        <td className="py-2.5 px-4 font-sans">Hybrid RRF + Graph Reranker</td>
+                        <td className="py-2.5 px-4">0.2593</td>
+                        <td className="py-2.5 px-4">0.8472</td>
+                        <td className="py-2.5 px-4">0.9537</td>
+                        <td className="py-2.5 px-4">0.8167</td>
+                        <td className="py-2.5 px-4">0.7686</td>
+                        <td className="py-2.5 px-4">0.8114</td>
+                        <td className="py-2.5 px-4 text-slate-400 font-sans">23.99 ms</td>
+                      </tr>
+
+                      {/* TEST SPLIT ROWS */}
+                      <tr className="bg-slate-900/60 border-t-2 border-white/10">
+                        <td rowSpan={5} className="py-3 px-4 font-sans font-bold text-violet-400 border-r border-white/5 align-top">
+                          Test (N=18)
+                          <span className="block text-[10px] font-normal text-slate-400">Held-Out</span>
+                        </td>
+                        <td className="py-2.5 px-4 font-sans text-slate-300">TF-IDF (Lexical Baseline)</td>
+                        <td className="py-2.5 px-4">0.4630</td>
+                        <td className="py-2.5 px-4">0.8241</td>
+                        <td className="py-2.5 px-4">0.9815</td>
+                        <td className="py-2.5 px-4">0.7338</td>
+                        <td className="py-2.5 px-4">0.7236</td>
+                        <td className="py-2.5 px-4">0.7901</td>
+                        <td className="py-2.5 px-4 text-slate-400 font-sans">0.46 ms</td>
+                      </tr>
+                      <tr className="bg-slate-900/60">
+                        <td className="py-2.5 px-4 font-sans text-slate-300">Code Transformer (st-codesearch)</td>
+                        <td className="py-2.5 px-4">0.4352</td>
+                        <td className="py-2.5 px-4">0.7500</td>
+                        <td className="py-2.5 px-4">0.8519</td>
+                        <td className="py-2.5 px-4">0.7886</td>
+                        <td className="py-2.5 px-4">0.7098</td>
+                        <td className="py-2.5 px-4">0.7454</td>
+                        <td className="py-2.5 px-4 text-slate-400 font-sans">22.5 ms</td>
+                      </tr>
+                      <tr className="bg-slate-900/60">
+                        <td className="py-2.5 px-4 font-sans text-slate-300">TF-IDF + Graph Reranker</td>
+                        <td className="py-2.5 px-4 text-emerald-400 font-bold">0.4907</td>
+                        <td className="py-2.5 px-4 text-emerald-400 font-bold">0.8611</td>
+                        <td className="py-2.5 px-4">0.9630</td>
+                        <td className="py-2.5 px-4">0.7935</td>
+                        <td className="py-2.5 px-4">0.7794</td>
+                        <td className="py-2.5 px-4 text-emerald-400 font-bold">0.8244</td>
+                        <td className="py-2.5 px-4 text-slate-400 font-sans">0.84 ms</td>
+                      </tr>
+                      <tr className="bg-indigo-950/30 font-semibold text-white">
+                        <td className="py-2.5 px-4 font-sans text-indigo-300 flex items-center gap-1.5">
+                          <Sparkles className="h-3 w-3 text-emerald-400" />
+                          <span>Hybrid RRF (TF-IDF + Code, k=60)</span>
+                        </td>
+                        <td className="py-2.5 px-4">0.4815</td>
+                        <td className="py-2.5 px-4">0.8519</td>
+                        <td className="py-2.5 px-4">0.8889</td>
+                        <td className="py-2.5 px-4 text-emerald-400 font-bold">0.8426</td>
+                        <td className="py-2.5 px-4 text-emerald-400 font-bold">0.7925</td>
+                        <td className="py-2.5 px-4">0.8079</td>
+                        <td className="py-2.5 px-4 text-slate-400 font-sans">24.06 ms</td>
+                      </tr>
+                      <tr className="bg-slate-900/60 text-slate-400">
+                        <td className="py-2.5 px-4 font-sans">Hybrid RRF + Graph Reranker</td>
+                        <td className="py-2.5 px-4">0.3148</td>
+                        <td className="py-2.5 px-4">0.8519</td>
+                        <td className="py-2.5 px-4">0.8889</td>
+                        <td className="py-2.5 px-4">0.7287</td>
+                        <td className="py-2.5 px-4">0.7107</td>
+                        <td className="py-2.5 px-4">0.7268</td>
+                        <td className="py-2.5 px-4 text-slate-400 font-sans">24.41 ms</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Sensitivity Analysis & Statistical Limitations */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Fusion Constant Sensitivity */}
+                <div className="glass-panel rounded-2xl p-5 space-y-3">
+                  <h4 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                    <SlidersHorizontal className="h-4 w-4 text-indigo-400" />
+                    <span>Fusion Constant Sensitivity Analysis (Dev Split)</span>
+                  </h4>
+                  <p className="text-xs text-slate-400">
+                    Evaluating varying values of fusion smoothing constant k on the development split:
+                  </p>
+                  <table className="w-full text-left text-xs font-mono">
+                    <thead className="text-slate-500 text-[11px] border-b border-white/5">
+                      <tr>
+                        <th className="py-1.5 px-2">Constant</th>
+                        <th className="py-1.5 px-2">Recall@1</th>
+                        <th className="py-1.5 px-2">Recall@5</th>
+                        <th className="py-1.5 px-2">MRR</th>
+                        <th className="py-1.5 px-2">nDCG@5</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-white/5 text-slate-300">
+                      <tr><td className="py-1.5 px-2">k = 20</td><td className="py-1.5 px-2">0.4722</td><td className="py-1.5 px-2">0.8750</td><td className="py-1.5 px-2">1.0000</td><td className="py-1.5 px-2">0.8781</td></tr>
+                      <tr><td className="py-1.5 px-2">k = 40</td><td className="py-1.5 px-2">0.4722</td><td className="py-1.5 px-2">0.8750</td><td className="py-1.5 px-2">1.0000</td><td className="py-1.5 px-2">0.8781</td></tr>
+                      <tr className="bg-indigo-950/40 text-indigo-300 font-bold"><td className="py-1.5 px-2">k = 60 (Std)</td><td className="py-1.5 px-2">0.4722</td><td className="py-1.5 px-2">0.8750</td><td className="py-1.5 px-2">1.0000</td><td className="py-1.5 px-2">0.8781</td></tr>
+                      <tr><td className="py-1.5 px-2">k = 80</td><td className="py-1.5 px-2">0.4722</td><td className="py-1.5 px-2">0.8750</td><td className="py-1.5 px-2">1.0000</td><td className="py-1.5 px-2">0.8781</td></tr>
+                      <tr><td className="py-1.5 px-2">k = 100</td><td className="py-1.5 px-2">0.4722</td><td className="py-1.5 px-2">0.8750</td><td className="py-1.5 px-2">1.0000</td><td className="py-1.5 px-2">0.8781</td></tr>
+                    </tbody>
+                  </table>
+                  <p className="text-[11px] text-slate-500 italic">
+                    Outcome: Invariance across k ∈ [20, 100] demonstrates that RRF ordering is robust to smoothing choice.
+                  </p>
+                </div>
+
+                {/* Key Research Findings & Limitations */}
+                <div className="glass-panel rounded-2xl p-5 space-y-3">
+                  <h4 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                    <ShieldCheck className="h-4 w-4 text-emerald-400" />
+                    <span>Empirical Findings & Statistical Power</span>
+                  </h4>
+                  <ul className="text-xs text-slate-300 space-y-2 list-disc list-inside">
+                    <li>
+                      <span className="font-semibold text-white">Top-Rank Precision:</span> Hybrid RRF achieved the highest MRR (<span className="text-emerald-400 font-mono">0.8426</span>) and nDCG@5 (<span className="text-emerald-400 font-mono">0.7925</span>) on the held-out test split, beating all single models.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-white">Graph Reranking Tradeoff:</span> While graph reranking boosted TF-IDF on test (+0.037 R@5), applying it on top of Hybrid RRF degraded top-1 precision (R@1 dropped to 0.3148) because graph affinity clustered methods over standalone controllers.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-white">Sample Size Limitation:</span> With N=18 per split, paired statistical power is ~0.35. Non-significant p-values (p &gt; 0.05) cannot establish equivalence, but practical gains in MRR and nDCG@5 are substantial.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* TAB 1: 3-WAY BENCHMARK */}
           {activeTab === "benchmark" && data.benchmark_comparison && (
             <div className="space-y-6">

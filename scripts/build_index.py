@@ -50,6 +50,17 @@ def parse_args() -> argparse.Namespace:
         help="Maximum lines before a code unit is split into deterministic chunks (default: 250)",
     )
     parser.add_argument(
+        "--workspace",
+        type=str,
+        default=None,
+        help="Target workspace ID to index via WorkspaceManager (e.g. 'docucharm' or a custom repo ID)",
+    )
+    parser.add_argument(
+        "--incremental",
+        action="store_true",
+        help="Perform incremental reindexing (requires --workspace)",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Perform scanning and extraction without writing output index files",
@@ -89,6 +100,77 @@ def resolve_output_path(raw_output: str) -> Path:
 
 def main() -> int:
     args = parse_args()
+
+    if args.workspace:
+        from codesage.workspace import WorkspaceError, WorkspaceManager, WorkspaceNotFoundError
+
+        manager = WorkspaceManager(project_root / "data")
+        ws_id = args.workspace.strip()
+
+        # Check if workspace exists, otherwise register it if repo_root is provided and valid
+        try:
+            ws = manager.get_workspace(ws_id)
+        except WorkspaceNotFoundError:
+            # Register new workspace
+            try:
+                repo_root = resolve_repo_path(args.repo_root)
+                print(f"Registering new workspace '{ws_id}' pointing to: {repo_root}")
+                ws = manager.register_workspace(ws_id, repo_root)
+            except Exception as e:
+                print(f"Error registering workspace '{ws_id}': {e}", file=sys.stderr)
+                return 1
+        except Exception as e:
+            print(f"Workspace error: {e}", file=sys.stderr)
+            return 1
+
+        if args.incremental:
+            print(f"Running incremental indexing for workspace '{ws_id}'...")
+            try:
+                ws, stats = manager.incremental_index(
+                    ws_id,
+                    max_file_size_kb=args.max_file_size_kb,
+                    max_unit_lines=args.max_unit_lines,
+                )
+                print("=" * 60)
+                print(f"Incremental Indexing Summary: {ws.metadata.name} ({ws_id})")
+                print("=" * 60)
+                print(f"Status:         {ws.metadata.status}")
+                print(f"Total Units:    {ws.metadata.unit_count}")
+                print(f"Files Added:    {stats.get('added', 0)}")
+                print(f"Files Modified: {stats.get('modified', 0)}")
+                print(f"Files Deleted:  {stats.get('deleted', 0)}")
+                print(f"Files Unchanged:{stats.get('unchanged', 0)}")
+                print(f"Code Units:     {ws.units_path}")
+                print(f"Graph:          {ws.graph_path}")
+                print("=" * 60)
+                return 0
+            except WorkspaceError as e:
+                print(f"Incremental indexing error: {e}", file=sys.stderr)
+                return 1
+
+        print(f"Running full indexing for workspace '{ws_id}'...")
+        try:
+            ws = manager.index_workspace(
+                ws_id,
+                max_files=args.max_files,
+                max_file_size_kb=args.max_file_size_kb,
+                max_unit_lines=args.max_unit_lines,
+            )
+            print("=" * 60)
+            print(f"Workspace Indexing Summary: {ws.metadata.name} ({ws_id})")
+            print("=" * 60)
+            print(f"Status:         {ws.metadata.status}")
+            print(f"Total Units:    {ws.metadata.unit_count}")
+            print(f"Total Files:    {ws.metadata.file_count}")
+            print(f"Languages:      {', '.join(ws.metadata.languages) if ws.metadata.languages else 'None'}")
+            print(f"Code Units:     {ws.units_path}")
+            print(f"Graph:          {ws.graph_path}")
+            print(f"Manifest:       {ws.manifest_path}")
+            print("=" * 60)
+            return 0
+        except WorkspaceError as e:
+            print(f"Indexing error: {e}", file=sys.stderr)
+            return 1
 
     try:
         repo_root = resolve_repo_path(args.repo_root)

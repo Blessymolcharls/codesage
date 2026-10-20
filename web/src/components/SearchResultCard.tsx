@@ -25,6 +25,10 @@ export interface SearchResultItem {
   extraction_method: string;
   preview: string;
   source_code: string;
+  model_ranks?: Record<string, number>;
+  rrf_score?: number;
+  graph_boost?: number;
+  graph_score?: number;
 }
 
 interface SearchResultCardProps {
@@ -158,6 +162,32 @@ export function SearchResultCard({
           L{result.start_line}–L{result.end_line}
         </div>
       </div>
+
+      {/* Hybrid RRF Provenance Details */}
+      {result.model_ranks && Object.keys(result.model_ranks).length > 0 && (
+        <div className="flex items-center gap-1.5 flex-wrap pb-2.5 text-[11px]">
+          <span className="text-slate-500 font-medium">RRF Consensus:</span>
+          {Object.entries(result.model_ranks).map(([modelKey, rankNum]) => (
+            <span
+              key={modelKey}
+              className="rounded bg-indigo-950/60 border border-indigo-500/30 px-2 py-0.5 text-indigo-300 font-mono"
+            >
+              {modelKey}: #{rankNum}
+            </span>
+          ))}
+          {result.graph_boost !== undefined && result.graph_boost !== 0 && (
+            <span
+              className={`rounded px-2 py-0.5 font-mono ${
+                result.graph_boost > 0
+                  ? "bg-amber-950/60 border border-amber-500/30 text-amber-300"
+                  : "bg-slate-800 text-slate-400"
+              }`}
+            >
+              graph: {result.graph_boost > 0 ? `+${result.graph_boost.toFixed(4)}` : result.graph_boost.toFixed(4)}
+            </span>
+          )}
+        </div>
+      )}
 
       {/* Syntax-Highlighted Source Preview */}
       <div className="mt-2">

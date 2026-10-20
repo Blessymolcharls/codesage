@@ -201,7 +201,49 @@ def test_models_availability_flag(client: TestClient):
     resp = client.get("/api/models")
     assert resp.status_code == 200
     models = resp.json()
+    model_ids = [m["id"] for m in models]
+    assert "hybrid" in model_ids
+    assert "hybrid_graph" in model_ids
     for m in models:
         assert "is_available" in m
         assert isinstance(m["is_available"], bool)
+
+
+def test_search_endpoint_hybrid(client: TestClient):
+    """Test search endpoint with RRF hybrid retrieval."""
+    payload = {
+        "query": "merge multiple PDF files",
+        "model": "hybrid",
+        "top_k": 5,
+        "rerank": False,
+    }
+    resp = client.post("/api/search", json=payload)
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["model"] == "hybrid"
+    assert len(data["results"]) <= 5
+    if data["results"]:
+        first = data["results"][0]
+        assert "model_ranks" in first
+        assert "rrf_score" in first
+        assert first["rrf_score"] is not None
+
+
+def test_search_endpoint_hybrid_graph(client: TestClient):
+    """Test search endpoint with RRF hybrid retrieval plus graph reranking."""
+    payload = {
+        "query": "merge multiple PDF files",
+        "model": "hybrid_graph",
+        "top_k": 5,
+        "rerank": True,
+    }
+    resp = client.post("/api/search", json=payload)
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["rerank_enabled"] is True
+    assert len(data["results"]) <= 5
+    if data["results"]:
+        first = data["results"][0]
+        assert "graph_boost" in first
+        assert "graph_score" in first
 

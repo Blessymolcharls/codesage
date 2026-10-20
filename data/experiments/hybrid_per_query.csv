@@ -1,0 +1,181 @@
+split,query_id,query,system,recall_at_1,recall_at_5,mrr,ndcg_at_5,retrieved_top_1,relevant_count,hits_at_5
+dev,q01,merge multiple PDF files,tfidf,0.3333,1.0000,1.0000,0.9675,frontend/lib/screens/feature_screens/tools.dart:method:build:7_16,3,3
+dev,q03,convert images into a single PDF document,tfidf,0.3333,0.6667,1.0000,0.7654,frontend/lib/screens/feature_screens/tools.dart:method:build:99_108,3,2
+dev,q06,clean up temporary uploaded files from disk,tfidf,0.0000,0.0000,0.1667,0.0000,backend/routes/pdfRoutes.js:line_chunk:anon:1_46,2,0
+dev,q09,start express server and listen on port,tfidf,1.0000,1.0000,1.0000,1.0000,backend/server.js:line_chunk:anon:1_36,1,1
+dev,q11,dio client configuration with base URL and timeout,tfidf,0.5000,1.0000,1.0000,1.0000,frontend/lib/services/network_service.dart:method:NetworkService:13_19,2,2
+dev,q12,state management for PDF processing status and progress,tfidf,0.0000,0.6667,0.3333,0.4367,frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:348_356:part2,3,2
+dev,q14,toggle between dark mode and light theme,tfidf,0.3333,1.0000,1.0000,1.0000,frontend/lib/main.dart:method:toggleTheme:25_28,3,3
+dev,q15,configure material app theme with google fonts,tfidf,0.3333,1.0000,1.0000,1.0000,frontend/lib/main.dart:method:build:35_46,3,3
+dev,q17,search text within PDF document toolbar,tfidf,0.3333,0.6667,1.0000,0.7039,frontend/lib/screens/viewer_screen.dart:class:SearchToolbar:237_251,3,2
+dev,q19,share or save processed PDF locally to device storage,tfidf,0.3333,1.0000,1.0000,1.0000,frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47,3,3
+dev,q20,drag and drop zone for picking files,tfidf,0.0000,0.7500,0.3333,0.5143,frontend/lib/providers/pdf_provider.dart:method:setPickingFiles:30_33,4,3
+dev,q22,display custom error or success snackbar message,tfidf,0.2500,0.7500,1.0000,0.7877,frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74,4,3
+dev,q23,base feature screen layout for uploading and processing,tfidf,0.0000,0.6667,0.3333,0.4162,frontend/lib/screens/feature_screens/base_feature_screen.dart:method:createState:41_41,3,2
+dev,q25,interactive animated card with hover scale effect,tfidf,0.3333,1.0000,1.0000,0.9675,frontend/lib/screens/dashboard_screen.dart:class:_FeatureCardState:180_306,3,3
+dev,q29,configure multer disk storage destination and filename,tfidf,1.0000,1.0000,1.0000,1.0000,backend/routes/pdfRoutes.js:line_chunk:anon:1_46,1,1
+dev,q31,show error snackbar alert notification,tfidf,0.5000,1.0000,1.0000,0.8772,frontend/lib/widgets/custom_snackbar.dart:method:showError:68_70,2,2
+dev,q36,reorderable list view of selected files,tfidf,0.0000,1.0000,0.5000,0.6934,frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_onFilesDropped:56_70,2,2
+dev,q38,flutter smoke test verifying docucharm app startup,tfidf,1.0000,1.0000,1.0000,1.0000,frontend/test/widget_test.dart:function:main:13_30,1,1
+dev,q01,merge multiple PDF files,code,0.3333,0.6667,1.0000,0.7039,backend/controllers/pdfController.js:function:mergePdfs:9_36,3,2
+dev,q03,convert images into a single PDF document,code,0.3333,0.6667,1.0000,0.7039,backend/controllers/pdfController.js:function:imageToPdf:94_135,3,2
+dev,q06,clean up temporary uploaded files from disk,code,0.5000,1.0000,1.0000,1.0000,backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48,2,2
+dev,q09,start express server and listen on port,code,0.0000,1.0000,0.5000,0.6309,frontend/test/widget_test.dart:function:main:13_30,1,1
+dev,q11,dio client configuration with base URL and timeout,code,0.5000,1.0000,1.0000,1.0000,frontend/lib/services/network_service.dart:method:NetworkService:13_19,2,2
+dev,q12,state management for PDF processing status and progress,code,0.0000,1.0000,0.5000,0.6797,frontend/lib/screens/viewer_screen.dart:class:_ViewerScreenState:15_235,3,3
+dev,q14,toggle between dark mode and light theme,code,0.3333,0.6667,1.0000,0.6714,frontend/lib/main.dart:method:toggleTheme:25_28,3,2
+dev,q15,configure material app theme with google fonts,code,0.3333,0.6667,1.0000,0.7654,frontend/lib/main.dart:class:DocuCharmApp:31_85,3,2
+dev,q17,search text within PDF document toolbar,code,0.3333,0.6667,1.0000,0.7039,frontend/lib/screens/viewer_screen.dart:class:SearchToolbarState:253_294,3,2
+dev,q19,share or save processed PDF locally to device storage,code,0.0000,0.3333,0.2500,0.2021,backend/controllers/pdfController.js:function:imageToPdf:94_135,3,1
+dev,q20,drag and drop zone for picking files,code,0.2500,0.7500,1.0000,0.8319,frontend/lib/widgets/file_drop_zone.dart:method:_pickFiles:32_46,4,3
+dev,q22,display custom error or success snackbar message,code,0.2500,1.0000,1.0000,1.0000,frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74,4,4
+dev,q23,base feature screen layout for uploading and processing,code,0.3333,0.3333,1.0000,0.4693,frontend/lib/screens/feature_screens/base_feature_screen.dart:class:BaseFeatureScreen:14_42,3,1
+dev,q25,interactive animated card with hover scale effect,code,0.3333,0.6667,1.0000,0.6714,frontend/lib/screens/dashboard_screen.dart:class:_FeatureCardState:180_306,3,2
+dev,q29,configure multer disk storage destination and filename,code,1.0000,1.0000,1.0000,1.0000,backend/routes/pdfRoutes.js:line_chunk:anon:1_46,1,1
+dev,q31,show error snackbar alert notification,code,0.5000,1.0000,1.0000,0.8772,frontend/lib/widgets/custom_snackbar.dart:method:showError:68_70,2,2
+dev,q36,reorderable list view of selected files,code,0.5000,0.5000,1.0000,0.6131,frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:44_293:part1,2,1
+dev,q38,flutter smoke test verifying docucharm app startup,code,1.0000,1.0000,1.0000,1.0000,frontend/test/widget_test.dart:function:main:13_30,1,1
+dev,q01,merge multiple PDF files,tfidf_graph,0.3333,1.0000,1.0000,0.9675,frontend/lib/screens/feature_screens/tools.dart:method:build:7_16,3,3
+dev,q03,convert images into a single PDF document,tfidf_graph,0.3333,0.6667,1.0000,0.7654,frontend/lib/screens/feature_screens/tools.dart:method:build:99_108,3,2
+dev,q06,clean up temporary uploaded files from disk,tfidf_graph,0.0000,0.0000,0.1429,0.0000,backend/routes/pdfRoutes.js:line_chunk:anon:1_46,2,0
+dev,q09,start express server and listen on port,tfidf_graph,1.0000,1.0000,1.0000,1.0000,backend/server.js:line_chunk:anon:1_36,1,1
+dev,q11,dio client configuration with base URL and timeout,tfidf_graph,0.5000,1.0000,1.0000,1.0000,frontend/lib/services/network_service.dart:method:NetworkService:13_19,2,2
+dev,q12,state management for PDF processing status and progress,tfidf_graph,0.0000,1.0000,0.3333,0.6183,frontend/lib/screens/feature_screens/base_feature_screen.dart:method:build:348_356:part2,3,3
+dev,q14,toggle between dark mode and light theme,tfidf_graph,0.3333,1.0000,1.0000,1.0000,frontend/lib/main.dart:method:toggleTheme:25_28,3,3
+dev,q15,configure material app theme with google fonts,tfidf_graph,0.3333,1.0000,1.0000,1.0000,frontend/lib/main.dart:class:DocuCharmApp:31_85,3,3
+dev,q17,search text within PDF document toolbar,tfidf_graph,0.3333,0.6667,1.0000,0.7039,frontend/lib/screens/viewer_screen.dart:class:SearchToolbar:237_251,3,2
+dev,q19,share or save processed PDF locally to device storage,tfidf_graph,0.3333,1.0000,1.0000,1.0000,frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47,3,3
+dev,q20,drag and drop zone for picking files,tfidf_graph,0.0000,0.7500,0.3333,0.5143,frontend/lib/widgets/file_drop_zone.dart:method:createState:26_26,4,3
+dev,q22,display custom error or success snackbar message,tfidf_graph,0.2500,0.7500,1.0000,0.8319,frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74,4,3
+dev,q23,base feature screen layout for uploading and processing,tfidf_graph,0.0000,0.3333,0.3333,0.2346,frontend/lib/screens/feature_screens/base_feature_screen.dart:method:createState:41_41,3,1
+dev,q25,interactive animated card with hover scale effect,tfidf_graph,0.3333,1.0000,1.0000,0.9675,frontend/lib/screens/dashboard_screen.dart:class:_FeatureCardState:180_306,3,3
+dev,q29,configure multer disk storage destination and filename,tfidf_graph,1.0000,1.0000,1.0000,1.0000,backend/routes/pdfRoutes.js:line_chunk:anon:1_46,1,1
+dev,q31,show error snackbar alert notification,tfidf_graph,0.5000,1.0000,1.0000,1.0000,frontend/lib/widgets/custom_snackbar.dart:method:showError:68_70,2,2
+dev,q36,reorderable list view of selected files,tfidf_graph,0.0000,1.0000,0.5000,0.6509,frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_onFilesDropped:56_70,2,2
+dev,q38,flutter smoke test verifying docucharm app startup,tfidf_graph,1.0000,1.0000,1.0000,1.0000,frontend/test/widget_test.dart:function:main:13_30,1,1
+dev,q01,merge multiple PDF files,hybrid_rrf_k60,0.3333,1.0000,1.0000,0.9675,backend/controllers/pdfController.js:function:mergePdfs:9_36,3,3
+dev,q03,convert images into a single PDF document,hybrid_rrf_k60,0.3333,1.0000,1.0000,0.8855,frontend/lib/screens/feature_screens/tools.dart:class:ImagesToPdfScreen:96_109,3,3
+dev,q06,clean up temporary uploaded files from disk,hybrid_rrf_k60,0.5000,0.5000,1.0000,0.6131,backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48,2,1
+dev,q09,start express server and listen on port,hybrid_rrf_k60,1.0000,1.0000,1.0000,1.0000,backend/server.js:line_chunk:anon:1_36,1,1
+dev,q11,dio client configuration with base URL and timeout,hybrid_rrf_k60,0.5000,1.0000,1.0000,1.0000,frontend/lib/services/network_service.dart:method:NetworkService:13_19,2,2
+dev,q12,state management for PDF processing status and progress,hybrid_rrf_k60,0.3333,1.0000,1.0000,1.0000,frontend/lib/providers/pdf_provider.dart:class:PdfState:5_5,3,3
+dev,q14,toggle between dark mode and light theme,hybrid_rrf_k60,0.3333,1.0000,1.0000,0.9469,frontend/lib/main.dart:method:toggleTheme:25_28,3,3
+dev,q15,configure material app theme with google fonts,hybrid_rrf_k60,0.3333,1.0000,1.0000,1.0000,frontend/lib/main.dart:class:DocuCharmApp:31_85,3,3
+dev,q17,search text within PDF document toolbar,hybrid_rrf_k60,0.3333,1.0000,1.0000,0.9469,frontend/lib/screens/viewer_screen.dart:class:SearchToolbar:237_251,3,3
+dev,q19,share or save processed PDF locally to device storage,hybrid_rrf_k60,0.3333,0.6667,1.0000,0.7654,frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46,3,2
+dev,q20,drag and drop zone for picking files,hybrid_rrf_k60,0.2500,0.7500,1.0000,0.7537,frontend/lib/widgets/file_drop_zone.dart:method:_pickFiles:32_46,4,3
+dev,q22,display custom error or success snackbar message,hybrid_rrf_k60,0.2500,1.0000,1.0000,1.0000,frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74,4,4
+dev,q23,base feature screen layout for uploading and processing,hybrid_rrf_k60,0.3333,0.3333,1.0000,0.4693,frontend/lib/screens/feature_screens/base_feature_screen.dart:class:BaseFeatureScreen:14_42,3,1
+dev,q25,interactive animated card with hover scale effect,hybrid_rrf_k60,0.3333,1.0000,1.0000,0.9675,frontend/lib/screens/dashboard_screen.dart:class:_FeatureCardState:180_306,3,3
+dev,q29,configure multer disk storage destination and filename,hybrid_rrf_k60,1.0000,1.0000,1.0000,1.0000,backend/routes/pdfRoutes.js:line_chunk:anon:1_46,1,1
+dev,q31,show error snackbar alert notification,hybrid_rrf_k60,0.5000,1.0000,1.0000,0.8772,frontend/lib/widgets/custom_snackbar.dart:method:showError:68_70,2,2
+dev,q36,reorderable list view of selected files,hybrid_rrf_k60,0.5000,0.5000,1.0000,0.6131,frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:44_293:part1,2,1
+dev,q38,flutter smoke test verifying docucharm app startup,hybrid_rrf_k60,1.0000,1.0000,1.0000,1.0000,frontend/test/widget_test.dart:function:main:13_30,1,1
+dev,q01,merge multiple PDF files,hybrid_rrf_graph,0.3333,1.0000,1.0000,0.9675,frontend/lib/screens/feature_screens/tools.dart:class:MergeScreen:4_17,3,3
+dev,q03,convert images into a single PDF document,hybrid_rrf_graph,0.3333,0.6667,1.0000,0.7654,frontend/lib/screens/feature_screens/tools.dart:class:ImagesToPdfScreen:96_109,3,2
+dev,q06,clean up temporary uploaded files from disk,hybrid_rrf_graph,0.0000,1.0000,0.5000,0.6934,frontend/lib/services/network_service.dart:method:uploadFiles:22_101,2,2
+dev,q09,start express server and listen on port,hybrid_rrf_graph,0.0000,1.0000,0.3333,0.5000,frontend/lib/services/network_service.dart:class:NetworkService:6_102,1,1
+dev,q11,dio client configuration with base URL and timeout,hybrid_rrf_graph,0.5000,1.0000,1.0000,0.9197,frontend/lib/services/network_service.dart:class:NetworkService:6_102,2,2
+dev,q12,state management for PDF processing status and progress,hybrid_rrf_graph,0.3333,1.0000,1.0000,1.0000,frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76,3,3
+dev,q14,toggle between dark mode and light theme,hybrid_rrf_graph,0.3333,1.0000,1.0000,0.9469,frontend/lib/main.dart:class:ThemeProvider:20_29,3,3
+dev,q15,configure material app theme with google fonts,hybrid_rrf_graph,0.3333,1.0000,1.0000,1.0000,frontend/lib/main.dart:class:DocuCharmApp:31_85,3,3
+dev,q17,search text within PDF document toolbar,hybrid_rrf_graph,0.3333,1.0000,1.0000,0.9469,frontend/lib/screens/viewer_screen.dart:class:SearchToolbar:237_251,3,3
+dev,q19,share or save processed PDF locally to device storage,hybrid_rrf_graph,0.3333,1.0000,1.0000,1.0000,frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47,3,3
+dev,q20,drag and drop zone for picking files,hybrid_rrf_graph,0.2500,0.7500,1.0000,0.8319,frontend/lib/widgets/file_drop_zone.dart:class:_FileDropZoneState:29_126,4,3
+dev,q22,display custom error or success snackbar message,hybrid_rrf_graph,0.2500,1.0000,1.0000,1.0000,frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75,4,4
+dev,q23,base feature screen layout for uploading and processing,hybrid_rrf_graph,0.0000,0.3333,0.5000,0.2961,frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:294_357:part2,3,1
+dev,q25,interactive animated card with hover scale effect,hybrid_rrf_graph,0.3333,1.0000,1.0000,0.9675,frontend/lib/screens/dashboard_screen.dart:class:_FeatureCardState:180_306,3,3
+dev,q29,configure multer disk storage destination and filename,hybrid_rrf_graph,0.0000,1.0000,0.2000,0.3869,frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46,1,1
+dev,q31,show error snackbar alert notification,hybrid_rrf_graph,0.5000,1.0000,1.0000,1.0000,frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75,2,2
+dev,q36,reorderable list view of selected files,hybrid_rrf_graph,0.5000,0.5000,1.0000,0.6131,frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:44_293:part1,2,1
+dev,q38,flutter smoke test verifying docucharm app startup,hybrid_rrf_graph,0.0000,0.0000,0.1667,0.0000,frontend/lib/utils/export_helper.dart:class:ExportHelper:7_47,1,0
+test,q02,split PDF into specific page ranges,tfidf,0.0000,0.6667,0.3333,0.4162,frontend/lib/screens/feature_screens/tools.dart:method:build:114_123,3,2
+test,q04,extract PDF pages as image files,tfidf,0.0000,0.3333,0.2500,0.2021,frontend/lib/screens/dashboard_screen.dart:method:build:16_157,3,1
+test,q05,rotate PDF pages by degree angle,tfidf,0.3333,1.0000,1.0000,0.9675,backend/controllers/pdfController.js:function:rotatePdf:195_226,3,3
+test,q07,middleware to automatically delete files after response,tfidf,1.0000,1.0000,1.0000,1.0000,backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48,1,1
+test,q08,express router defining pdf manipulation endpoints,tfidf,1.0000,1.0000,1.0000,1.0000,backend/routes/pdfRoutes.js:line_chunk:anon:1_46,1,1
+test,q10,generic multipart upload function with progress tracking,tfidf,0.0000,1.0000,0.5000,0.6509,frontend/lib/providers/pdf_provider.dart:method:uploadProgress:20_20,2,2
+test,q13,reset PDF provider state to idle,tfidf,1.0000,1.0000,1.0000,1.0000,frontend/lib/providers/pdf_provider.dart:method:reset:22_28,1,1
+test,q16,view and read PDF document in viewer screen,tfidf,0.0000,0.3333,0.5000,0.2961,frontend/lib/screens/viewer_screen.dart:method:createState:12_12,3,1
+test,q18,modal grid sheet to jump to specific page,tfidf,1.0000,1.0000,1.0000,1.0000,frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234,1,1
+test,q21,loading overlay with progress indicator and percentage,tfidf,0.5000,1.0000,1.0000,1.0000,frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85,2,2
+test,q24,dashboard screen displaying grid of PDF feature cards,tfidf,0.0000,0.0000,0.1250,0.0000,frontend/lib/screens/dashboard_screen.dart:method:createState:177_177,3,0
+test,q28,health check endpoint returning backend status,tfidf,1.0000,1.0000,1.0000,1.0000,backend/server.js:line_chunk:anon:1_36,1,1
+test,q30,set upload file size limit of 50 megabytes,tfidf,1.0000,1.0000,1.0000,1.0000,backend/routes/pdfRoutes.js:line_chunk:anon:1_46,1,1
+test,q32,show success snackbar alert notification,tfidf,0.5000,1.0000,1.0000,0.8772,frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74,2,2
+test,q33,set error state with message in provider,tfidf,0.5000,1.0000,1.0000,0.9197,frontend/lib/providers/pdf_provider.dart:method:setError:35_39,2,2
+test,q34,save output file to application documents directory,tfidf,0.5000,1.0000,1.0000,1.0000,frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46,2,2
+test,q35,validate minimum two files selected before merging,tfidf,0.0000,1.0000,0.2500,0.4307,frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_onFilesDropped:56_70,1,1
+test,q37,open and view generated pdf in viewer after completion,tfidf,0.0000,0.5000,0.2500,0.2641,frontend/lib/screens/dashboard_screen.dart:method:build:16_157,2,1
+test,q02,split PDF into specific page ranges,code,0.3333,0.6667,1.0000,0.7654,backend/controllers/pdfController.js:function:splitPdf:39_91,3,2
+test,q04,extract PDF pages as image files,code,0.3333,0.6667,1.0000,0.6508,backend/controllers/pdfController.js:function:pdfToImage:138_192,3,2
+test,q05,rotate PDF pages by degree angle,code,0.3333,0.6667,1.0000,0.7654,backend/controllers/pdfController.js:function:rotatePdf:195_226,3,2
+test,q07,middleware to automatically delete files after response,code,1.0000,1.0000,1.0000,1.0000,backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48,1,1
+test,q08,express router defining pdf manipulation endpoints,code,0.0000,1.0000,0.2500,0.4307,backend/controllers/pdfController.js:function:pdfToImage:138_192,1,1
+test,q10,generic multipart upload function with progress tracking,code,0.5000,1.0000,1.0000,1.0000,frontend/lib/services/network_service.dart:method:uploadFiles:22_101,2,2
+test,q13,reset PDF provider state to idle,code,1.0000,1.0000,1.0000,1.0000,frontend/lib/providers/pdf_provider.dart:method:reset:22_28,1,1
+test,q16,view and read PDF document in viewer screen,code,0.0000,0.3333,0.3333,0.2346,backend/controllers/pdfController.js:function:imageToPdf:94_135,3,1
+test,q18,modal grid sheet to jump to specific page,code,1.0000,1.0000,1.0000,1.0000,frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234,1,1
+test,q21,loading overlay with progress indicator and percentage,code,0.5000,0.5000,1.0000,0.6131,frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85,2,1
+test,q24,dashboard screen displaying grid of PDF feature cards,code,0.3333,0.6667,1.0000,0.7654,frontend/lib/screens/dashboard_screen.dart:class:DashboardScreen:12_158,3,2
+test,q28,health check endpoint returning backend status,code,1.0000,1.0000,1.0000,1.0000,backend/server.js:line_chunk:anon:1_36,1,1
+test,q30,set upload file size limit of 50 megabytes,code,0.0000,0.0000,0.1111,0.0000,frontend/lib/services/network_service.dart:method:uploadFiles:22_101,1,0
+test,q32,show success snackbar alert notification,code,0.5000,1.0000,1.0000,0.9197,frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74,2,2
+test,q33,set error state with message in provider,code,0.5000,1.0000,1.0000,1.0000,frontend/lib/providers/pdf_provider.dart:method:setError:35_39,2,2
+test,q34,save output file to application documents directory,code,0.5000,1.0000,1.0000,1.0000,frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46,2,2
+test,q35,validate minimum two files selected before merging,code,0.0000,1.0000,0.5000,0.6309,backend/controllers/pdfController.js:function:mergePdfs:9_36,1,1
+test,q37,open and view generated pdf in viewer after completion,code,0.0000,0.0000,0.0000,0.0000,backend/controllers/pdfController.js:function:pdfToImage:138_192,2,0
+test,q02,split PDF into specific page ranges,tfidf_graph,0.0000,0.6667,0.5000,0.4776,frontend/lib/screens/feature_screens/tools.dart:method:build:114_123,3,2
+test,q04,extract PDF pages as image files,tfidf_graph,0.0000,0.3333,0.2000,0.1815,frontend/lib/screens/dashboard_screen.dart:method:build:16_157,3,1
+test,q05,rotate PDF pages by degree angle,tfidf_graph,0.3333,1.0000,1.0000,0.9060,frontend/lib/screens/feature_screens/tools.dart:class:_RotateScreenState:132_177,3,3
+test,q07,middleware to automatically delete files after response,tfidf_graph,1.0000,1.0000,1.0000,1.0000,backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48,1,1
+test,q08,express router defining pdf manipulation endpoints,tfidf_graph,1.0000,1.0000,1.0000,1.0000,backend/routes/pdfRoutes.js:line_chunk:anon:1_46,1,1
+test,q10,generic multipart upload function with progress tracking,tfidf_graph,0.0000,1.0000,0.5000,0.6509,frontend/lib/providers/pdf_provider.dart:method:uploadProgress:20_20,2,2
+test,q13,reset PDF provider state to idle,tfidf_graph,1.0000,1.0000,1.0000,1.0000,frontend/lib/providers/pdf_provider.dart:method:reset:22_28,1,1
+test,q16,view and read PDF document in viewer screen,tfidf_graph,0.0000,0.6667,0.5000,0.4982,frontend/lib/screens/viewer_screen.dart:method:createState:12_12,3,2
+test,q18,modal grid sheet to jump to specific page,tfidf_graph,1.0000,1.0000,1.0000,1.0000,frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234,1,1
+test,q21,loading overlay with progress indicator and percentage,tfidf_graph,0.5000,1.0000,1.0000,1.0000,frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85,2,2
+test,q24,dashboard screen displaying grid of PDF feature cards,tfidf_graph,0.0000,0.3333,0.2500,0.2021,frontend/lib/screens/dashboard_screen.dart:method:createState:177_177,3,1
+test,q28,health check endpoint returning backend status,tfidf_graph,1.0000,1.0000,1.0000,1.0000,backend/server.js:line_chunk:anon:1_36,1,1
+test,q30,set upload file size limit of 50 megabytes,tfidf_graph,1.0000,1.0000,1.0000,1.0000,backend/routes/pdfRoutes.js:line_chunk:anon:1_46,1,1
+test,q32,show success snackbar alert notification,tfidf_graph,0.5000,1.0000,1.0000,1.0000,frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74,2,2
+test,q33,set error state with message in provider,tfidf_graph,0.5000,1.0000,1.0000,1.0000,frontend/lib/providers/pdf_provider.dart:method:setError:35_39,2,2
+test,q34,save output file to application documents directory,tfidf_graph,0.5000,1.0000,1.0000,1.0000,frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46,2,2
+test,q35,validate minimum two files selected before merging,tfidf_graph,0.0000,1.0000,0.3333,0.5000,frontend/lib/screens/feature_screens/base_feature_screen.dart:method:_onFilesDropped:56_70,1,1
+test,q37,open and view generated pdf in viewer after completion,tfidf_graph,0.5000,0.5000,1.0000,0.6131,frontend/lib/screens/viewer_screen.dart:class:ViewerScreen:6_13,2,1
+test,q02,split PDF into specific page ranges,hybrid_rrf_k60,0.3333,0.6667,1.0000,0.7654,frontend/lib/screens/feature_screens/tools.dart:class:_SplitScreenState:25_94,3,2
+test,q04,extract PDF pages as image files,hybrid_rrf_k60,0.3333,0.3333,1.0000,0.4693,backend/controllers/pdfController.js:function:pdfToImage:138_192,3,1
+test,q05,rotate PDF pages by degree angle,hybrid_rrf_k60,0.3333,1.0000,1.0000,0.9675,backend/controllers/pdfController.js:function:rotatePdf:195_226,3,3
+test,q07,middleware to automatically delete files after response,hybrid_rrf_k60,1.0000,1.0000,1.0000,1.0000,backend/utils/fileHelper.js:function:cleanupUploadsMiddleware:23_48,1,1
+test,q08,express router defining pdf manipulation endpoints,hybrid_rrf_k60,1.0000,1.0000,1.0000,1.0000,backend/routes/pdfRoutes.js:line_chunk:anon:1_46,1,1
+test,q10,generic multipart upload function with progress tracking,hybrid_rrf_k60,0.0000,1.0000,0.5000,0.6934,frontend/lib/providers/pdf_provider.dart:method:uploadProgress:20_20,2,2
+test,q13,reset PDF provider state to idle,hybrid_rrf_k60,1.0000,1.0000,1.0000,1.0000,frontend/lib/providers/pdf_provider.dart:method:reset:22_28,1,1
+test,q16,view and read PDF document in viewer screen,hybrid_rrf_k60,0.3333,0.6667,1.0000,0.7654,frontend/lib/screens/viewer_screen.dart:class:_ViewerScreenState:15_235,3,2
+test,q18,modal grid sheet to jump to specific page,hybrid_rrf_k60,1.0000,1.0000,1.0000,1.0000,frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234,1,1
+test,q21,loading overlay with progress indicator and percentage,hybrid_rrf_k60,0.5000,1.0000,1.0000,0.9197,frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85,2,2
+test,q24,dashboard screen displaying grid of PDF feature cards,hybrid_rrf_k60,0.3333,0.6667,1.0000,0.7654,frontend/lib/screens/dashboard_screen.dart:class:DashboardScreen:12_158,3,2
+test,q28,health check endpoint returning backend status,hybrid_rrf_k60,1.0000,1.0000,1.0000,1.0000,backend/server.js:line_chunk:anon:1_36,1,1
+test,q30,set upload file size limit of 50 megabytes,hybrid_rrf_k60,0.0000,1.0000,0.3333,0.5000,frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76,1,1
+test,q32,show success snackbar alert notification,hybrid_rrf_k60,0.5000,1.0000,1.0000,0.9197,frontend/lib/widgets/custom_snackbar.dart:method:showSuccess:72_74,2,2
+test,q33,set error state with message in provider,hybrid_rrf_k60,0.5000,1.0000,1.0000,1.0000,frontend/lib/providers/pdf_provider.dart:method:setError:35_39,2,2
+test,q34,save output file to application documents directory,hybrid_rrf_k60,0.5000,1.0000,1.0000,1.0000,frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46,2,2
+test,q35,validate minimum two files selected before merging,hybrid_rrf_k60,0.0000,1.0000,0.3333,0.5000,frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:44_293:part1,1,1
+test,q37,open and view generated pdf in viewer after completion,hybrid_rrf_k60,0.0000,0.0000,0.0000,0.0000,backend/controllers/pdfController.js:function:pdfToImage:138_192,2,0
+test,q02,split PDF into specific page ranges,hybrid_rrf_graph,0.3333,0.6667,1.0000,0.7654,frontend/lib/screens/feature_screens/tools.dart:class:_SplitScreenState:25_94,3,2
+test,q04,extract PDF pages as image files,hybrid_rrf_graph,0.3333,0.3333,1.0000,0.4693,backend/controllers/pdfController.js:function:pdfToImage:138_192,3,1
+test,q05,rotate PDF pages by degree angle,hybrid_rrf_graph,0.3333,1.0000,1.0000,0.8855,frontend/lib/screens/feature_screens/tools.dart:class:_RotateScreenState:132_177,3,3
+test,q07,middleware to automatically delete files after response,hybrid_rrf_graph,0.0000,1.0000,0.3333,0.5000,backend/utils/fileHelper.js:function:cleanupFiles:7_17,1,1
+test,q08,express router defining pdf manipulation endpoints,hybrid_rrf_graph,1.0000,1.0000,1.0000,1.0000,backend/routes/pdfRoutes.js:line_chunk:anon:1_46,1,1
+test,q10,generic multipart upload function with progress tracking,hybrid_rrf_graph,0.0000,1.0000,0.5000,0.6934,frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76,2,2
+test,q13,reset PDF provider state to idle,hybrid_rrf_graph,0.0000,1.0000,0.5000,0.6309,frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76,1,1
+test,q16,view and read PDF document in viewer screen,hybrid_rrf_graph,0.3333,0.6667,1.0000,0.7654,frontend/lib/screens/viewer_screen.dart:class:_ViewerScreenState:15_235,3,2
+test,q18,modal grid sheet to jump to specific page,hybrid_rrf_graph,1.0000,1.0000,1.0000,1.0000,frontend/lib/screens/viewer_screen.dart:method:_showPageGrid:166_234,1,1
+test,q21,loading overlay with progress indicator and percentage,hybrid_rrf_graph,0.5000,1.0000,1.0000,1.0000,frontend/lib/widgets/loading_overlay.dart:class:LoadingOverlay:5_85,2,2
+test,q24,dashboard screen displaying grid of PDF feature cards,hybrid_rrf_graph,0.3333,0.6667,1.0000,0.7654,frontend/lib/screens/dashboard_screen.dart:class:FeatureCard:160_178,3,2
+test,q28,health check endpoint returning backend status,hybrid_rrf_graph,0.0000,1.0000,0.2500,0.4307,frontend/lib/providers/pdf_provider.dart:method:processFiles:41_75,1,1
+test,q30,set upload file size limit of 50 megabytes,hybrid_rrf_graph,0.0000,1.0000,0.2000,0.3869,frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76,1,1
+test,q32,show success snackbar alert notification,hybrid_rrf_graph,0.5000,1.0000,1.0000,1.0000,frontend/lib/widgets/custom_snackbar.dart:class:CustomSnackbar:4_75,2,2
+test,q33,set error state with message in provider,hybrid_rrf_graph,0.5000,1.0000,1.0000,1.0000,frontend/lib/providers/pdf_provider.dart:class:PdfProvider:7_76,2,2
+test,q34,save output file to application documents directory,hybrid_rrf_graph,0.5000,1.0000,1.0000,1.0000,frontend/lib/utils/export_helper.dart:method:saveFileLocally:12_46,2,2
+test,q35,validate minimum two files selected before merging,hybrid_rrf_graph,0.0000,1.0000,0.3333,0.5000,frontend/lib/screens/feature_screens/base_feature_screen.dart:class:_BaseFeatureScreenState:44_293:part1,1,1
+test,q37,open and view generated pdf in viewer after completion,hybrid_rrf_graph,0.0000,0.0000,0.0000,0.0000,frontend/lib/screens/viewer_screen.dart:class:_ViewerScreenState:15_235,2,0

@@ -13,11 +13,11 @@ CodeSage is a research-grade codebase intelligence, search, and evaluation platf
                              ▼                       ▼                       ▼
                      ┌───────────────┐       ┌───────────────┐       ┌───────────────┐
                      │    TF-IDF     │       │  all-MiniLM   │       │ st-codesearch │
-                     │  (Subwords)   │       │    (Dense)    │       │ (DistilRoBERTa│
+                     │  (Subwords)   │       │    (Dense)    │       │(DistilRoBERTa)│
                      └───────┬───────┘       └───────┬───────┘       └───────┬───────┘
                              │                       │                       │
                              └───────────────────────┼───────────────────────┘
-                                                     ▼
+                                                     ▼   
                                            Candidate Set (Top K)
                                                      │
                                                      ▼
@@ -209,12 +209,13 @@ cd codesage
 
 # Create and activate virtual environment
 python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\Activate.ps1
+source .venv/bin/activate  # On Windows (PowerShell): .\.venv\Scripts\Activate.ps1 | (cmd): .venv\Scripts\activate.bat
 
-# Install dependencies
+# Install dependencies and package in editable mode
 pip install -r requirements.txt
+pip install -e .
 
-# Run full test suite (all 65 tests)
+# Run automated test suite
 pytest -v
 ```
 
