@@ -19,7 +19,15 @@ from codesage.graph_reranker import GraphContextReranker
 from codesage.hybrid import HybridRetriever, HybridSearchResult
 from codesage.retrieval import SearchResult, TfidfRetriever, load_code_units_from_jsonl
 from codesage.semantic import SemanticRetriever
+from codesage.github import (
+    GithubFetchError,
+    GithubIngestionError,
+    InvalidGithubUrlError,
+    OversizedRepositoryError,
+    UnsafeRepositoryContentError,
+)
 from codesage.workspace import (
+    DuplicateWorkspaceError,
     InvalidWorkspaceIdError,
     UnsafePathError,
     Workspace,
@@ -178,6 +186,36 @@ class RegisterWorkspaceRequest(BaseModel):
         default=None,
         max_length=128,
         description="Optional human-readable display title",
+    )
+
+
+class RegisterGithubWorkspaceRequest(BaseModel):
+    url: str = Field(
+        ...,
+        min_length=1,
+        max_length=500,
+        description="Public GitHub repository URL (e.g. 'https://github.com/owner/repo')",
+        examples=["https://github.com/pallets/click"],
+    )
+    name: Optional[str] = Field(
+        default=None,
+        max_length=128,
+        description="Optional human-readable display title",
+    )
+    auto_index: bool = Field(
+        default=True,
+        description="Automatically fetch, scan, and index immediately after registration",
+    )
+    max_files: Optional[int] = Field(
+        default=None,
+        ge=1,
+        description="Optional limit on number of source files to scan",
+    )
+    max_file_size_kb: int = Field(
+        default=512,
+        ge=1,
+        le=10240,
+        description="Maximum file size in kilobytes",
     )
 
 
@@ -431,6 +469,40 @@ def register_workspace(req: RegisterWorkspaceRequest) -> Dict[str, Any]:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
+@app.post("/api/workspaces/github", summary="Register & Ingest GitHub Workspace", status_code=status.HTTP_201_CREATED)
+def register_github_workspace_endpoint(req: RegisterGithubWorkspaceRequest) -> Dict[str, Any]:
+    """Register and safely ingest a public GitHub repository with snapshot isolation."""
+    try:
+        ws = state.workspace_manager.register_github_workspace(req.url, name=req.name)
+        if req.auto_index:
+            ws = state.workspace_manager.fetch_and_index_github_workspace(
+                ws.id,
+                max_files=req.max_files,
+                max_file_size_kb=req.max_file_size_kb,
+            )
+            state.invalidate_container(ws.id)
+
+        resp = ws.metadata.to_dict(mask_absolute_path=True)
+        return resp
+    except InvalidGithubUrlError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+    except DuplicateWorkspaceError as e:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=str(e))
+    except OversizedRepositoryError as e:
+        raise HTTPException(status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, detail=str(e))
+    except UnsafeRepositoryContentError as e:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(e))
+    except GithubFetchError as e:
+        err_msg = str(e)
+        if "timed out" in err_msg.lower():
+            raise HTTPException(status_code=status.HTTP_504_GATEWAY_TIMEOUT, detail=sanitize_error_message(err_msg))
+        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=sanitize_error_message(err_msg))
+    except (WorkspaceError, GithubIngestionError) as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=sanitize_error_message(str(e)))
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=sanitize_error_message(str(e)))
+
+
 @app.get("/api/workspaces/{workspace_id}", summary="Get Workspace Details")
 def get_workspace_details(workspace_id: str) -> Dict[str, Any]:
     """Get metadata, index counts, and status for a specific workspace."""
@@ -480,6 +552,43 @@ def index_workspace_endpoint(
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=sanitize_error_message(str(e)))
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Indexing failed: {sanitize_error_message(str(e))}")
+
+
+@app.post("/api/workspaces/{workspace_id}/refresh", summary="Refresh GitHub Workspace")
+def refresh_github_workspace_endpoint(
+    workspace_id: str,
+    req: Optional[IndexWorkspaceRequest] = None,
+) -> Dict[str, Any]:
+    """Check remote GitHub repository for new commits and atomically refresh source and index."""
+    try:
+        max_files = req.max_files if req else None
+        max_file_size_kb = req.max_file_size_kb if req else 512
+        max_unit_lines = req.max_unit_lines if req else 250
+
+        ws, res = state.workspace_manager.refresh_github_workspace(
+            workspace_id,
+            max_files=max_files,
+            max_file_size_kb=max_file_size_kb,
+            max_unit_lines=max_unit_lines,
+        )
+        if res.get("status") == "updated":
+            state.invalidate_container(workspace_id)
+        return res
+    except WorkspaceNotFoundError:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Workspace '{workspace_id}' not found.")
+    except OversizedRepositoryError as e:
+        raise HTTPException(status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, detail=str(e))
+    except UnsafeRepositoryContentError as e:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=str(e))
+    except GithubFetchError as e:
+        err_msg = str(e)
+        if "timed out" in err_msg.lower():
+            raise HTTPException(status_code=status.HTTP_504_GATEWAY_TIMEOUT, detail=sanitize_error_message(err_msg))
+        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=sanitize_error_message(err_msg))
+    except (WorkspaceError, GithubIngestionError) as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=sanitize_error_message(str(e)))
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=sanitize_error_message(str(e)))
 
 
 @app.delete("/api/workspaces/{workspace_id}", summary="Delete Workspace Index")

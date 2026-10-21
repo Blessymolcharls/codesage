@@ -18,6 +18,17 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 from codesage.config import CodeSageConfig
+from codesage.github import (
+    GitHubRepoIdentity,
+    GithubFetchError,
+    GithubIngestionError,
+    InvalidGithubUrlError,
+    OversizedRepositoryError,
+    UnsafeRepositoryContentError,
+    _safe_remove_dir,
+    fetch_github_repository,
+    parse_and_validate_github_url,
+)
 from codesage.graph import RepositoryGraph, RepositoryGraphBuilder
 from codesage.indexer import CodeSageIndexer
 from codesage.retrieval import SearchResult, TfidfRetriever, load_code_units_from_jsonl
@@ -61,6 +72,11 @@ class UnsafePathError(WorkspaceError):
     pass
 
 
+class DuplicateWorkspaceError(WorkspaceError):
+    """Raised when attempting to register a repository that is already registered."""
+    pass
+
+
 @dataclass
 class WorkspaceMetadata:
     """Metadata describing a repository workspace and its index state."""
@@ -77,6 +93,11 @@ class WorkspaceMetadata:
     last_error: Optional[str] = None
     source_fingerprint: Optional[str] = None
     is_canonical: bool = False
+    source_type: str = "local"  # "local" | "github"
+    github_url: Optional[str] = None
+    github_owner: Optional[str] = None
+    github_repo: Optional[str] = None
+    commit_sha: Optional[str] = None
 
     def to_dict(self, mask_absolute_path: bool = True) -> Dict[str, Any]:
         """Convert metadata to dictionary, masking host filesystem paths for privacy and security."""
@@ -118,6 +139,13 @@ class Workspace:
         return self.metadata.id
 
     @property
+    def source_dir(self) -> Path:
+        """Resolved source directory for this workspace (managed source/ for GitHub, external path for local)."""
+        if self.metadata.source_type == "github":
+            return self.workspace_dir / "source"
+        return Path(self.metadata.repo_path)
+
+    @property
     def is_ready(self) -> bool:
         return self.metadata.status == "ready" and self.units_path.exists()
 
@@ -151,6 +179,41 @@ class WorkspaceManager:
         # Concurrency guards: per-workspace threading locks
         self._workspace_locks: Dict[str, threading.Lock] = {}
         self._locks_guard = threading.Lock()
+
+    @staticmethod
+    def _recover_workspace_staging(ws_dir: Path) -> None:
+        """Recover any interrupted publication attempts on application start or workspace load.
+        
+        Ensures failed or crashed operations clean up candidate artifacts and restore
+        last known-good live source and index.
+        """
+        if not ws_dir.exists() or not ws_dir.is_dir():
+            return
+
+        # 1. Clean interrupted candidate staging
+        staging_dir = ws_dir / ".staging_tmp"
+        if staging_dir.exists():
+            shutil.rmtree(staging_dir, ignore_errors=True)
+
+        candidate_tmp = ws_dir / ".candidate_source_tmp"
+        if candidate_tmp.exists():
+            shutil.rmtree(candidate_tmp, ignore_errors=True)
+
+        candidate_ready = ws_dir / ".candidate_source_ready"
+        if candidate_ready.exists():
+            shutil.rmtree(candidate_ready, ignore_errors=True)
+
+        # 2. Recover source backup if atomic swap was interrupted
+        backup_src = ws_dir / ".previous_source_backup"
+        live_src = ws_dir / "source"
+        if backup_src.exists():
+            if not live_src.exists():
+                try:
+                    os.replace(backup_src, live_src)
+                except Exception:
+                    pass
+            else:
+                shutil.rmtree(backup_src, ignore_errors=True)
 
     def _get_workspace_lock(self, repo_id: str) -> threading.Lock:
         """Retrieve or create an isolated threading lock for a specific workspace ID."""
@@ -282,6 +345,7 @@ class WorkspaceManager:
 
         valid_id = self.validate_workspace_id(repo_id)
         ws_dir = self._resolve_workspace_dir(valid_id)
+        self._recover_workspace_staging(ws_dir)
         meta_file = ws_dir / "metadata.json"
 
         if not ws_dir.exists() or not meta_file.exists():
@@ -364,6 +428,348 @@ class WorkspaceManager:
 
         return self.get_workspace(valid_id)
 
+    def find_workspace_by_github_url(self, canonical_url: str) -> Optional[WorkspaceMetadata]:
+        """Find registered workspace matching the canonical GitHub repository URL."""
+        if not canonical_url:
+            return None
+        clean_url = canonical_url.strip().lower().rstrip("/")
+        if clean_url.endswith(".git"):
+            clean_url = clean_url[:-4]
+
+        for ws in self.list_workspaces():
+            if ws.github_url:
+                existing_url = ws.github_url.strip().lower().rstrip("/")
+                if existing_url.endswith(".git"):
+                    existing_url = existing_url[:-4]
+                if existing_url == clean_url:
+                    return ws
+        return None
+
+    def register_github_workspace(
+        self,
+        url: str,
+        workspace_id: Optional[str] = None,
+        name: Optional[str] = None,
+        allow_duplicate: bool = False,
+    ) -> Workspace:
+        """Register a new public GitHub repository workspace.
+
+        Validates the GitHub URL, enforces host/protocol/slug security, checks for duplicates,
+        and establishes an isolated workspace directory with source_type='github'.
+        """
+        identity = parse_and_validate_github_url(url)
+
+        # Duplicate registration guard
+        if not allow_duplicate:
+            existing = self.find_workspace_by_github_url(identity.canonical_url)
+            if existing:
+                raise DuplicateWorkspaceError(
+                    f"Repository '{identity.canonical_url}' is already registered as workspace '{existing.id}'."
+                )
+
+        if workspace_id:
+            valid_id = self.validate_workspace_id(workspace_id)
+        else:
+            base_id = self.validate_workspace_id(identity.default_workspace_id)
+            valid_id = base_id
+            # Collision handling: if workspace directory already exists for another repo, append suffix
+            if (self.workspaces_dir / valid_id).exists():
+                for i in range(2, 100):
+                    candidate_id = f"{base_id[:58]}-{i}"
+                    if not (self.workspaces_dir / candidate_id).exists():
+                        valid_id = candidate_id
+                        break
+
+        if valid_id.lower() in ("default", "docucharm"):
+            raise InvalidWorkspaceIdError("The IDs 'default' and 'docucharm' are reserved for the canonical baseline.")
+
+        ws_dir = self._resolve_workspace_dir(valid_id)
+        ws_dir.mkdir(parents=True, exist_ok=True)
+        (ws_dir / "cache").mkdir(exist_ok=True)
+
+        display_name = name.strip() if name and name.strip() else identity.full_name
+        now_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        live_src = ws_dir / "source"
+
+        meta = WorkspaceMetadata(
+            id=valid_id,
+            name=display_name,
+            display_path=identity.canonical_url,
+            repo_path=str(live_src),
+            created_at=now_iso,
+            status="unindexed",
+            is_canonical=False,
+            source_type="github",
+            github_url=identity.canonical_url,
+            github_owner=identity.owner,
+            github_repo=identity.repo,
+            commit_sha=None,
+        )
+
+        meta_file = ws_dir / "metadata.json"
+        with open(meta_file, "w", encoding="utf-8") as f:
+            json.dump(meta.to_dict(mask_absolute_path=False), f, indent=2)
+
+        return self.get_workspace(valid_id)
+
+    def fetch_and_index_github_workspace(
+        self,
+        repo_id: str,
+        timeout_seconds: int = 60,
+        max_files: Optional[int] = None,
+        max_file_size_kb: int = 512,
+        max_unit_lines: int = 250,
+    ) -> Workspace:
+        """Safely fetch public GitHub repository and build its isolated index and graph.
+
+        Preserves source/index consistency:
+        - Active source and index are NEVER replaced until the candidate source checkout
+          AND its newly built index artifacts have passed validation.
+        - Candidate files are processed in '.candidate_source_tmp' and '.staging_tmp'.
+        - If any error or limit violation occurs, candidate artifacts are purged and the
+          previous source, index, and commit SHA are retained.
+        """
+        valid_id = self.validate_workspace_id(repo_id)
+        with self._get_workspace_lock(valid_id):
+            ws = self.get_workspace(valid_id)
+            if ws.metadata.is_canonical:
+                raise WorkspaceError("The canonical research baseline is immutable and cannot be reindexed.")
+            if ws.metadata.source_type != "github" or not ws.metadata.github_url:
+                raise WorkspaceError(f"Workspace '{repo_id}' is not a GitHub repository workspace.")
+
+            self._recover_workspace_staging(ws.workspace_dir)
+            identity = parse_and_validate_github_url(ws.metadata.github_url)
+
+            ws.metadata.status = "indexing"
+            self._save_metadata(ws)
+
+            candidate_src = ws.workspace_dir / ".candidate_source_tmp"
+            candidate_ready = ws.workspace_dir / ".candidate_source_ready"
+            staging_dir = ws.workspace_dir / ".staging_tmp"
+            backup_src = ws.workspace_dir / ".previous_source_backup"
+
+            try:
+                # Stage 1: Constrained Git shallow clone
+                fetch_res = fetch_github_repository(
+                    identity=identity,
+                    destination_dir=candidate_src,
+                    expected_parent=ws.workspace_dir,
+                    timeout_seconds=timeout_seconds,
+                    max_files=max_files or 2500,
+                )
+
+                # Stage 2: Ingest and index candidate source into staging directory
+                staging_dir.mkdir(parents=True, exist_ok=True)
+                config = CodeSageConfig(
+                    repo_root=candidate_src,
+                    output_dir=staging_dir,
+                    max_files=max_files,
+                    max_file_size_bytes=max_file_size_kb * 1024,
+                    max_unit_lines=max_unit_lines,
+                )
+                indexer = CodeSageIndexer(config)
+                index_result = indexer.build_index()
+
+                # Stage 3: Build relationship graph into staging directory
+                graph_builder = RepositoryGraphBuilder(repo_root=candidate_src)
+                raw_units = [u.to_dict() if hasattr(u, "to_dict") else u for u in index_result.code_units]
+                graph = graph_builder.build(raw_units)
+                graph.save(staging_dir / "relationship_graph.json")
+
+                # Stage 4: Compute and write file hashes
+                file_hashes: Dict[str, str] = {}
+                if hasattr(index_result, "scan_result") and index_result.scan_result:
+                    for fp in index_result.scan_result.source_files:
+                        try:
+                            rel_p = fp.resolve().relative_to(candidate_src.resolve()).as_posix()
+                            with open(fp, "rb") as bf:
+                                file_hashes[rel_p] = hashlib.sha256(bf.read()).hexdigest()
+                        except Exception:
+                            continue
+                with open(staging_dir / "file_hashes.json", "w", encoding="utf-8") as f:
+                    json.dump(file_hashes, f, indent=2)
+
+                # Stage 5: Recoverable atomic publication
+                if candidate_ready.exists():
+                    _safe_remove_dir(candidate_ready, ws.workspace_dir)
+                os.replace(candidate_src, candidate_ready)
+
+                live_src = ws.workspace_dir / "source"
+                if live_src.exists():
+                    if backup_src.exists():
+                        _safe_remove_dir(backup_src, ws.workspace_dir)
+                    os.replace(live_src, backup_src)
+                os.replace(candidate_ready, live_src)
+
+                self._publish_staged_artifacts(staging_dir, ws)
+
+                if backup_src.exists():
+                    _safe_remove_dir(backup_src, ws.workspace_dir)
+
+                now_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+                languages = sorted(list(set(u.language for u in index_result.code_units if u.language)))
+
+                ws.metadata.status = "ready"
+                ws.metadata.commit_sha = fetch_res.commit_sha
+                ws.metadata.indexed_at = now_iso
+                ws.metadata.unit_count = len(index_result.code_units)
+                ws.metadata.file_count = fetch_res.total_files
+                ws.metadata.languages = languages
+                ws.metadata.last_error = None
+                ws.metadata.repo_path = str(live_src)
+                self._save_metadata(ws)
+
+                return ws
+
+            except (GithubFetchError, OversizedRepositoryError, UnsafeRepositoryContentError) as e:
+                self._recover_workspace_staging(ws.workspace_dir)
+                has_usable_index = (ws.workspace_dir / "source").exists() and ws.units_path.exists()
+                ws.metadata.status = "ready" if has_usable_index else "error"
+                ws.metadata.last_error = str(e)
+                self._save_metadata(ws)
+                raise
+            except Exception as e:
+                self._recover_workspace_staging(ws.workspace_dir)
+                has_usable_index = (ws.workspace_dir / "source").exists() and ws.units_path.exists()
+                ws.metadata.status = "ready" if has_usable_index else "error"
+                ws.metadata.last_error = str(e)
+                self._save_metadata(ws)
+                raise GithubIngestionError(f"GitHub ingestion failed for workspace '{repo_id}': {e}") from e
+
+    def refresh_github_workspace(
+        self,
+        repo_id: str,
+        timeout_seconds: int = 60,
+        max_files: Optional[int] = None,
+        max_file_size_kb: int = 512,
+        max_unit_lines: int = 250,
+    ) -> Tuple[Workspace, Dict[str, Any]]:
+        """Refresh a GitHub workspace, pulling latest commit and atomically reindexing if changed.
+
+        If the remote commit matches active commit_sha and workspace is ready, no re-indexing
+        is performed.
+        If a new commit is detected, it is indexed and atomically published.
+        If fetch/index fails, the previous working source, index, and commit SHA are retained.
+        """
+        valid_id = self.validate_workspace_id(repo_id)
+        with self._get_workspace_lock(valid_id):
+            ws = self.get_workspace(valid_id)
+            if ws.metadata.source_type != "github" or not ws.metadata.github_url:
+                raise WorkspaceError(f"Workspace '{repo_id}' is not a GitHub repository workspace.")
+
+            previous_sha = ws.metadata.commit_sha
+            identity = parse_and_validate_github_url(ws.metadata.github_url)
+
+            candidate_src = ws.workspace_dir / ".candidate_source_tmp"
+            candidate_ready = ws.workspace_dir / ".candidate_source_ready"
+            staging_dir = ws.workspace_dir / ".staging_tmp"
+            backup_src = ws.workspace_dir / ".previous_source_backup"
+            self._recover_workspace_staging(ws.workspace_dir)
+
+            try:
+                fetch_res = fetch_github_repository(
+                    identity=identity,
+                    destination_dir=candidate_src,
+                    expected_parent=ws.workspace_dir,
+                    timeout_seconds=timeout_seconds,
+                    max_files=max_files or 2500,
+                )
+            except Exception as e:
+                self._recover_workspace_staging(ws.workspace_dir)
+                ws.metadata.last_error = f"Refresh failed: {e}"
+                self._save_metadata(ws)
+                raise GithubFetchError(f"Refresh failed for workspace '{repo_id}': {e}") from e
+
+            # If commit SHA is unchanged and index is ready, report up to date without reindexing
+            if previous_sha and fetch_res.commit_sha == previous_sha and ws.is_ready:
+                _safe_remove_dir(candidate_src, ws.workspace_dir)
+                return ws, {
+                    "status": "up_to_date",
+                    "commit_sha": previous_sha,
+                    "message": "Repository is already at latest commit.",
+                }
+
+            # New commit found: proceed with indexing candidate_src into staging_dir
+            try:
+                staging_dir.mkdir(parents=True, exist_ok=True)
+                config = CodeSageConfig(
+                    repo_root=candidate_src,
+                    output_dir=staging_dir,
+                    max_files=max_files,
+                    max_file_size_bytes=max_file_size_kb * 1024,
+                    max_unit_lines=max_unit_lines,
+                )
+                indexer = CodeSageIndexer(config)
+                index_result = indexer.build_index()
+
+                graph_builder = RepositoryGraphBuilder(repo_root=candidate_src)
+                raw_units = [u.to_dict() if hasattr(u, "to_dict") else u for u in index_result.code_units]
+                graph = graph_builder.build(raw_units)
+                graph.save(staging_dir / "relationship_graph.json")
+
+                file_hashes: Dict[str, str] = {}
+                if hasattr(index_result, "scan_result") and index_result.scan_result:
+                    for fp in index_result.scan_result.source_files:
+                        try:
+                            rel_p = fp.resolve().relative_to(candidate_src.resolve()).as_posix()
+                            with open(fp, "rb") as bf:
+                                file_hashes[rel_p] = hashlib.sha256(bf.read()).hexdigest()
+                        except Exception:
+                            continue
+                with open(staging_dir / "file_hashes.json", "w", encoding="utf-8") as f:
+                    json.dump(file_hashes, f, indent=2)
+
+                # Recoverable atomic publication
+                if candidate_ready.exists():
+                    _safe_remove_dir(candidate_ready, ws.workspace_dir)
+                os.replace(candidate_src, candidate_ready)
+
+                live_src = ws.workspace_dir / "source"
+                if live_src.exists():
+                    if backup_src.exists():
+                        _safe_remove_dir(backup_src, ws.workspace_dir)
+                    os.replace(live_src, backup_src)
+                os.replace(candidate_ready, live_src)
+
+                self._publish_staged_artifacts(staging_dir, ws)
+
+                if backup_src.exists():
+                    _safe_remove_dir(backup_src, ws.workspace_dir)
+
+                now_iso = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+                languages = sorted(list(set(u.language for u in index_result.code_units if u.language)))
+
+                ws.metadata.status = "ready"
+                ws.metadata.commit_sha = fetch_res.commit_sha
+                ws.metadata.indexed_at = now_iso
+                ws.metadata.unit_count = len(index_result.code_units)
+                ws.metadata.file_count = fetch_res.total_files
+                ws.metadata.languages = languages
+                ws.metadata.last_error = None
+                ws.metadata.repo_path = str(live_src)
+                self._save_metadata(ws)
+
+                return ws, {
+                    "status": "updated",
+                    "previous_commit": previous_sha,
+                    "new_commit": fetch_res.commit_sha,
+                    "unit_count": ws.metadata.unit_count,
+                }
+            except (GithubFetchError, OversizedRepositoryError, UnsafeRepositoryContentError) as e:
+                self._recover_workspace_staging(ws.workspace_dir)
+                has_usable_index = (ws.workspace_dir / "source").exists() and ws.units_path.exists()
+                ws.metadata.status = "ready" if has_usable_index else "error"
+                ws.metadata.last_error = f"Refresh indexing failed: {e}"
+                self._save_metadata(ws)
+                raise
+            except Exception as e:
+                self._recover_workspace_staging(ws.workspace_dir)
+                has_usable_index = (ws.workspace_dir / "source").exists() and ws.units_path.exists()
+                ws.metadata.status = "ready" if has_usable_index else "error"
+                ws.metadata.last_error = f"Refresh indexing failed: {e}"
+                self._save_metadata(ws)
+                raise GithubIngestionError(f"Refresh failed for workspace '{repo_id}': {e}") from e
+
     def delete_workspace(self, repo_id: str) -> None:
         """Delete a registered workspace's generated index artifacts.
         
@@ -390,7 +796,13 @@ class WorkspaceManager:
             if ws_dir.is_symlink():
                 ws_dir.unlink()
             else:
-                shutil.rmtree(ws_dir)
+                def on_exc(fn, path, exc_info):
+                    try:
+                        os.chmod(path, 0o777)
+                        fn(path)
+                    except Exception:
+                        pass
+                shutil.rmtree(ws_dir, onexc=on_exc)
 
     def _publish_staged_artifacts(self, staging_dir: Path, ws: Workspace) -> None:
         """Atomically validate and publish candidate index artifacts to target workspace directory."""

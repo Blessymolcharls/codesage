@@ -15,6 +15,9 @@ import {
   Play,
   Clock,
   Sparkles,
+  GitBranch,
+  GitCommit,
+  Globe,
 } from "lucide-react";
 
 export interface WorkspaceMetadata {
@@ -30,6 +33,11 @@ export interface WorkspaceMetadata {
   languages: string[];
   last_error: string | null;
   is_canonical?: boolean;
+  source_type?: "local" | "github";
+  github_url?: string;
+  github_owner?: string;
+  github_repo?: string;
+  commit_sha?: string;
 }
 
 interface WorkspaceSelectorProps {
@@ -48,12 +56,18 @@ export function WorkspaceSelector({
   const [workspaces, setWorkspaces] = useState<WorkspaceMetadata[]>([]);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<"list" | "register">("list");
+  const [activeTab, setActiveTab] = useState<"list" | "register" | "github">("list");
 
-  // Registration Form State
+  // Local Registration Form State
   const [newId, setNewId] = useState("");
   const [newPath, setNewPath] = useState("");
   const [newName, setNewName] = useState("");
+
+  // GitHub Import Form State
+  const [githubUrl, setGithubUrl] = useState("");
+  const [githubName, setGithubName] = useState("");
+  const [githubMaxFiles, setGithubMaxFiles] = useState<string>("");
+
   const [actionError, setActionError] = useState<string | null>(null);
   const [actionSuccess, setActionSuccess] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -97,9 +111,10 @@ export function WorkspaceSelector({
     languages: ["dart", "javascript"],
     last_error: null,
     is_canonical: currentWorkspaceId === "default",
+    source_type: "local",
   };
 
-  const handleRegister = async (e: React.FormEvent) => {
+  const handleRegisterLocal = async (e: React.FormEvent) => {
     e.preventDefault();
     setActionError(null);
     setActionSuccess(null);
@@ -136,6 +151,47 @@ export function WorkspaceSelector({
     }
   };
 
+  const handleRegisterGithub = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setActionError(null);
+    setActionSuccess(null);
+    setIsProcessing(true);
+
+    try {
+      const maxFilesNum = githubMaxFiles.trim() ? parseInt(githubMaxFiles.trim(), 10) : undefined;
+      const res = await fetch(`${apiBase}/api/workspaces/github`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          url: githubUrl.trim(),
+          name: githubName.trim() || undefined,
+          auto_index: true,
+          max_files: maxFilesNum && !isNaN(maxFilesNum) ? maxFilesNum : undefined,
+        }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.detail || "Failed to ingest GitHub repository");
+      }
+
+      const created: WorkspaceMetadata = await res.json();
+      setActionSuccess(
+        `Imported GitHub workspace '${created.name}' successfully (${created.unit_count} units indexed).`
+      );
+      setGithubUrl("");
+      setGithubName("");
+      setGithubMaxFiles("");
+      await fetchWorkspaces();
+      onSelectWorkspace(created);
+      setActiveTab("list");
+    } catch (err: any) {
+      setActionError(err.message);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   const handleTriggerIndex = async (workspaceId: string, incremental: boolean = false) => {
     setActionError(null);
     setActionSuccess(null);
@@ -159,6 +215,43 @@ export function WorkspaceSelector({
       );
       await fetchWorkspaces();
       if (updated.id === currentWorkspaceId) {
+        onSelectWorkspace(updated);
+      }
+    } catch (err: any) {
+      setActionError(err.message);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleRefreshWorkspace = async (workspaceId: string) => {
+    setActionError(null);
+    setActionSuccess(null);
+    setIsProcessing(true);
+
+    try {
+      const res = await fetch(`${apiBase}/api/workspaces/${workspaceId}/refresh`, {
+        method: "POST",
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.detail || "Refresh failed");
+      }
+
+      const result = await res.json();
+      if (result.status === "up_to_date") {
+        setActionSuccess(
+          `Workspace is up to date at commit ${result.commit_sha ? result.commit_sha.slice(0, 7) : "HEAD"}.`
+        );
+      } else {
+        setActionSuccess(
+          `Workspace updated to commit ${result.new_commit ? result.new_commit.slice(0, 7) : "latest"} (${result.unit_count} code units).`
+        );
+      }
+      await fetchWorkspaces();
+      const updated = workspaces.find((w) => w.id === workspaceId);
+      if (updated && updated.id === currentWorkspaceId) {
         onSelectWorkspace(updated);
       }
     } catch (err: any) {
@@ -209,11 +302,15 @@ export function WorkspaceSelector({
           title="Click to manage or switch repository workspaces"
         >
           <div className="flex h-5 w-5 items-center justify-center rounded-lg bg-indigo-500/20 text-indigo-400 group-hover:scale-105 transition">
-            <Database className="h-3 w-3" />
+            {currentWorkspace.source_type === "github" ? (
+              <GitBranch className="h-3 w-3 text-cyan-400" />
+            ) : (
+              <Database className="h-3 w-3" />
+            )}
           </div>
           <div className="flex flex-col text-left">
             <span className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">
-              Repository Workspace
+              {currentWorkspace.source_type === "github" ? "GitHub Workspace" : "Repository Workspace"}
             </span>
             <span className="font-semibold text-white group-hover:text-indigo-300 transition max-w-[140px] truncate">
               {currentWorkspace.name}
@@ -242,7 +339,7 @@ export function WorkspaceSelector({
                 <div>
                   <h2 className="text-base font-bold text-white">Repository Workspaces</h2>
                   <p className="text-xs text-slate-400">
-                    Index, switch, and search isolated local codebases independently
+                    Index, switch, and search isolated local codebases and remote GitHub repositories
                   </p>
                 </div>
               </div>
@@ -271,6 +368,18 @@ export function WorkspaceSelector({
               </button>
               <button
                 type="button"
+                onClick={() => setActiveTab("github")}
+                className={`flex items-center gap-2 border-b-2 px-4 py-3 text-xs font-semibold transition ${
+                  activeTab === "github"
+                    ? "border-indigo-500 text-indigo-400"
+                    : "border-transparent text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                <GitBranch className="h-3.5 w-3.5 text-cyan-400" />
+                <span>Import GitHub Repo</span>
+              </button>
+              <button
+                type="button"
                 onClick={() => setActiveTab("register")}
                 className={`flex items-center gap-2 border-b-2 px-4 py-3 text-xs font-semibold transition ${
                   activeTab === "register"
@@ -279,7 +388,7 @@ export function WorkspaceSelector({
                 }`}
               >
                 <Plus className="h-3.5 w-3.5" />
-                <span>Register Local Repository</span>
+                <span>Register Local Path</span>
               </button>
             </div>
 
@@ -299,10 +408,11 @@ export function WorkspaceSelector({
 
             {/* Modal Body */}
             <div className="flex-1 overflow-y-auto p-6 space-y-4">
-              {activeTab === "list" ? (
+              {activeTab === "list" && (
                 <div className="space-y-3">
                   {workspaces.map((ws) => {
                     const isSelected = ws.id === currentWorkspaceId;
+                    const isGitHub = ws.source_type === "github";
                     return (
                       <div
                         key={ws.id}
@@ -324,10 +434,29 @@ export function WorkspaceSelector({
                                   Benchmark Baseline
                                 </span>
                               )}
+                              {isGitHub && (
+                                <span className="rounded-full bg-indigo-500/15 px-2 py-0.5 text-[10px] font-medium text-indigo-400 border border-indigo-500/30 flex items-center gap-1">
+                                  <GitBranch className="h-2.5 w-2.5" />
+                                  GitHub
+                                </span>
+                              )}
+                              {isGitHub && ws.commit_sha && (
+                                <span
+                                  className="rounded bg-slate-800/90 px-1.5 py-0.5 text-[10px] font-mono text-slate-300 border border-white/10 flex items-center gap-1"
+                                  title={`Commit: ${ws.commit_sha}`}
+                                >
+                                  <GitCommit className="h-2.5 w-2.5 text-cyan-400" />
+                                  {ws.commit_sha.slice(0, 7)}
+                                </span>
+                              )}
                             </div>
                             <div className="flex items-center gap-3 text-xs text-slate-400">
-                              <span className="flex items-center gap-1 font-mono text-[11px]">
-                                <Folder className="h-3 w-3 text-slate-500" />
+                              <span className="flex items-center gap-1 font-mono text-[11px] truncate max-w-[280px]">
+                                {isGitHub ? (
+                                  <Globe className="h-3 w-3 text-indigo-400 shrink-0" />
+                                ) : (
+                                  <Folder className="h-3 w-3 text-slate-500 shrink-0" />
+                                )}
                                 {ws.display_path}
                               </span>
                               <span>•</span>
@@ -371,21 +500,33 @@ export function WorkspaceSelector({
 
                             {!ws.is_canonical && (
                               <>
-                                <button
-                                  type="button"
-                                  disabled={isProcessing}
-                                  onClick={() => handleTriggerIndex(ws.id, false)}
-                                  className="rounded-lg border border-white/10 bg-slate-800 p-1.5 text-slate-300 hover:bg-slate-700 hover:text-white transition disabled:opacity-50"
-                                  title="Re-run full index"
-                                >
-                                  <RefreshCw className="h-3.5 w-3.5" />
-                                </button>
+                                {isGitHub ? (
+                                  <button
+                                    type="button"
+                                    disabled={isProcessing}
+                                    onClick={() => handleRefreshWorkspace(ws.id)}
+                                    className="rounded-lg border border-indigo-500/30 bg-indigo-500/10 p-1.5 text-indigo-300 hover:bg-indigo-500/20 hover:text-white transition disabled:opacity-50"
+                                    title="Check GitHub for latest commit and refresh index"
+                                  >
+                                    <RefreshCw className="h-3.5 w-3.5" />
+                                  </button>
+                                ) : (
+                                  <button
+                                    type="button"
+                                    disabled={isProcessing}
+                                    onClick={() => handleTriggerIndex(ws.id, false)}
+                                    className="rounded-lg border border-white/10 bg-slate-800 p-1.5 text-slate-300 hover:bg-slate-700 hover:text-white transition disabled:opacity-50"
+                                    title="Re-run full index"
+                                  >
+                                    <RefreshCw className="h-3.5 w-3.5" />
+                                  </button>
+                                )}
                                 <button
                                   type="button"
                                   disabled={isProcessing}
                                   onClick={() => handleDeleteWorkspace(ws.id)}
                                   className="rounded-lg border border-rose-500/20 bg-rose-500/10 p-1.5 text-rose-300 hover:bg-rose-500/20 transition disabled:opacity-50"
-                                  title="Remove workspace index (preserves sources)"
+                                  title="Remove workspace index"
                                 >
                                   <Trash2 className="h-3.5 w-3.5" />
                                 </button>
@@ -397,9 +538,89 @@ export function WorkspaceSelector({
                     );
                   })}
                 </div>
-              ) : (
-                /* Registration Form */
-                <form onSubmit={handleRegister} className="space-y-4">
+              )}
+
+              {/* GitHub Import Form */}
+              {activeTab === "github" && (
+                <form onSubmit={handleRegisterGithub} className="space-y-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-slate-300">
+                      GitHub Repository URL <span className="text-rose-400">*</span>
+                    </label>
+                    <input
+                      type="url"
+                      required
+                      value={githubUrl}
+                      onChange={(e) => setGithubUrl(e.target.value)}
+                      placeholder="https://github.com/owner/repository"
+                      className="w-full rounded-xl border border-white/10 bg-slate-900/90 px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono"
+                    />
+                    <p className="text-[11px] text-slate-500">
+                      Canonical public repository URL. Shallow cloned securely with disabled hooks, HTTPS-only policy, and size limits.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1">
+                      <label className="text-xs font-semibold text-slate-300">
+                        Display Title <span className="text-slate-500">(Optional)</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={githubName}
+                        onChange={(e) => setGithubName(e.target.value)}
+                        placeholder="e.g. Requests HTTP Library"
+                        className="w-full rounded-xl border border-white/10 bg-slate-900/90 px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-xs font-semibold text-slate-300">
+                        Max Files Limit <span className="text-slate-500">(Default: 2,500)</span>
+                      </label>
+                      <input
+                        type="number"
+                        min="10"
+                        max="10000"
+                        value={githubMaxFiles}
+                        onChange={(e) => setGithubMaxFiles(e.target.value)}
+                        placeholder="2500"
+                        className="w-full rounded-xl border border-white/10 bg-slate-900/90 px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 font-mono"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="pt-2 flex justify-end gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab("list")}
+                      className="rounded-xl border border-white/10 bg-slate-800/80 px-4 py-2 text-xs font-medium text-slate-300 hover:bg-slate-700 transition"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={isProcessing || !githubUrl.trim()}
+                      className="rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 px-5 py-2 text-xs font-semibold text-white shadow-glow hover:opacity-95 transition disabled:opacity-50 flex items-center gap-2"
+                    >
+                      {isProcessing ? (
+                        <>
+                          <RefreshCw className="h-3.5 w-3.5 animate-spin" />
+                          <span>Fetching & Indexing...</span>
+                        </>
+                      ) : (
+                        <>
+                          <GitBranch className="h-3.5 w-3.5" />
+                          <span>Import & Index Repository</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {/* Local Path Registration Form */}
+              {activeTab === "register" && (
+                <form onSubmit={handleRegisterLocal} className="space-y-4">
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-300">
                       Workspace Identifier <span className="text-rose-400">*</span>
